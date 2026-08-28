@@ -1,6 +1,6 @@
-# จาก curl ถึงความปลอดภัยของระบบ
+# Hands-on Systems
 
-> คู่มือลงมือทำ — HTTP, API, ความปลอดภัย และ GPU/AI infrastructure
+> จาก curl ถึง GPU — คู่มือลงมือทำที่ทุกตัวเลขมาจากการรันจริง
 
 📖 **อ่านออนไลน์: <https://kasemsit.github.io/hands-on/>**
 

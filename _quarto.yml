@@ -8,10 +8,8 @@ project:
     - lab/README.md
 
 book:
-  title: "จาก curl ถึงความปลอดภัยของระบบ"
-  # subtitle เดิมเขียนว่า "anti-bot" ซึ่งตอนนี้เป็นแค่ 6 บทจาก 53 —
-  # ปรับให้ตรงกับขอบเขตจริงที่ครอบถึง OS, malware และ GPU/AI infrastructure
-  subtitle: "คู่มือลงมือทำ — HTTP, API, ความปลอดภัย และ GPU/AI infrastructure"
+  title: "Hands-on Systems"
+  subtitle: "จาก curl ถึง GPU — คู่มือลงมือทำที่ทุกตัวเลขมาจากการรันจริง"
   author: "บันทึกการเรียนรู้"
   date: last-modified
   date-format: "D MMMM YYYY"

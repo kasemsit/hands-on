@@ -1,6 +1,7 @@
 # CLAUDE.md
 
-หนังสือสอน HTTP → API → ความปลอดภัย → GPU/AI infrastructure (53 บท ภาษาไทย)
+**Hands-on Systems** — หนังสือสอน HTTP → API → ความปลอดภัย → GPU/AI infrastructure
+(53 บท ภาษาไทย)
 สร้างเว็บด้วย **Quarto** · lab รันได้จริงบนเครื่องผู้อ่าน
 
 ## คำสั่งหลัก
