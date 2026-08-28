@@ -56,7 +56,9 @@ book:
         - course/26-proxy-caching-cdn.md
         - course/27-database-and-performance.md
         - course/28-observability-and-deployment.md
+        - course/68-observability-deep.md
         - course/29-realtime-push-and-offline.md
+        - course/69-websocket-sse-deep.md
         - course/56-background-jobs-and-queues.md
         - course/57-scaling-out.md
 
@@ -66,6 +68,7 @@ book:
         - course/20-shell-scripting-for-curl.md
         - course/32-testing-with-pytest.md
         - course/55-ci-cd.md
+        - course/67-profiling.md
         - course/33-concurrency-and-async.md
         - course/21-debugging-and-pitfalls.md
         - course/A1-netcat.md

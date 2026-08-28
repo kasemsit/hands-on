@@ -303,4 +303,4 @@ asyncio.run(main(), debug=True)     # เตือนเมื่อมี corou
    แบบ thread รับไหวไหม — ดูจำนวน thread ด้วย `ls /proc/<pid>/task | wc -l`
 
 ***
-[⬅ CI/CD](55-ci-cd.md) · [สารบัญ](../README.md) · [Debug และกับดักที่เจอบ่อย ➡](21-debugging-and-pitfalls.md)
+[⬅ Profiling](67-profiling.md) · [สารบัญ](../README.md) · [Debug และกับดักที่เจอบ่อย ➡](21-debugging-and-pitfalls.md)

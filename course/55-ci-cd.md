@@ -214,4 +214,4 @@ flowchart LR
 7. ตั้ง `permissions:` ใน workflow ให้แคบที่สุดเท่าที่ยังทำงานได้ ([บทที่ 36](36-permissions-and-isolation.md))
 
 ***
-[⬅ เขียนเทสต์ให้ API](32-testing-with-pytest.md) · [สารบัญ](../README.md) · [Concurrency และ async ➡](33-concurrency-and-async.md)
+[⬅ เขียนเทสต์ให้ API](32-testing-with-pytest.md) · [สารบัญ](../README.md) · [Profiling ➡](67-profiling.md)

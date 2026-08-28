@@ -83,7 +83,9 @@ curl -i http://127.0.0.1:8080/
 | [บทที่ 26](course/26-proxy-caching-cdn.md) | Reverse proxy, X-Forwarded-For, Caching และ CDN |
 | [บทที่ 27](course/27-database-and-performance.md) | Database และ Performance ของ API |
 | [บทที่ 28](course/28-observability-and-deployment.md) | Observability และ Deployment |
+| [บทที่ 68](course/68-observability-deep.md) | Observability เจาะลึก — trace |
 | [บทที่ 29](course/29-realtime-push-and-offline.md) | Push, Real-time, Upload และ Offline |
+| [บทที่ 69](course/69-websocket-sse-deep.md) | Real-time เจาะลึก — SSE, WebSocket |
 | [บทที่ 56](course/56-background-jobs-and-queues.md) | งานเบื้องหลังและคิวงาน |
 | [บทที่ 57](course/57-scaling-out.md) | ขยายระบบออกหลายเครื่อง |
 
@@ -95,6 +97,7 @@ curl -i http://127.0.0.1:8080/
 | [บทที่ 20](course/20-shell-scripting-for-curl.md) | เขียน bash ให้ปลอดภัยและไม่พังเงียบ ๆ |
 | [บทที่ 32](course/32-testing-with-pytest.md) | เขียนเทสต์ให้ API |
 | [บทที่ 55](course/55-ci-cd.md) | CI/CD — ท่อที่เชื่อมทุกอย่างเข้าด้วยกัน |
+| [บทที่ 67](course/67-profiling.md) | Profiling — หาจุดที่ช้าจริง |
 | [บทที่ 33](course/33-concurrency-and-async.md) | Concurrency และ async |
 | [บทที่ 21](course/21-debugging-and-pitfalls.md) | Debug และกับดักที่เจอบ่อย |
 | [ภาคผนวก A](course/A1-netcat.md) | netcat (`nc`) — เครื่องมือดูของจริง |
@@ -175,7 +178,7 @@ curl -i http://127.0.0.1:8080/
 ├── Makefile             ← คำสั่งลัด (make help)
 ├── _quarto.yml          ← ตั้งค่าหนังสือ (เว็บ / PDF / EPUB)
 ├── index.qmd            ← หน้าแรกของหนังสือ
-├── course/              ← บทเรียน 67 บท
+├── course/              ← บทเรียน 70 บท
 │   └── img/             ← รูปประกอบ SVG (รองรับธีมสว่าง/มืด)
 └── lab/
     ├── server.py        ← lab server (stdlib ล้วน ไม่ต้องลงอะไร)

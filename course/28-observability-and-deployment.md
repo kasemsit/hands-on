@@ -334,4 +334,4 @@ DEBUG = os.environ.get("DEBUG") == "1"
 7. ตอบตัวเอง: ถ้าตอนนี้ผู้ใช้แจ้งว่าแอปพัง คุณใช้เวลากี่นาทีกว่าจะรู้สาเหตุ
 
 ***
-[⬅ Database และ Performance ของ API](27-database-and-performance.md) · [สารบัญ](../README.md) · [Push, Real-time, Upload และ Offline ➡](29-realtime-push-and-offline.md)
+[⬅ Database และ Performance](27-database-and-performance.md) · [สารบัญ](../README.md) · [Observability เจาะลึก ➡](68-observability-deep.md)
