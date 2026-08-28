@@ -104,6 +104,7 @@ book:
         - course/46-gpu-101.md
         - course/47-gpu-memory-and-kv-cache.md
         - course/48-serving-llm.md
+        - course/66-training-and-finetuning.md
         - course/49-gpu-on-containers-and-k8s.md
         - course/50-multi-gpu-and-networking.md
         - course/51-gpu-observability-and-cost.md

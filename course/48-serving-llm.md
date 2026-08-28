@@ -334,4 +334,4 @@ location /v1/ {
    แล้วเทียบกับที่วัดได้จริงตอน batch=1
 
 ***
-[⬅ VRAM และ KV cache](47-gpu-memory-and-kv-cache.md) · [สารบัญ](../README.md) · [แบ่ง GPU ให้หลายคนใช้ ➡](49-gpu-on-containers-and-k8s.md)
+[⬅ VRAM และ KV cache](47-gpu-memory-and-kv-cache.md) · [สารบัญ](../README.md) · [เทรนและ fine-tune ให้เป็น ➡](66-training-and-finetuning.md)
