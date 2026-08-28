@@ -93,6 +93,8 @@ book:
         - course/40-malware-analysis-basics.md
         - course/41-detection-and-response.md
         - course/42-supply-chain-security.md
+        - course/58-cloud-security.md
+        - course/59-network-defense.md
 
     - part: "ส่วนที่ 8 · GPU และ AI Infrastructure"
       chapters:
@@ -106,6 +108,9 @@ book:
 
     - part: "ส่วนที่ 9 · คิดอย่างเป็นระบบ และก้าวต่อไป"
       chapters:
+        - course/60-grc-and-compliance.md
+        - course/61-digital-forensics.md
+        - course/62-anonymity-and-tunneling.md
         - course/34-threat-modeling.md
         - course/22-ethics-and-limits.md
         - course/43-security-roles-and-paths.md

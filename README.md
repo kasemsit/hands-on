@@ -128,6 +128,8 @@ curl -i http://127.0.0.1:8080/
 | [บทที่ 40](course/40-malware-analysis-basics.md) | การวิเคราะห์มัลแวร์เบื้องต้น |
 | [บทที่ 41](course/41-detection-and-response.md) | การตรวจจับและตอบสนอง |
 | [บทที่ 42](course/42-supply-chain-security.md) | Supply chain security |
+| [บทที่ 58](course/58-cloud-security.md) | ความปลอดภัยบนคลาวด์ |
+| [บทที่ 59](course/59-network-defense.md) | ออกแบบเครือข่ายให้ป้องกันได้ |
 
 ### ส่วนที่ 8 · GPU และ AI Infrastructure
 
@@ -145,6 +147,9 @@ curl -i http://127.0.0.1:8080/
 
 | บท | เรื่อง |
 |----|--------|
+| [บทที่ 60](course/60-grc-and-compliance.md) | ความเสี่ยง มาตรฐาน และการปฏิบัติตามกฎ |
+| [บทที่ 61](course/61-digital-forensics.md) | Digital forensics |
+| [บทที่ 62](course/62-anonymity-and-tunneling.md) | การระบุตัวตนบนอินเทอร์เน็ต — VPN, Tor, tunneling |
 | [บทที่ 34](course/34-threat-modeling.md) | Threat modeling — คิดเองเป็น ไม่ใช่ท่อง checklist |
 | [บทที่ 22](course/22-ethics-and-limits.md) | จริยธรรมและขอบเขต |
 | [บทที่ 43](course/43-security-roles-and-paths.md) | งานสาย security ทำอะไรกันจริง ๆ |
@@ -166,7 +171,7 @@ curl -i http://127.0.0.1:8080/
 ├── Makefile             ← คำสั่งลัด (make help)
 ├── _quarto.yml          ← ตั้งค่าหนังสือ (เว็บ / PDF / EPUB)
 ├── index.qmd            ← หน้าแรกของหนังสือ
-├── course/              ← บทเรียน 58 บท
+├── course/              ← บทเรียน 63 บท
 │   └── img/             ← รูปประกอบ SVG (รองรับธีมสว่าง/มืด)
 └── lab/
     ├── server.py        ← lab server (stdlib ล้วน ไม่ต้องลงอะไร)

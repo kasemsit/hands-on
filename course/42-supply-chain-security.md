@@ -300,4 +300,4 @@ pip install --dry-run --report - some-package | jq '.install | length'
 8. ตรวจ `torch.load` ในโค้ดเก่าของคุณ — มี `weights_only=True` ครบไหม
 
 ***
-[⬅ การตรวจจับและตอบสนอง](41-detection-and-response.md) · [สารบัญ](../README.md) · [GPU 101 ➡](46-gpu-101.md)
+[⬅ การตรวจจับและตอบสนอง](41-detection-and-response.md) · [สารบัญ](../README.md) · [ความปลอดภัยบนคลาวด์ ➡](58-cloud-security.md)
