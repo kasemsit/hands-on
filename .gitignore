@@ -29,3 +29,7 @@ __pycache__/
 # ของที่ระบบปฏิบัติการ/เอดิเตอร์ทิ้งไว้
 .DS_Store
 *.swp
+
+# ผลลัพธ์การ compile ของ lab 63
+lab/re/crackme
+lab/re/crackme_patched

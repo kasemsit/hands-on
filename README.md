@@ -118,6 +118,7 @@ curl -i http://127.0.0.1:8080/
 | [บทที่ 35](course/35-linux-internals.md) | Linux internals ที่คนทำ API ต้องรู้ |
 | [บทที่ 36](course/36-permissions-and-isolation.md) | สิทธิ์และการแยกส่วน |
 | [บทที่ 37](course/37-memory-and-classic-exploits.md) | หน่วยความจำและช่องโหว่คลาสสิก |
+| [บทที่ 63](course/63-reverse-engineering.md) | Reverse engineering เบื้องต้น |
 | [บทที่ 38](course/38-crypto-in-practice.md) | Cryptography ภาคปฏิบัติ |
 
 ### ส่วนที่ 7 · Malware และการตั้งรับ
@@ -171,7 +172,7 @@ curl -i http://127.0.0.1:8080/
 ├── Makefile             ← คำสั่งลัด (make help)
 ├── _quarto.yml          ← ตั้งค่าหนังสือ (เว็บ / PDF / EPUB)
 ├── index.qmd            ← หน้าแรกของหนังสือ
-├── course/              ← บทเรียน 63 บท
+├── course/              ← บทเรียน 64 บท
 │   └── img/             ← รูปประกอบ SVG (รองรับธีมสว่าง/มืด)
 └── lab/
     ├── server.py        ← lab server (stdlib ล้วน ไม่ต้องลงอะไร)

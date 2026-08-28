@@ -85,6 +85,7 @@ book:
         - course/35-linux-internals.md
         - course/36-permissions-and-isolation.md
         - course/37-memory-and-classic-exploits.md
+        - course/63-reverse-engineering.md
         - course/38-crypto-in-practice.md
 
     - part: "ส่วนที่ 7 · Malware และการตั้งรับ"
