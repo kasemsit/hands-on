@@ -25,7 +25,7 @@ bytes ที่ส่งจริงบนสาย
 
 - ชั้น (1) **UTF-8** คือมาตรฐานปัจจุบัน ใช้ 1-4 byte ต่อตัวอักษร ภาษาไทยใช้ 3 byte/ตัว
 - ชั้น (2) **percent-encoding** ทำงานกับ *bytes* ไม่ใช่ตัวอักษร — จึงต้องรู้ (1) ก่อนเสมอ
-- ชั้น (3) จัดการด้วย `--compressed` (บทที่ 5)
+- ชั้น (3) จัดการด้วย `--compressed` ([บทที่ 5](05-redirects-and-headers.md))
 
 ![สามชั้นของการเข้ารหัสข้อความ](img/encoding-layers.svg)
 
@@ -113,9 +113,9 @@ base64 แปลง binary เป็นข้อความ ASCII 64 ตัว 
 
 **ที่คุณจะเจอในคอร์สนี้:**
 
-- Basic auth: `Authorization: Basic base64(user:pass)` (บทที่ 9)
-- JWT: 3 ส่วนคั่นด้วย `.` แต่ละส่วนเป็น base64url (บทที่ 10)
-- **ALTCHA payload: base64 ของ JSON** (บทที่ 16) ← สำคัญมาก
+- Basic auth: `Authorization: Basic base64(user:pass)` ([บทที่ 9](09-authentication.md))
+- JWT: 3 ส่วนคั่นด้วย `.` แต่ละส่วนเป็น base64url ([บทที่ 10](10-jwt-deep-dive.md))
+- **ALTCHA payload: base64 ของ JSON** ([บทที่ 16](16-altcha-pow.md)) ← สำคัญมาก
 
 ```bash
 echo -n 'myuser:mypass' | base64          # bXl1c2VyOm15cGFzcw==

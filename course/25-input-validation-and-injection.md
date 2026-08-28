@@ -102,7 +102,7 @@ subprocess.run(f"curl -s {url}", shell=True)
 subprocess.run(["curl", "-s", url], check=True)
 ```
 
-ใน bash หลักการเดียวกันคือ **ใส่ quote รอบตัวแปรเสมอ** (บทที่ 20)
+ใน bash หลักการเดียวกันคือ **ใส่ quote รอบตัวแปรเสมอ** ([บทที่ 20](20-shell-scripting-for-curl.md))
 
 ## 25.4 SSRF — ช่องโหว่ที่คนทำ API มักเจอ
 
@@ -186,7 +186,7 @@ def safe_fetch(url: str):
 หรือถ้าจำเป็นจริง ให้ยิงผ่าน **egress proxy แยก** ที่มี allowlist ของปลายทาง
 และรันในเครือข่ายที่แตะอะไรภายในไม่ได้เลย
 
-> **โยงกับบทที่ 13**: webhook URL ที่ลูกค้าตั้งเองก็คือ SSRF surface
+> **โยงกับ[บทที่ 13](13-webhooks-and-hmac.md)**: webhook URL ที่ลูกค้าตั้งเองก็คือ SSRF surface
 > — ต้องตรวจแบบเดียวกันก่อนยิง
 
 ## 25.5 การอัปโหลดไฟล์
@@ -231,7 +231,7 @@ if kind is None:
 
 ถ้าเก็บในโฟลเดอร์ที่ web server เสิร์ฟตรง ๆ ไฟล์ `.php`/`.jsp` ที่อัปโหลดขึ้นไป
 อาจถูก**รันเป็นโค้ด** ทางที่ดีกว่า: เก็บใน S3/โฟลเดอร์แยก แล้วเสิร์ฟผ่าน endpoint
-ที่ตรวจสิทธิ์ (**BOLA! บทที่ 24**) พร้อม header ที่ปลอดภัย:
+ที่ตรวจสิทธิ์ (**BOLA! [บทที่ 24](24-authorization-and-bola.md)**) พร้อม header ที่ปลอดภัย:
 
 ```
 Content-Type: application/octet-stream       # อย่าเชื่อ type ที่ผู้ใช้ส่ง

@@ -1,6 +1,6 @@
 # บทที่ 48 · Serving LLM ให้เป็น API
 
-> บทที่ 47 ตอบว่า "เสิร์ฟได้กี่คน" — บทนี้ตอบว่า **"ทำยังไงให้ได้เท่านั้นจริง"**
+> [บทที่ 47](47-gpu-memory-and-kv-cache.md) ตอบว่า "เสิร์ฟได้กี่คน" — บทนี้ตอบว่า **"ทำยังไงให้ได้เท่านั้นจริง"**
 >
 > และอธิบายว่าทำไม `model.generate()` ใน loop ถึงเปลือง GPU มหาศาล
 
@@ -127,7 +127,7 @@ request B: จอง 4096 tokens  แต่ใช้จริง 1500 → เส
 ```
 
 **PagedAttention ยืมแนวคิด virtual memory paging ของระบบปฏิบัติการมาใช้**
-(หลักการเดียวกับที่คุณเจอในบทที่ 36.5)
+(หลักการเดียวกับที่คุณเจอใน[บทที่ 36.5](36-permissions-and-isolation.md))
 
 | | หน่วยความจำแบบเดิม | Paging |
 |---|-------------------|--------|
@@ -137,7 +137,7 @@ request B: จอง 4096 tokens  แต่ใช้จริง 1500 → เส
 
 **ผลที่ได้จริง:**
 
-- ใช้ VRAM ที่มีอยู่ได้คุ้มขึ้นมาก → เสิร์ฟได้มากกว่าที่คำนวณในบทที่ 47
+- ใช้ VRAM ที่มีอยู่ได้คุ้มขึ้นมาก → เสิร์ฟได้มากกว่าที่คำนวณใน[บทที่ 47](47-gpu-memory-and-kv-cache.md)
 - **prefix caching** — หลาย request ที่ขึ้นต้นด้วย system prompt เดียวกัน
   ใช้ KV cache ก้อนเดียวร่วมกัน (ประหยัดมากในงานจริงที่มี system prompt ยาว)
 
@@ -156,7 +156,7 @@ python -m vllm.entrypoints.openai.api_server \
   --gpu-memory-utilization 0.90
 ```
 
-**ยิงด้วย curl ได้เลย** — ทุกอย่างที่เรียนมาตั้งแต่บทที่ 1 ใช้ได้ทันที:
+**ยิงด้วย curl ได้เลย** — ทุกอย่างที่เรียนมาตั้งแต่[บทที่ 1](01-http-basics.md) ใช้ได้ทันที:
 
 ```bash
 curl -s http://localhost:8000/v1/completions \
@@ -171,32 +171,32 @@ curl -N http://localhost:8000/v1/completions \
   -d '{"model":"...","prompt":"...","max_tokens":128,"stream":true}'
 ```
 
-> **vLLM พูด SSE** สำหรับ streaming — ความรู้บทที่ 29 ใช้ได้ตรง ๆ
-> รวมถึงเรื่อง `proxy_buffering off` ถ้าวางหลัง nginx (บทที่ 26.7)
+> **vLLM พูด SSE** สำหรับ streaming — ความรู้[บทที่ 29](29-realtime-push-and-offline.md) ใช้ได้ตรง ๆ
+> รวมถึงเรื่อง `proxy_buffering off` ถ้าวางหลัง nginx ([บทที่ 26.7](26-proxy-caching-cdn.md))
 
 ## 48.6 พารามิเตอร์ที่ต้องตั้งให้ถูก
 
 | พารามิเตอร์ | ทำอะไร | ตั้งยังไง |
 |-------------|--------|-----------|
 | `--gpu-memory-utilization` | จองกี่ % ของ VRAM | **0.85-0.92** ไม่ใช่ 1.0 |
-| `--max-model-len` | context สูงสุด | เท่าที่ต้องใช้จริง (บทที่ 47) |
+| `--max-model-len` | context สูงสุด | เท่าที่ต้องใช้จริง ([บทที่ 47](47-gpu-memory-and-kv-cache.md)) |
 | `--max-num-seqs` | จำนวน sequence พร้อมกันสูงสุด | ปรับตามผลวัด |
 | `--dtype` | ชนิดน้ำหนัก | `bfloat16` ถ้าการ์ดรองรับ |
 | `--quantization` | quantize น้ำหนัก | `awq`, `gptq` เมื่อ VRAM ไม่พอ |
 | `--kv-cache-dtype` | quantize KV cache | `fp8` ลด KV ครึ่งหนึ่ง |
 | `--enable-prefix-caching` | แชร์ KV ของ prefix | เปิดถ้ามี system prompt ยาว |
-| `--tensor-parallel-size` | ใช้กี่ GPU | บทที่ 50 |
+| `--tensor-parallel-size` | ใช้กี่ GPU | [บทที่ 50](50-multi-gpu-and-networking.md) |
 
 > ## ⚠️ `--gpu-memory-utilization 1.0` = OOM แน่นอน
 >
-> เพราะ **prefill peak** (บทที่ 47.9) ต้องการที่ว่างชั่วคราว
+> เพราะ **prefill peak** ([บทที่ 47.9](47-gpu-memory-and-kv-cache.md)) ต้องการที่ว่างชั่วคราว
 > ถ้าจองไว้เต็ม 100% พอเจอ prompt ยาวก็ระเบิด
 >
 > **เริ่มที่ 0.90 แล้วค่อยขยับ** และเผื่อไว้ถ้ามี process อื่นใช้การ์ดร่วมด้วย
 
 **`--max-model-len` มีผลกับ throughput โดยตรง** — ตั้ง 32768 ทั้งที่ผู้ใช้จริง
 ใช้แค่ 2048 แปลว่าคุณจอง KV cache เผื่อไว้เยอะเกินจนเสิร์ฟได้น้อยคน
-(กลับไปดูเลขในบทที่ 47.7)
+(กลับไปดูเลขใน[บทที่ 47.7](47-gpu-memory-and-kv-cache.md))
 
 ## 48.7 ทางเลือกอื่นนอกจาก vLLM
 
@@ -231,7 +231,7 @@ flowchart LR
     style L fill:#ffebe9,stroke:#cf222e
 ```
 
-> **นี่คือ trade-off เดียวกับบทที่ 12.5** (rate limit / batching) และบทที่ 33.9
+> **นี่คือ trade-off เดียวกับ[บทที่ 12.5](12-api-design-practices.md)** (rate limit / batching) และ[บทที่ 33.9](33-concurrency-and-async.md)
 > (backpressure) — ระบบที่รับงานเยอะเกินจะช้าลงจนทุกคนแย่
 
 **วัดด้วยเครื่องมือของ vLLM:**
@@ -288,7 +288,7 @@ vLLM ให้ HTTP API มา — **ทุกบทในส่วนที่ 
 | Timeout (บท 2.5) | ตั้งให้ยาวพอ generation ยาว ๆ |
 | SSE (บท 29.2) | streaming response |
 | Reverse proxy (บท 26.7) | `proxy_buffering off` ไม่งั้น streaming ค้าง |
-| Observability (บท 28) | บทที่ 51 |
+| Observability (บท 28) | [บทที่ 51](51-gpu-observability-and-cost.md) |
 | Idempotency (บท 12.4) | request ที่ retry แล้วเสีย GPU ซ้ำ |
 
 ```nginx
@@ -312,9 +312,9 @@ location /v1/ {
 - [ ] rate limit **ตาม token** ไม่ใช่ตาม request
 - [ ] timeout ทั้งฝั่ง client, proxy, และ server สอดคล้องกัน
 - [ ] `proxy_buffering off` ถ้ามี nginx คั่น
-- [ ] มี health check แยก live/ready (บทที่ 28.7)
-- [ ] วัด **cost per 1M tokens** ไม่ใช่แค่ utilization (บทที่ 51)
-- [ ] ทดสอบว่าเมื่อคิวเต็ม ระบบตอบ 429 ไม่ใช่ค้าง (บทที่ 33.9)
+- [ ] มี health check แยก live/ready ([บทที่ 28.7](28-observability-and-deployment.md))
+- [ ] วัด **cost per 1M tokens** ไม่ใช่แค่ utilization ([บทที่ 51](51-gpu-observability-and-cost.md))
+- [ ] ทดสอบว่าเมื่อคิวเต็ม ระบบตอบ 429 ไม่ใช่ค้าง ([บทที่ 33.9](33-concurrency-and-async.md))
 
 ## แบบฝึกหัด
 
@@ -322,13 +322,13 @@ location /v1/ {
    บนการ์ดคุณ
 2. ดูผลการทดลองที่ 2 — ถ้าความยาว prompt ของผู้ใช้จริงต่างกันมาก
    static batching เสียเปล่ากี่เปอร์เซ็นต์
-3. เทียบผลการทดลองที่ 3 กับตาราง dtype ในบทที่ 46.8 — ตรงกันไหม
+3. เทียบผลการทดลองที่ 3 กับตาราง dtype ใน[บทที่ 46.8](46-gpu-101.md) — ตรงกันไหม
 4. ติดตั้ง vLLM แล้วเสิร์ฟโมเดลเล็ก (เช่น `Qwen/Qwen2.5-1.5B-Instruct`)
    บน RTX 3090 แล้วยิงด้วย `curl`
 5. ลอง `--gpu-memory-utilization` ที่ 0.5, 0.9, 0.99 แล้วดูว่า
    `--max-num-seqs` ที่รับได้ต่างกันแค่ไหน
 6. ยิงด้วย `stream: true` แล้ววัด TTFT ด้วย `curl -w '%{time_starttransfer}'`
-7. ยิงพร้อมกัน 20 request ด้วย `asyncio` (บทที่ 33) แล้วเทียบ throughput
+7. ยิงพร้อมกัน 20 request ด้วย `asyncio` ([บทที่ 33](33-concurrency-and-async.md)) แล้วเทียบ throughput
    กับการยิงทีละอัน
 8. คำนวณเพดาน token/s จาก memory bandwidth ของการ์ดคุณ (ข้อ 48.9)
    แล้วเทียบกับที่วัดได้จริงตอน batch=1

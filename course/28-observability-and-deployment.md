@@ -46,7 +46,7 @@ event="order_created" AND amount > 100000 AND duration_ms > 1000
 
 | field | ทำไม |
 |-------|------|
-| `ts` | ISO 8601 UTC (บทที่ 12) |
+| `ts` | ISO 8601 UTC ([บทที่ 12](12-api-design-practices.md)) |
 | `level` | debug/info/warn/error |
 | `event` | ชื่อเหตุการณ์แบบคงที่ ไม่ใช่ประโยคที่เปลี่ยนได้ |
 | `request_id` | **ผูกทุกบรรทัดของ request เดียวกันเข้าด้วยกัน** |
@@ -65,7 +65,7 @@ def redact(d: dict) -> dict:
 
 **ที่มักหลุดโดยไม่ตั้งใจ:**
 - ยัด request body ทั้งก้อนลง log ตอน debug แล้วลืมเอาออก
-- log URL เต็มที่มี `?api_key=` (บทที่ 9 — อีกเหตุผลที่ไม่ควรใส่ key ใน query)
+- log URL เต็มที่มี `?api_key=` ([บทที่ 9](09-authentication.md) — อีกเหตุผลที่ไม่ควรใส่ key ใน query)
 - stack trace ที่มีค่าตัวแปร
 - log `Authorization` header ทั้งบรรทัด
 
@@ -104,7 +104,7 @@ def middleware(request):
 ```
 
 > ⚠️ **อย่าเชื่อ request_id ที่ client ส่งมาแบบไม่ตรวจ** — จำกัดความยาวและ
-> อนุญาตเฉพาะ `[A-Za-z0-9_-]` ไม่งั้นเป็นช่องทาง log injection (บทที่ 25.3)
+> อนุญาตเฉพาะ `[A-Za-z0-9_-]` ไม่งั้นเป็นช่องทาง log injection ([บทที่ 25.3](25-input-validation-and-injection.md))
 
 ## 28.4 Metrics — RED และ USE
 
@@ -132,7 +132,7 @@ LATENCY = Histogram("http_request_duration_seconds", "", ["method", "path"])
 
 **metric ระดับธุรกิจสำคัญไม่แพ้ metric ระดับเทคนิค:**
 จำนวนคน login สำเร็จ/ล้มเหลว, ออเดอร์ต่อชั่วโมง, การ refresh token,
-**จำนวนครั้งที่ตรวจพบ refresh token reuse** (บทที่ 11)
+**จำนวนครั้งที่ตรวจพบ refresh token reuse** ([บทที่ 11](11-mobile-api-auth-design.md))
 
 ## 28.5 Distributed tracing
 
@@ -268,7 +268,7 @@ deploy โค้ดขึ้นไปก่อนโดยยังปิดอ�
 แต่ flag ฝั่ง server เปลี่ยนได้ทันที
 
 **Rollback ต้องซ้อมไว้** — รู้ว่ากดอะไร ใช้เวลากี่นาที และ **migration ที่ทำไปแล้ว
-ต้องเข้ากันได้กับโค้ดเวอร์ชันเก่า** (บทที่ 27.6 — นี่คือเหตุผลที่ต้อง expand/contract)
+ต้องเข้ากันได้กับโค้ดเวอร์ชันเก่า** ([บทที่ 27.6](27-database-and-performance.md) — นี่คือเหตุผลที่ต้อง expand/contract)
 
 ## 28.10 Config และ secret
 
@@ -284,12 +284,12 @@ DEBUG = os.environ.get("DEBUG") == "1"
 | ที่เก็บ secret | ความเห็น |
 |----------------|----------|
 | Vault / AWS Secrets Manager / GCP Secret Manager | ✅ ดีที่สุด — หมุนอัตโนมัติได้ |
-| Kubernetes Secret | ⚠️ base64 ไม่ใช่การเข้ารหัส (บทที่ 6) ต้องเปิด encryption at rest |
+| Kubernetes Secret | ⚠️ base64 ไม่ใช่การเข้ารหัส ([บทที่ 6](06-encoding-and-charset.md)) ต้องเปิด encryption at rest |
 | env var จาก CI | ⚠️ พอใช้ได้ |
 | ไฟล์ `.env` ใน git | ❌ **ห้ามเด็ดขาด** |
 
 **ต้องหมุน secret ได้โดยไม่ downtime** — รองรับสองค่าพร้อมกันช่วงเปลี่ยนผ่าน
-(หลักการเดียวกับ backup pin ในบทที่ 7 และ webhook secret ในบทที่ 13)
+(หลักการเดียวกับ backup pin ใน[บทที่ 7](07-tls-https.md) และ webhook secret ใน[บทที่ 13](13-webhooks-and-hmac.md))
 
 ## 28.11 Checklist
 

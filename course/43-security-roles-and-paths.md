@@ -74,8 +74,8 @@ flowchart TD
 |---------|--------------|
 | Active Directory / Windows | ห้องแล็บ Windows — องค์กรจริงใช้ AD แทบทั้งหมด |
 | Cloud (AWS/Azure/GCP) IAM | บัญชีฟรีทดลอง + เอกสารของผู้ให้บริการ |
-| Reverse engineering ลึก | Ghidra + crackme (บทที่ 40) |
-| การเขียนรายงาน | ฝึกจาก CTF write-up (บทที่ 44) |
+| Reverse engineering ลึก | Ghidra + crackme ([บทที่ 40](40-malware-analysis-basics.md)) |
+| การเขียนรายงาน | ฝึกจาก CTF write-up ([บทที่ 44](44-ctf-and-legal-practice.md)) |
 | ทำงานกับคน | 🔴 **ตัวที่สำคัญที่สุดและสอนในหนังสือไม่ได้** |
 
 > ## ทักษะที่ตัดสินความก้าวหน้าจริง ๆ ไม่ใช่ทักษะเทคนิค

@@ -59,7 +59,7 @@
 | หนังสือ | เรื่อง |
 |---------|-------|
 | **Computer Networking: A Top-Down Approach** (Kurose & Ross) | ตำราเครือข่ายมาตรฐาน เริ่มจาก HTTP ลงไปหา TCP — เหมาะกับคนที่มาจากเว็บ |
-| **API Design Patterns** (JJ Geewax) | ตรงกับบทที่ 12 มาก |
+| **API Design Patterns** (JJ Geewax) | ตรงกับ[บทที่ 12](12-api-design-practices.md) มาก |
 | **Web API Design** / **RESTful Web APIs** (Richardson) | ออกแบบ API |
 | **Designing Data-Intensive Applications** (Kleppmann) | ระบบขนาดใหญ่ idempotency, consistency |
 
@@ -70,7 +70,7 @@
 | **The Web Application Hacker's Handbook** (Stuttard & Pinto) | คัมภีร์ของสาย web security — หนา แต่คุ้ม |
 | **Real-World Cryptography** (David Wong) | ✅ **แนะนำที่สุดสำหรับคุณ** — HMAC, TLS, signature แบบใช้งานจริง ไม่เน้นคณิตศาสตร์ |
 | **Serious Cryptography** (Aumasson) | crypto เชิงลึกกว่า |
-| **API Security in Action** (Neil Madden) | ✅ ตรงกับบทที่ 9-13 มากที่สุด token, OAuth, mobile |
+| **API Security in Action** (Neil Madden) | ✅ ตรงกับ[บทที่ 9](09-authentication.md)-13 มากที่สุด token, OAuth, mobile |
 | **OAuth 2 in Action** (Richer & Sanso) | ถ้าจะทำ OAuth เต็มรูปแบบ |
 
 **ถ้าจะซื้อแค่ 2 เล่มสำหรับงานที่คุณทำอยู่: _API Security in Action_ + _Real-World Cryptography_**
@@ -85,7 +85,7 @@
 | **[OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/)** | checklist ตรวจระบบก่อนขึ้น production |
 | **[OWASP MASVS](https://mas.owasp.org/)** | ✅ มาตรฐานความปลอดภัย **mobile app** โดยเฉพาะ |
 | **[OWASP API Security Top 10](https://owasp.org/API-Security/)** | 10 ช่องโหว่ API ที่พบบ่อยที่สุด |
-| **[ALTCHA docs](https://altcha.org/docs/)** + [source](https://github.com/altcha-org/altcha-lib) | บทที่ 16 |
+| **[ALTCHA docs](https://altcha.org/docs/)** + [source](https://github.com/altcha-org/altcha-lib) | [บทที่ 16](16-altcha-pow.md) |
 | **[Playwright docs](https://playwright.dev/python/docs/intro)** | บท 17-18 |
 | **RFC** ([9110](https://www.rfc-editor.org/rfc/rfc9110) HTTP semantics, [6749](https://www.rfc-editor.org/rfc/rfc6749) OAuth 2.0, [7519](https://www.rfc-editor.org/rfc/rfc7519) JWT, [6265](https://www.rfc-editor.org/rfc/rfc6265) Cookie) | เมื่อต้องการคำตอบที่แน่นอนที่สุด |
 
@@ -150,8 +150,8 @@ flowchart TD
 1. เลือก 1 หนังสือจาก 23.3 แล้วอ่านบทแรกภายในสัปดาห์นี้
 2. สมัคร PortSwigger Web Security Academy แล้วทำ lab หมวด Authentication ให้ครบ
 3. เปิด OWASP MASVS แล้วเช็ค mobile app ของคุณว่าผ่านกี่ข้อ
-4. อ่าน RFC 6265 (Cookie) ส่วนที่ 4.1 แล้วเทียบกับบทที่ 4 ว่าตรงกันไหม
-5. เอา checklist ในบทที่ 11.11 มาตรวจ API ของคุณ แล้วเขียนรายการสิ่งที่ต้องแก้
+4. อ่าน RFC 6265 (Cookie) ส่วนที่ 4.1 แล้วเทียบกับ[บทที่ 4](04-cookies-sessions.md) ว่าตรงกันไหม
+5. เอา checklist ใน[บทที่ 11.11](11-mobile-api-auth-design.md) มาตรวจ API ของคุณ แล้วเขียนรายการสิ่งที่ต้องแก้
 
 ***
 

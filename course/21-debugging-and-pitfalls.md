@@ -41,7 +41,7 @@ curl [options ทั้งหมดที่สงสัย] http://127.0.0.1:80
 
 | อาการ | สาเหตุ | แก้ |
 |-------|--------|-----|
-| `unable to get local issuer certificate` | server ส่ง chain ไม่ครบ | ตั้งค่า server ให้ส่ง full chain (บทที่ 7) |
+| `unable to get local issuer certificate` | server ส่ง chain ไม่ครบ | ตั้งค่า server ให้ส่ง full chain ([บทที่ 7](07-tls-https.md)) |
 | `certificate has expired` | cert หมดอายุ | ต่ออายุ |
 | `SSL_ERROR_SYSCALL` | TLS version/cipher ไม่ตรง | `--tlsv1.2 -v` |
 | ทำงานในเบราว์เซอร์แต่ curl ไม่ได้ | เบราว์เซอร์มี intermediate cert แคชไว้ | ปัญหาอยู่ที่ server ไม่ใช่ curl |
@@ -55,13 +55,13 @@ curl [options ทั้งหมดที่สงสัย] http://127.0.0.1:80
 | ได้ 403 CSRF ทั้งที่ token ถูก | ลืม `-b` ส่ง cookie / token คนละ session |
 | login ผ่านแต่หน้าถัดไปไม่ผ่าน | ลืม `-c` ตอน POST → cookie ใหม่หาย |
 | ใช้ได้ครั้งแรก ครั้งที่สองพัง | token ใช้ครั้งเดียว / refresh rotation ทำงาน |
-| refresh แล้วทุกอย่างพังหมด | refresh ซ้อนกัน → reuse detection เพิกถอน family (บทที่ 11) |
+| refresh แล้วทุกอย่างพังหมด | refresh ซ้อนกัน → reuse detection เพิกถอน family ([บทที่ 11](11-mobile-api-auth-design.md)) |
 
 ### ปัญหาข้อมูล
 
 | อาการ | สาเหตุ |
 |-------|--------|
-| ภาษาไทยเป็น `à¸«à¸™` | charset ผิด (บทที่ 6) |
+| ภาษาไทยเป็น `à¸«à¸™` | charset ผิด ([บทที่ 6](06-encoding-and-charset.md)) |
 | `+` กลายเป็น space | ใช้ `-d` แทน `--data-urlencode` |
 | `&` ทำให้ field เพี้ยน | ไม่ได้ encode |
 | body ที่ได้เป็นตัวอักษรมั่ว | gzip — ใส่ `--compressed` |
@@ -74,7 +74,7 @@ curl [options ทั้งหมดที่สงสัย] http://127.0.0.1:80
 | อาการ | สาเหตุ |
 |-------|--------|
 | ได้ HTML ว่าง ๆ + 302 | ลืม `-L` |
-| POST กลายเป็น POST ซ้ำที่ปลายทาง | ใส่ `-X POST` คู่กับ `-L` (บทที่ 5) |
+| POST กลายเป็น POST ซ้ำที่ปลายทาง | ใส่ `-X POST` คู่กับ `-L` ([บทที่ 5](05-redirects-and-headers.md)) |
 | cookie หายหลัง redirect | ลืม `-b`/`-c` |
 | วนไม่รู้จบ | redirect loop — ใส่ `--max-redirs 5` |
 
@@ -82,10 +82,10 @@ curl [options ทั้งหมดที่สงสัย] http://127.0.0.1:80
 
 | อาการ | สาเหตุ |
 |-------|--------|
-| curl ได้ 403 แต่เบราว์เซอร์ผ่าน | User-Agent / TLS fingerprint (บทที่ 15) |
-| ได้ HTML ว่างเปล่า | เนื้อหาสร้างด้วย JS → ต้องใช้ Playwright (บทที่ 17) |
+| curl ได้ 403 แต่เบราว์เซอร์ผ่าน | User-Agent / TLS fingerprint ([บทที่ 15](15-captcha-and-antibot.md)) |
+| ได้ HTML ว่างเปล่า | เนื้อหาสร้างด้วย JS → ต้องใช้ Playwright ([บทที่ 17](17-playwright-basics.md)) |
 | ทำงานได้สักพักแล้ว 429 | rate limit — ใส่ `sleep` และเคารพ `Retry-After` |
-| ได้หน้า CAPTCHA | ระบบ anti-bot ทำงาน (บทที่ 15) |
+| ได้หน้า CAPTCHA | ระบบ anti-bot ทำงาน ([บทที่ 15](15-captcha-and-antibot.md)) |
 
 ## 21.3 เครื่องมือ debug
 
@@ -121,7 +121,7 @@ curl -d 'a=b' http://127.0.0.1:8081/test
 
 ## 21.4 กับดักที่ทำให้เสียเวลามากที่สุด 10 อันดับ
 
-**1. `-X POST` กับ `-L`** — POST ซ้ำที่ปลายทาง (บทที่ 5)
+**1. `-X POST` กับ `-L`** — POST ซ้ำที่ปลายทาง ([บทที่ 5](05-redirects-and-headers.md))
 
 **2. ลืม `-c` ตอน POST** — cookie ใหม่ที่ server ตั้งหลัง login หายไป
 
@@ -145,12 +145,12 @@ printf '%s' 'abc' | sha256sum  # ปลอดภัยที่สุด
 
 **7. ไม่ใส่ `--max-time`** — สคริปต์ค้างตลอดกาลใน cron
 
-**8. cookie jar ไม่ได้คั่นด้วย TAB** — เขียนเองแล้ว curl เงียบ ๆ ไม่อ่าน (บทที่ 18)
+**8. cookie jar ไม่ได้คั่นด้วย TAB** — เขียนเองแล้ว curl เงียบ ๆ ไม่อ่าน ([บทที่ 18](18-playwright-cookies-to-curl.md))
 
 **9. ตัวแปรไม่ใส่ quote** — ค่าที่มี space ทำให้พังแบบงง ๆ
 
 **10. refresh token ซ้อนกัน** — บั๊กอันดับหนึ่งของ mobile app ที่ทำ rotation
-(บทที่ 11) แก้ด้วย single-flight
+([บทที่ 11](11-mobile-api-auth-design.md)) แก้ด้วย single-flight
 
 ## 21.5 checklist เมื่อ "curl ไม่ได้ แต่เบราว์เซอร์ได้"
 
@@ -158,7 +158,7 @@ printf '%s' 'abc' | sha256sum  # ปลอดภัยที่สุด
 
 - [ ] 1. มี cookie ครบไหม (`-b`) — บาง cookie ถูกตั้งจากหน้าอื่นก่อนหน้า
 - [ ] 2. มี CSRF token / hidden field ครบไหม
-- [ ] 3. token อยู่ใน localStorage หรือเปล่า (บทที่ 18)
+- [ ] 3. token อยู่ใน localStorage หรือเปล่า ([บทที่ 18](18-playwright-cookies-to-curl.md))
 - [ ] 4. `User-Agent` ถูกเช็คไหม
 - [ ] 5. `Referer` / `Origin` ถูกเช็คไหม
 - [ ] 6. มี custom header (`X-...`) ที่ JS ใส่ให้ไหม
@@ -185,7 +185,7 @@ printf '%s' 'abc' | sha256sum  # ปลอดภัยที่สุด
 
 **สิ่งที่ต้องมีเพื่อ debug ได้:**
 
-- `X-Request-ID` ที่ไหลผ่านทุกชั้นและอยู่ใน log ทุกบรรทัด (บทที่ 12)
+- `X-Request-ID` ที่ไหลผ่านทุกชั้นและอยู่ใน log ทุกบรรทัด ([บทที่ 12](12-api-design-practices.md))
 - log ที่มี: timestamp, request_id, user_id, method, path, status, duration
 - **ไม่มี**: token, password, `Authorization` header เต็ม ๆ
 

@@ -39,8 +39,8 @@ chmod 700 ~/private/      # โฟลเดอร์ส่วนตัว
 chmod 755 script.sh       # รันได้ทุกคน แก้ได้เจ้าของ
 ```
 
-**`600` คือสิทธิ์ของทุกอย่างที่เป็นความลับ** — cookie jar (บทที่ 20.3),
-`.env`, private key, `state.json` ของ Playwright (บทที่ 18.10)
+**`600` คือสิทธิ์ของทุกอย่างที่เป็นความลับ** — cookie jar ([บทที่ 20.3](20-shell-scripting-for-curl.md)),
+`.env`, private key, `state.json` ของ Playwright ([บทที่ 18.10](18-playwright-cookies-to-curl.md))
 
 ```bash
 umask 077       # ไฟล์ใหม่ที่สร้างจะเป็น 600 อัตโนมัติ
@@ -88,12 +88,12 @@ getcap /usr/bin/ping
 | Capability | ให้ทำอะไร | ตัวอย่างที่เจอในคอร์สนี้ |
 |------------|-----------|--------------------------|
 | `cap_net_bind_service` | bind port < 1024 | server ที่ต้องฟัง 80/443 |
-| `cap_net_raw` | ส่ง packet ดิบ | **`tcpdump`, `ping`** (บทที่ 31.6) |
+| `cap_net_raw` | ส่ง packet ดิบ | **`tcpdump`, `ping`** ([บทที่ 31.6](31-tcpip-and-tcpdump.md)) |
 | `cap_net_admin` | ตั้งค่าเครือข่าย | firewall, interface |
-| `cap_sys_ptrace` | ดู process อื่น | **`strace`** (บทที่ 35.7) |
+| `cap_sys_ptrace` | ดู process อื่น | **`strace`** ([บทที่ 35.7](35-linux-internals.md)) |
 | `cap_dac_override` | ข้ามการตรวจสิทธิ์ไฟล์ | ⚠️ เกือบเท่ากับ root |
 
-**นี่คือคำสั่งที่บทที่ 31 ให้ใช้กับ tcpdump:**
+**นี่คือคำสั่งที่[บทที่ 31](31-tcpip-and-tcpdump.md) ให้ใช้กับ tcpdump:**
 
 ```bash
 sudo setcap cap_net_raw,cap_net_admin=eip "$(which tcpdump)"
@@ -239,7 +239,7 @@ docker run -v /run/secrets/token:/run/secrets/token:ro myapi
 ```
 
 Kubernetes: ใช้ Secret **แต่ต้องรู้ว่า Secret ของ k8s เป็นแค่ base64
-ไม่ใช่การเข้ารหัส** (บทที่ 6.5) — ต้องเปิด encryption at rest ด้วย
+ไม่ใช่การเข้ารหัส** ([บทที่ 6.5](06-encoding-and-charset.md)) — ต้องเปิด encryption at rest ด้วย
 
 ## 36.8 SELinux / AppArmor
 
@@ -272,14 +272,14 @@ sudo ausearch -m avc -ts recent     # SELinux
 - [ ] ไม่มี `--privileged` และไม่ mount docker socket
 - [ ] ถ้าต้อง bind port ต่ำ ใช้ capability หรือ reverse proxy ไม่ใช่ root
 - [ ] ตรวจว่าไม่มีไฟล์ setuid แปลกปลอมบนเครื่อง
-- [ ] backup ก็ต้องมีสิทธิ์เข้มเท่าข้อมูลต้นฉบับ (โยงกับ attack tree บทที่ 34.6)
+- [ ] backup ก็ต้องมีสิทธิ์เข้มเท่าข้อมูลต้นฉบับ (โยงกับ attack tree [บทที่ 34.6](34-threat-modeling.md))
 
 ## แบบฝึกหัด
 
 1. ดู `ls -l` ของ `lab/server.py` แล้วอ่านสิทธิ์ให้ออกทีละตัวอักษร
 2. สร้างโฟลเดอร์แล้วเอา `x` ออก (`chmod 600 dir/`) — ยังเข้าไปดูไฟล์ข้างในได้ไหม
    ทั้งที่รู้ชื่อไฟล์
-3. `chmod 600` ไฟล์ cookie jar ที่สร้างจากบทที่ 4 แล้วตรวจด้วย `ls -l`
+3. `chmod 600` ไฟล์ cookie jar ที่สร้างจาก[บทที่ 4](04-cookies-sessions.md) แล้วตรวจด้วย `ls -l`
 4. รัน `getcap $(which ping)` — ทำไม `ping` ถึงส่ง ICMP ได้โดยไม่ต้อง sudo
 5. ให้ capability กับ `tcpdump` ตามข้อ 36.3 แล้วยืนยันว่าดัก packet ได้โดยไม่ sudo
    จากนั้นลอง `tcpdump` อ่านไฟล์ของ root — ทำได้ไหม (ควรไม่ได้)

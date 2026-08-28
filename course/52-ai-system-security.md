@@ -1,7 +1,7 @@
 # บทที่ 52 · ความปลอดภัยของระบบ AI
 
-> บทนี้เป็นจุดที่ทุกส่วนของหนังสือมาบรรจบกัน — **API security** (บทที่ 24-25)
-> **การแยกส่วน** (บทที่ 36) **supply chain** (บทที่ 42) และ **GPU** (ส่วนที่ 8)
+> บทนี้เป็นจุดที่ทุกส่วนของหนังสือมาบรรจบกัน — **API security** ([บทที่ 24](24-authorization-and-bola.md)-25)
+> **การแยกส่วน** ([บทที่ 36](36-permissions-and-isolation.md)) **supply chain** ([บทที่ 42](42-supply-chain-security.md)) และ **GPU** (ส่วนที่ 8)
 >
 > ระบบ AI ไม่ได้มีช่องโหว่ชนิดใหม่ทั้งหมด แต่มัน**เพิ่มพื้นผิวโจมตี**
 > ในแบบที่ checklist เดิมไม่ครอบคลุม
@@ -33,7 +33,7 @@ flowchart TD
 ## 52.2 ไฟล์โมเดล — โหลดแล้วรันโค้ดได้ทันที
 
 นี่คือช่องโหว่ที่**ตรงไปตรงมาที่สุดและอันตรายที่สุด** และเป็นการต่อยอด
-โดยตรงจากบทที่ 42
+โดยตรงจาก[บทที่ 42](42-supply-chain-security.md)
 
 ```python
 torch.load("model.pt")           # 🔴 รันโค้ดที่ฝังในไฟล์ได้
@@ -72,7 +72,7 @@ curl -s https://huggingface.co/api/models/<org>/<model> | jq '.siblings[].rfilen
 > **ห้ามโหลดน้ำหนักจากลิงก์ที่นักศึกษาส่งมาให้ ลงบนเครื่องที่ใช้ร่วมกัน**
 >
 > ถ้าจำเป็น ให้รันในเครื่องแยก หรือ container ที่ไม่มี network
-> และไม่ mount ข้อมูลอื่นเข้าไป (บทที่ 36)
+> และไม่ mount ข้อมูลอื่นเข้าไป ([บทที่ 36](36-permissions-and-isolation.md))
 
 ## 52.3 Prompt injection — ทำไมมันแก้ไม่หายด้วยการกรอง
 
@@ -85,7 +85,7 @@ curl -s https://huggingface.co/api/models/<org>/<model> | jq '.siblings[].rfilen
                         └──────────── โมเดลมองเป็นคำสั่งเท่ากัน ────────────┘
 ```
 
-เทียบกับ SQL injection (บทที่ 25) จะเห็นความต่างที่สำคัญ:
+เทียบกับ SQL injection ([บทที่ 25](25-input-validation-and-injection.md)) จะเห็นความต่างที่สำคัญ:
 
 | | SQL injection | Prompt injection |
 |---|---|---|
@@ -116,10 +116,10 @@ curl -s https://huggingface.co/api/models/<org>/<model> | jq '.siblings[].rfilen
 
 | หลักการ | ทำยังไง |
 |---------|---------|
-| **โมเดลไม่ควรมีสิทธิ์ที่ผู้ใช้ไม่มี** | ส่ง token ของผู้ใช้ต่อไป ไม่ใช้ service account (บทที่ 24) |
+| **โมเดลไม่ควรมีสิทธิ์ที่ผู้ใช้ไม่มี** | ส่ง token ของผู้ใช้ต่อไป ไม่ใช้ service account ([บทที่ 24](24-authorization-and-bola.md)) |
 | **ทุก tool call ต้องตรวจสิทธิ์ซ้ำ** | ฝั่ง server ตรวจเอง อย่าเชื่อว่าโมเดลตรวจแล้ว |
 | **การกระทำที่ย้อนไม่ได้ต้องให้คนยืนยัน** | ลบข้อมูล โอนเงิน ส่งอีเมลออกนอก |
-| **จำกัดปลายทางของ network** | allowlist เท่านั้น — กัน SSRF (บทที่ 25) |
+| **จำกัดปลายทางของ network** | allowlist เท่านั้น — กัน SSRF ([บทที่ 25](25-input-validation-and-injection.md)) |
 | **แยกบริบทที่ไม่น่าเชื่อถือ** | เนื้อหาจากเว็บ ≠ คำสั่งจากผู้ใช้ |
 
 > ## คำถามที่ใช้ตรวจการออกแบบได้เสมอ
@@ -135,11 +135,11 @@ curl -s https://huggingface.co/api/models/<org>/<model> | jq '.siblings[].rfilen
 | **System prompt leak** | ถามตรง ๆ หรืออ้อม ๆ ก็หลุด | อย่าเก็บความลับใน prompt |
 | **ข้อมูลจาก RAG ข้ามผู้ใช้** | ค้นเจอเอกสารที่ไม่มีสิทธิ์ | **กรองสิทธิ์ตอน retrieve ไม่ใช่ตอนตอบ** |
 | **Training data extraction** | โมเดล fine-tune จำข้อมูลดิบ | ล้างข้อมูลอ่อนไหวก่อนเทรน |
-| **Log รั่ว** | เก็บ prompt ที่มีข้อมูลส่วนตัว | ปิดบังก่อนเก็บ (บทที่ 28.2) |
+| **Log รั่ว** | เก็บ prompt ที่มีข้อมูลส่วนตัว | ปิดบังก่อนเก็บ ([บทที่ 28.2](28-observability-and-deployment.md)) |
 
 > ## แถวที่สองคือ BOLA ในคราบใหม่
 >
-> ระบบ RAG จำนวนมากทำผิดแบบเดียวกับบทที่ 24 — **ค้นทั้งฐานข้อมูลก่อน
+> ระบบ RAG จำนวนมากทำผิดแบบเดียวกับ[บทที่ 24](24-authorization-and-bola.md) — **ค้นทั้งฐานข้อมูลก่อน
 > แล้วค่อยหวังว่าโมเดลจะไม่พูดถึงเอกสารที่ผู้ใช้ไม่มีสิทธิ์**
 >
 > ```
@@ -151,7 +151,7 @@ curl -s https://huggingface.co/api/models/<org>/<model> | jq '.siblings[].rfilen
 
 ## 52.5 Multi-tenant isolation บน GPU
 
-ต่อยอดจากบทที่ 49 โดยตรง — เมื่อหลายคนใช้การ์ดใบเดียวกัน
+ต่อยอดจาก[บทที่ 49](49-gpu-on-containers-and-k8s.md) โดยตรง — เมื่อหลายคนใช้การ์ดใบเดียวกัน
 
 | กลไก | isolation | ความเสี่ยงที่เหลือ |
 |------|-----------|-------------------|
@@ -198,11 +198,11 @@ nvidia-smi -q | grep -i -A3 'ecc errors'
 |---------|-----------|
 | จำกัดความยาว input | `--max-model-len` ใน vLLM |
 | จำกัด token ที่ผลิตได้ | `max_tokens` ต่อ request |
-| **โควตาต่อผู้ใช้ต่อวัน** | นับ token ที่ gateway (บทที่ 49.15) |
+| **โควตาต่อผู้ใช้ต่อวัน** | นับ token ที่ gateway ([บทที่ 49.15](49-gpu-on-containers-and-k8s.md)) |
 | rate limit ตาม token ไม่ใช่ตามจำนวน request | เพราะ request เดียวก็ทำร้ายได้ |
 | timeout ต่อ request | กัน generation ที่ไม่ยอมจบ |
 
-> **rate limit แบบนับ request อย่างเดียวไม่พอ** (ต่างจากบทที่ 12)
+> **rate limit แบบนับ request อย่างเดียวไม่พอ** (ต่างจาก[บทที่ 12](12-api-design-practices.md))
 > เพราะ request ที่ context 100k กับ request ที่ context 100 token
 > ใช้ทรัพยากรต่างกันเป็นพันเท่า — ต้องนับ **token** ไม่ใช่ **ครั้ง**
 
@@ -212,14 +212,14 @@ nvidia-smi -q | grep -i -A3 'ecc errors'
 
 - [ ] ใช้ `.safetensors` ทุกโมเดล ไม่มี `.pt` จากแหล่งที่ไม่รู้จัก
 - [ ] โหลดโมเดลใน container ที่จำกัดสิทธิ์และเครือข่าย
-- [ ] บันทึกว่าโมเดลแต่ละตัวมาจากไหน hash อะไร (SBOM — บทที่ 42)
+- [ ] บันทึกว่าโมเดลแต่ละตัวมาจากไหน hash อะไร (SBOM — [บทที่ 42](42-supply-chain-security.md))
 
 **ชั้น prompt / tool**
 
 - [ ] ออกแบบโดยสมมติว่า **prompt injection สำเร็จเสมอ**
 - [ ] ทุก tool call ตรวจสิทธิ์ฝั่ง server ด้วย token ของผู้ใช้จริง
 - [ ] การกระทำที่ย้อนไม่ได้ ต้องมีคนยืนยัน
-- [ ] network ของ tool เป็น allowlist (กัน SSRF — บทที่ 25)
+- [ ] network ของ tool เป็น allowlist (กัน SSRF — [บทที่ 25](25-input-validation-and-injection.md))
 - [ ] ไม่มีความลับอยู่ใน system prompt
 
 **ชั้น RAG**
@@ -244,13 +244,13 @@ nvidia-smi -q | grep -i -A3 'ecc errors'
 1. เปิด HuggingFace หาโมเดลที่คุณใช้ — มี `.safetensors` ไหม
    ถ้ามีแต่ `.bin` คุณจะทำอย่างไร
 2. ตรวจโค้ดของคุณเองว่ามี `torch.load()` ที่ไม่ได้ใส่ `weights_only=True` ไหม
-3. ออกแบบ threat model (บทที่ 34) ของระบบ RAG ที่ให้พนักงานถามข้อมูลภายใน
+3. ออกแบบ threat model ([บทที่ 34](34-threat-modeling.md)) ของระบบ RAG ที่ให้พนักงานถามข้อมูลภายใน
    — ใครเป็นผู้โจมตีได้บ้าง
 4. ตอบคำถาม "ถ้าผู้ใช้ควบคุมโมเดลได้ 100% เขาทำอะไรได้บ้าง"
    สำหรับระบบที่คุณกำลังทำ
-5. เขียน rate limit ที่นับ token แทนจำนวน request — ต่างจากบทที่ 12 อย่างไร
+5. เขียน rate limit ที่นับ token แทนจำนวน request — ต่างจาก[บทที่ 12](12-api-design-practices.md) อย่างไร
 6. ทดลอง: ส่ง prompt ที่บอกให้โมเดลเปิดเผย system prompt — สำเร็จไหม
-   **ทำกับระบบของตัวเองเท่านั้น** (บทที่ 22)
+   **ทำกับระบบของตัวเองเท่านั้น** ([บทที่ 22](22-ethics-and-limits.md))
 7. คำนวณว่า request ที่ context 100k token กิน KV cache เท่าไร
    ด้วย [vram_calc.py](../lab/gpu/vram_calc.py) — เทียบกับ context 1k
 

@@ -37,7 +37,7 @@ curl http://127.0.0.1:8080/api/books?tag=curl       # & จะทำให้ sh
 | `-u` | `--user` | Basic auth |
 | `-A` | `--user-agent` | ตั้ง User-Agent |
 | `-e` | `--referer` | ตั้ง Referer |
-| `-k` | `--insecure` | ข้ามการตรวจ TLS cert (**อันตราย** ดูบทที่ 7) |
+| `-k` | `--insecure` | ข้ามการตรวจ TLS cert (**อันตราย** ดู[บทที่ 7](07-tls-https.md)) |
 | `--max-time` | | timeout ทั้งคำสั่ง (วินาที) |
 | `--retry` | | ลองใหม่กี่ครั้งถ้าล้มเหลว |
 
@@ -134,7 +134,7 @@ curl --max-time 5 http://127.0.0.1:8080/slow    # จะผ่าน
 ```
 
 > ⚠️ **อย่า retry method ที่ไม่ idempotent แบบสุ่มสี่สุ่มห้า** — `--retry` กับ POST
-> "สร้างคำสั่งซื้อ" อาจได้ออเดอร์ซ้ำ เรื่องนี้อธิบายเต็มในบทที่ 12 (idempotency key)
+> "สร้างคำสั่งซื้อ" อาจได้ออเดอร์ซ้ำ เรื่องนี้อธิบายเต็มใน[บทที่ 12](12-api-design-practices.md) (idempotency key)
 
 ## 2.6 exit code
 
@@ -185,7 +185,7 @@ echo '{"a":1}' | curl -d @- 'URL'
 
 ## 2.8 แปลง curl ↔ ภาษาอื่น
 
-- **จาก DevTools มาเป็น curl**: คลิกขวาที่ request → Copy → Copy as cURL (บทที่ 14)
+- **จาก DevTools มาเป็น curl**: คลิกขวาที่ request → Copy → Copy as cURL ([บทที่ 14](14-devtools-to-curl.md))
 - **จาก curl ไปเป็นโค้ด**: <https://curlconverter.com> แปลงเป็น Python/JS/Go ได้
 - **`--libcurl out.c`**: ให้ curl เขียนโค้ด C ที่เทียบเท่าคำสั่งนั้นออกมา
 

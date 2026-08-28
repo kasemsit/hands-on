@@ -289,7 +289,7 @@ finally:
 
 1. cookie ครบทุกตัวไหม (บางตัวถูกตั้งจาก subdomain อื่น)
 2. token อยู่ใน localStorage หรือเปล่า (ข้อ 18.7)
-3. มี header พิเศษที่ JS ใส่ให้ไหม เช่น `X-CSRF-Token` (ดู DevTools บทที่ 14)
+3. มี header พิเศษที่ JS ใส่ให้ไหม เช่น `X-CSRF-Token` (ดู DevTools [บทที่ 14](14-devtools-to-curl.md))
 4. server เช็ค `User-Agent` / `Referer` / `Origin` ไหม → ใส่ให้ตรงกับตอนที่ browser ยิง
 5. เป็น TLS fingerprint ไหม → ถ้าใช่ ต้องกลับไปใช้ Playwright
 

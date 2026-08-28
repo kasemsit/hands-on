@@ -23,7 +23,7 @@ sequenceDiagram
 ```
 
 **จุดที่ต้องเข้าใจ:** server **ไม่ต้องจำ**อะไรเลยระหว่างสองขั้นนี้
-เพราะ signature ทำหน้าที่พิสูจน์ว่า challenge เป็นของจริง (หลักการจากบทที่ 13)
+เพราะ signature ทำหน้าที่พิสูจน์ว่า challenge เป็นของจริง (หลักการจาก[บทที่ 13](13-webhooks-and-hmac.md))
 
 ![ขั้นตอนของ Proof of Work แบบ ALTCHA](img/pow-flow.svg)
 
@@ -123,7 +123,7 @@ b64 = base64.b64encode(json.dumps(payload, separators=(",", ":")).encode()).deco
 
 > บาง implementation ใส่ `"took"` (เวลาที่ใช้เป็นมิลลิวินาที) เข้าไปใน payload ด้วย
 > server ส่วนใหญ่ไม่ตรวจ field นี้ แต่ถ้าเว็บคุณตรวจ ก็ต้องใส่ให้ครบ
-> — **วิธีเช็คที่ชัวร์ที่สุด: ดู Request Payload จริงใน DevTools** (บทที่ 14)
+> — **วิธีเช็คที่ชัวร์ที่สุด: ดู Request Payload จริงใน DevTools** ([บทที่ 14](14-devtools-to-curl.md))
 
 ## 16.6 flow เต็มด้วย curl
 
@@ -195,7 +195,7 @@ curl -s https://yoursite/page | grep -oE '[^"]*altcha[^"]*\.(js|mjs)'
       (⚠️ lab ยังไม่ได้ทำข้อนี้ ดูแบบฝึกหัดข้อ 5)
 - [ ] ตั้ง `maxNumber` ให้พอดี: ยากไปผู้ใช้มือถือเก่ารอนาน ง่ายไปไม่มีความหมาย
       (แนะนำเริ่มที่ 50,000-200,000 แล้ววัดผลจริง)
-- [ ] ปรับ difficulty ตามความเสี่ยง (บทที่ 15)
+- [ ] ปรับ difficulty ตามความเสี่ยง ([บทที่ 15](15-captcha-and-antibot.md))
 - [ ] **PoW ไม่ใช่การยืนยันตัวตน** — ต้องมี rate limit ควบคู่เสมอ
 
 **ข้อ "กันใช้ซ้ำ" สำคัญมาก**: ถ้าไม่ทำ ผู้โจมตีแก้โจทย์ครั้งเดียว

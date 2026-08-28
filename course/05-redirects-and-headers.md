@@ -85,8 +85,8 @@ curl -L --max-redirs 5 URL
 | `Content-Type` | body ที่ส่งไปเป็นชนิดอะไร | ตั้งอัตโนมัติตาม `-d`/`-F` หรือ `-H` |
 | `Referer` | มาจากหน้าไหน (สะกดผิดตั้งแต่ปี 1996) | `-e 'URL'` |
 | `Origin` | โดเมนต้นทาง (สำคัญกับ CORS) | `-H 'Origin: ...'` |
-| `Authorization` | ข้อมูลยืนยันตัวตน | `-u` หรือ `-H` (บทที่ 9) |
-| `Cookie` | cookie | `-b` (บทที่ 4) |
+| `Authorization` | ข้อมูลยืนยันตัวตน | `-u` หรือ `-H` ([บทที่ 9](09-authentication.md)) |
+| `Cookie` | cookie | `-b` ([บทที่ 4](04-cookies-sessions.md)) |
 | `X-Requested-With` | มักใช้บอกว่าเป็น AJAX | `-H 'X-Requested-With: XMLHttpRequest'` |
 
 ### ขากลับ (response headers)
@@ -100,7 +100,7 @@ curl -L --max-redirs 5 URL
 | `Cache-Control` / `ETag` | กติกาการ cache |
 | `WWW-Authenticate` | วิธี auth ที่ต้องใช้ (มากับ 401) |
 | `Retry-After` | ให้รอกี่วินาทีก่อนลองใหม่ (มากับ 429/503) |
-| `Access-Control-Allow-*` | กติกา CORS (บทที่ 12) |
+| `Access-Control-Allow-*` | กติกา CORS ([บทที่ 12](12-api-design-practices.md)) |
 | `Strict-Transport-Security` | บังคับ HTTPS |
 
 ## 5.6 `--compressed` — ที่คนลืมบ่อย
@@ -127,7 +127,7 @@ User-Agent: curl/8.5.0
 curl -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36' URL
 ```
 
-> จะพูดถึงเรื่องนี้ในเชิงจริยธรรมและข้อจำกัดในบทที่ 15 และ 22
+> จะพูดถึงเรื่องนี้ในเชิงจริยธรรมและข้อจำกัดใน[บทที่ 15](15-captcha-and-antibot.md) และ 22
 > การเปลี่ยน User-Agent ให้ตรงกับ client จริงของคุณเอง (เช่น `MyApp/1.2 (Android 14)`)
 > เป็นเรื่องปกติและควรทำ — ต่างจากการปลอมเป็นเบราว์เซอร์เพื่อหลบระบบของคนอื่น
 

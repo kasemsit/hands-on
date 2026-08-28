@@ -47,7 +47,7 @@ event: done
 data: {}
 ```
 
-`-N` = ปิด buffer เห็นข้อมูลทันทีที่มาถึง (บทที่ 8)
+`-N` = ปิด buffer เห็นข้อมูลทันทีที่มาถึง ([บทที่ 8](08-json-api-and-jq.md))
 
 **รูปแบบ SSE:**
 
@@ -76,7 +76,7 @@ self.wfile.flush()          # ← ต้อง flush ทุกครั้ง �
 **สามกับดักของ SSE:**
 
 1. **proxy buffer** — nginx จะเก็บ response ไว้จนเต็มก่อนส่ง
-   ต้องตั้ง `proxy_buffering off` (บทที่ 26.7)
+   ต้องตั้ง `proxy_buffering off` ([บทที่ 26.7](26-proxy-caching-cdn.md))
 2. **timeout** — proxy ตัดการเชื่อมต่อที่เงียบนานเกินไป
    → ส่ง heartbeat (`: ping\n\n` — บรรทัดที่ขึ้นต้นด้วย `:` คือ comment) ทุก 30 วินาที
 3. **จำนวนการเชื่อมต่อ** — แต่ละ client กิน 1 connection ค้างไว้
@@ -97,11 +97,11 @@ HTTP/1.1 101 Switching Protocols     ← หลังจากนี้ไม่
 
 | เรื่อง | รายละเอียด |
 |-------|-----------|
-| **Authentication** | เบราว์เซอร์ใส่ custom header ไม่ได้ตอน handshake → ส่ง token เป็นข้อความแรกหลังต่อ หรือใช้ ticket ที่ขอจาก REST ก่อน (**อย่าใส่ token ใน query string** — บทที่ 9) |
+| **Authentication** | เบราว์เซอร์ใส่ custom header ไม่ได้ตอน handshake → ส่ง token เป็นข้อความแรกหลังต่อ หรือใช้ ticket ที่ขอจาก REST ก่อน (**อย่าใส่ token ใน query string** — [บทที่ 9](09-authentication.md)) |
 | **Token หมดอายุ** | connection ค้างอยู่ข้ามช่วงที่ token หมดอายุ → ต้องมีกลไก re-auth ระหว่างทาง |
 | **Origin check** | WebSocket **ไม่มี CORS** ต้องตรวจ `Origin` เอง ไม่งั้นเว็บอื่นเปิด connection มาได้ |
 | **Scale หลาย server** | client A ต่อ server 1, client B ต่อ server 2 → ต้องมี pub/sub (Redis) คั่นกลาง |
-| **Reconnect** | ต้องเขียนเอง (ต่างจาก SSE) + exponential backoff (บทที่ 12) |
+| **Reconnect** | ต้องเขียนเอง (ต่างจาก SSE) + exponential backoff ([บทที่ 12](12-api-design-practices.md)) |
 | **Heartbeat** | ping/pong เพื่อรู้ว่าอีกฝั่งยังอยู่ |
 | **Backpressure** | ถ้า client รับช้ากว่าที่ส่ง → buffer บวมจนหน่วยความจำเต็ม |
 
@@ -148,11 +148,11 @@ Server ของคุณ ──▶ FCM (Android) / APNs (iOS) ──▶ เค�
 - **ไม่รับประกันการส่งถึง** — อย่าใช้ push เป็นกลไกหลักในการ sync ข้อมูล
 - **เคารพการตั้งค่าของผู้ใช้** — ให้ปิดแจ้งเตือนแต่ละประเภทได้
 - **จัดกลุ่ม** อย่าส่ง 50 notification รวดเดียว
-- **ระวัง timezone** — อย่าส่งตอนตี 3 ของผู้ใช้ (บทที่ 12: เก็บ UTC แต่รู้ timezone ผู้ใช้)
+- **ระวัง timezone** — อย่าส่งตอนตี 3 ของผู้ใช้ ([บทที่ 12](12-api-design-practices.md): เก็บ UTC แต่รู้ timezone ผู้ใช้)
 
 ## 29.5 อัปโหลดไฟล์ระดับใช้งานจริง
 
-`-F 'file=@x.jpg'` ในบทที่ 3 ใช้ได้กับไฟล์เล็ก แต่ของจริงมีปัญหา:
+`-F 'file=@x.jpg'` ใน[บทที่ 3](03-html-forms.md) ใช้ได้กับไฟล์เล็ก แต่ของจริงมีปัญหา:
 ไฟล์ใหญ่กินหน่วยความจำ server, เน็ตมือถือหลุดกลางคัน, และ server ต้องรับ
 traffic ทั้งหมดโดยไม่จำเป็น
 
@@ -173,7 +173,7 @@ traffic ทั้งหมดโดยไม่จำเป็น
 **ข้อควรระวัง:**
 - presigned URL ต้อง **หมดอายุเร็ว** (5-15 นาที)
 - **จำกัดขนาดใน policy ของ presigned URL** ไม่ใช่แค่เชื่อค่า `size` ที่แอปบอก
-- ขั้นตอนที่ 6 ต้องตรวจไฟล์จริงเสมอ (magic bytes — บทที่ 25.5)
+- ขั้นตอนที่ 6 ต้องตรวจไฟล์จริงเสมอ (magic bytes — [บทที่ 25.5](25-input-validation-and-injection.md))
   **อย่าเชื่อว่าแอปอัปโหลดสิ่งที่บอกไว้**
 - ตั้ง lifecycle rule ลบไฟล์ที่อัปโหลดค้าง (ขั้นที่ 4 สำเร็จแต่ไม่มีขั้นที่ 5)
 
@@ -205,7 +205,7 @@ flowchart TD
 
 ### สามอย่างที่ backend ต้องมี
 
-**1. Idempotency** (บทที่ 12) — แอปส่งซ้ำได้โดยไม่เกิดข้อมูลซ้ำ
+**1. Idempotency** ([บทที่ 12](12-api-design-practices.md)) — แอปส่งซ้ำได้โดยไม่เกิดข้อมูลซ้ำ
 
 ```bash
 POST /v1/orders
@@ -233,7 +233,7 @@ GET /v1/sync?since=2026-08-27T10:00:00Z&cursor=...
 
 - ส่งเฉพาะสิ่งที่เปลี่ยน ไม่ใช่ทั้งหมด
 - **ต้องมี `deletions`** ไม่งั้นแอปไม่มีทางรู้ว่าอะไรถูกลบ
-  (นี่คือเหตุผลที่ต้อง soft delete — บทที่ 12)
+  (นี่คือเหตุผลที่ต้อง soft delete — [บทที่ 12](12-api-design-practices.md))
 - ใช้ **server_time ไม่ใช่ device time** เพราะนาฬิกาเครื่องผู้ใช้อาจเพี้ยน
 - ตอบเป็นชุด ๆ ด้วย cursor สำหรับคนที่ offline นาน
 
@@ -248,7 +248,7 @@ GET /v1/sync?since=2026-08-27T10:00:00Z&cursor=...
 | **ให้ผู้ใช้เลือก** | แสดงทั้งสองเวอร์ชัน | ข้อมูลสำคัญ |
 | **CRDT** | โครงสร้างที่รวมกันเองได้ | collaborative editing |
 
-**ใช้ version/ETag ตรวจ conflict** (โยงกับบทที่ 26.5):
+**ใช้ version/ETag ตรวจ conflict** (โยงกับ[บทที่ 26.5](26-proxy-caching-cdn.md)):
 
 ```bash
 PATCH /v1/orders/1001
@@ -281,7 +281,7 @@ If-Match: "v3"
 **Upload**
 - [ ] ไฟล์ใหญ่ใช้ presigned URL ไม่ผ่าน API server
 - [ ] presigned URL หมดอายุเร็ว + จำกัดขนาดใน policy
-- [ ] ตรวจไฟล์จริงหลังอัปโหลด (บทที่ 25.5)
+- [ ] ตรวจไฟล์จริงหลังอัปโหลด ([บทที่ 25.5](25-input-validation-and-injection.md))
 - [ ] resumable สำหรับไฟล์ใหญ่
 - [ ] ลบไฟล์ที่อัปโหลดค้าง
 
@@ -300,7 +300,7 @@ If-Match: "v3"
 2. เพิ่ม `id:` และ heartbeat (`: ping`) ให้ `api_stream` ใน [lab/server.py](../lab/server.py)
 3. เพิ่มการรองรับ `Last-Event-ID` ให้ stream ส่งต่อจากจุดที่ค้าง
 4. เพิ่ม `POST /api/uploads` ที่คืน "presigned URL ปลอม" (URL ที่มี HMAC + expires
-   ตามบทที่ 13) แล้วเขียน endpoint ที่รับไฟล์เฉพาะเมื่อ signature ถูกต้อง
+   ตาม[บทที่ 13](13-webhooks-and-hmac.md)) แล้วเขียน endpoint ที่รับไฟล์เฉพาะเมื่อ signature ถูกต้อง
 5. เพิ่ม `GET /api/sync?since=` ที่คืนเฉพาะ order ที่เปลี่ยนหลังเวลานั้น พร้อม `deletions`
 6. เพิ่ม `version` ให้ order แล้วทำ `If-Match` → ตอบ 412 เมื่อไม่ตรง
 7. ออกแบบ flow การ sync ของแอปคุณเป็นผัง: ผู้ใช้แก้ตอน offline 3 รายการ

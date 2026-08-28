@@ -151,9 +151,9 @@ query plan: SEARCH orders USING COVERING INDEX idx_orders_user (user_id=?)
 - ทำให้ **covering index ใช้ไม่ได้** (ต้องกลับไปอ่านตาราง)
 - ดึงคอลัมน์ TEXT/BLOB ใหญ่ ๆ ที่ไม่ได้ใช้ผ่านสาย
 - **พังเงียบ ๆ เมื่อมีคนเพิ่มคอลัมน์** — และอาจทำให้ field ลับหลุดออก API
-  (โยงกับ BOPLA บทที่ 24.8)
+  (โยงกับ BOPLA [บทที่ 24.8](24-authorization-and-bola.md))
 
-โยงกับบทที่ 12: `?fields=id,title` ให้แอปเลือกเองว่าจะเอาอะไร ประหยัดทั้ง
+โยงกับ[บทที่ 12](12-api-design-practices.md): `?fields=id,title` ให้แอปเลือกเองว่าจะเอาอะไร ประหยัดทั้ง
 เวลา DB และเน็ตของผู้ใช้
 
 ## 27.4 Connection pool
@@ -254,7 +254,7 @@ POST /v1/reports  →  202 Accepted + {"job_id": "..."}
 GET  /v1/jobs/{id} →  {"status": "processing" | "done", "result_url": "..."}
 ```
 
-หรือแจ้งกลับด้วย push notification (บทที่ 29)
+หรือแจ้งกลับด้วย push notification ([บทที่ 29](29-realtime-push-and-offline.md))
 
 งานที่ควรเข้าคิว: ส่งอีเมล/SMS, ประมวลผลรูป, สร้างรายงาน, เรียก API ภายนอกที่ช้า,
 งานที่ต้อง retry
@@ -263,7 +263,7 @@ GET  /v1/jobs/{id} →  {"status": "processing" | "done", "result_url": "..."}
 หรือ SQS/Cloud Tasks
 
 **งานเบื้องหลังต้อง idempotent** เพราะ queue ส่วนใหญ่รับประกันแค่ "at least once"
-— งานเดิมอาจถูกรันซ้ำ (โยงกับ Idempotency-Key บทที่ 12)
+— งานเดิมอาจถูกรันซ้ำ (โยงกับ Idempotency-Key [บทที่ 12](12-api-design-practices.md))
 
 ## 27.8 วัดผลก่อนแก้
 
@@ -308,7 +308,7 @@ ALTER SYSTEM SET log_min_duration_statement = '200ms';
 - [ ] ทุก FK และคอลัมน์ใน WHERE/ORDER BY มี index
 - [ ] `EXPLAIN` ยืนยันว่าใช้ index จริงในคิวรีหลัก
 - [ ] ไม่มี `SELECT *` ใน endpoint ที่ยิงบ่อย
-- [ ] มี pagination ทุก endpoint ที่คืนรายการ (บทที่ 12)
+- [ ] มี pagination ทุก endpoint ที่คืนรายการ ([บทที่ 12](12-api-design-practices.md))
 
 **Connection**
 - [ ] ใช้ connection pool ขนาดเหมาะสม (ไม่ใหญ่เกิน)

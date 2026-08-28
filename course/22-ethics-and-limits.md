@@ -118,11 +118,11 @@ Crawl-delay: 10
 คอร์สนี้สอนทั้งสองด้านโดยตั้งใจ **การรู้ว่าคนโจมตีคิดยังไง ทำให้คุณป้องกันได้ดีขึ้น**
 สรุปสิ่งที่ควรทำกับ API ของคุณ:
 
-- ทำ rate limit ตั้งแต่วันแรก (บทที่ 12)
-- validate ทุกอย่างที่ server — **อย่าเชื่อ client** (บทที่ 15)
-- ตอบ error เท่ากันเสมอเพื่อกัน user enumeration (บทที่ 11)
-- log พอที่จะสืบสวนได้ แต่ไม่ log ความลับ (บทที่ 12)
-- token อายุสั้น + revoke ได้ (บทที่ 11)
+- ทำ rate limit ตั้งแต่วันแรก ([บทที่ 12](12-api-design-practices.md))
+- validate ทุกอย่างที่ server — **อย่าเชื่อ client** ([บทที่ 15](15-captcha-and-antibot.md))
+- ตอบ error เท่ากันเสมอเพื่อกัน user enumeration ([บทที่ 11](11-mobile-api-auth-design.md))
+- log พอที่จะสืบสวนได้ แต่ไม่ log ความลับ ([บทที่ 12](12-api-design-practices.md))
+- token อายุสั้น + revoke ได้ ([บทที่ 11](11-mobile-api-auth-design.md))
 - มี `security.txt` และช่องทางรับรายงานช่องโหว่
 - ตอบคนที่รายงานช่องโหว่อย่างสุภาพ — เขาช่วยคุณอยู่
 

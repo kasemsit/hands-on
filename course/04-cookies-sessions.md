@@ -1,6 +1,6 @@
 # บทที่ 4 · Cookie และ Session
 
-> จำได้ไหมว่าบทที่ 1 บอกว่า HTTP ไม่มีความจำ
+> จำได้ไหมว่า[บทที่ 1](01-http-basics.md) บอกว่า HTTP ไม่มีความจำ
 > บทนี้คือคำตอบว่าเว็บ "จำ" คุณได้อย่างไร
 
 ## 4.1 Cookie คืออะไร
@@ -53,7 +53,7 @@ Set-Cookie: sid=abc123; Path=/; Domain=example.com; Max-Age=3600;
 - `None` — ส่งทุกกรณี **ต้องมี `Secure` ด้วย** ใช้เมื่อจำเป็นจริง ๆ เท่านั้น
 
 > **สำหรับ mobile API ที่คุณทำอยู่**: ปกติ mobile app ไม่ใช้ cookie แต่ใช้ Bearer token
-> (บทที่ 9-11) เพราะไม่มี cookie jar อัตโนมัติแบบเบราว์เซอร์ และ CSRF ไม่ใช่ปัญหา
+> ([บทที่ 9](09-authentication.md)-11) เพราะไม่มี cookie jar อัตโนมัติแบบเบราว์เซอร์ และ CSRF ไม่ใช่ปัญหา
 > ของ native app แต่ถ้าใช้ WebView ต้องคิดเรื่อง cookie ด้วย
 
 ## 4.3 curl กับ cookie: `-c` และ `-b`
@@ -99,7 +99,7 @@ curl ใช้ **Netscape cookie file format** ซึ่งเป็น TSV (ค
 | 6 | name | `sid` | ชื่อ |
 | 7 | value | `5661bc...` | ค่า |
 
-รู้ format นี้ไว้เพราะ **บทที่ 18 เราจะเขียนไฟล์นี้ขึ้นมาเองจาก cookie ของ Playwright**
+รู้ format นี้ไว้เพราะ **[บทที่ 18](18-playwright-cookies-to-curl.md) เราจะเขียนไฟล์นี้ขึ้นมาเองจาก cookie ของ Playwright**
 
 ถ้าบรรทัดขึ้นต้นด้วย `#HttpOnly_` แปลว่า cookie นั้นมี flag HttpOnly
 

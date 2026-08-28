@@ -64,7 +64,7 @@ with open("data.txt") as f:
 OSError: [Errno 24] Too many open files
 ```
 
-**วิธีตรวจ** (โยงกับ `CLOSE-WAIT` ในบทที่ 31.5):
+**วิธีตรวจ** (โยงกับ `CLOSE-WAIT` ใน[บทที่ 31.5](31-tcpip-and-tcpdump.md)):
 
 ```bash
 ls /proc/$PID/fd | wc -l           # ใช้ไปเท่าไรแล้ว
@@ -118,7 +118,7 @@ syscall ที่ขัดจังหวะไม่ได้ (เช่นร�
 | `SIGHUP` | 1 | terminal ปิด / "โหลด config ใหม่" | ✅ |
 | `SIGPIPE` | 13 | เขียนลง pipe ที่อีกฝั่งปิดแล้ว | ✅ |
 
-**นี่คือหัวใจของ graceful shutdown ในบทที่ 28.8**
+**นี่คือหัวใจของ graceful shutdown ใน[บทที่ 28.8](28-observability-and-deployment.md)**
 
 ```python
 import signal
@@ -176,7 +176,7 @@ ls /proc/$PID/task | wc -l             # จำนวน thread
 cat /proc/$PID/io                      # อ่าน/เขียนไปเท่าไร
 ```
 
-> ⚠️ **`/proc/PID/environ` คือเหตุผลที่บทที่ 20.4 บอกว่า environment variable
+> ⚠️ **`/proc/PID/environ` คือเหตุผลที่[บทที่ 20.4](20-shell-scripting-for-curl.md) บอกว่า environment variable
 > ยังไม่ใช่ที่ปลอดภัยที่สุดสำหรับ secret** — เจ้าของ process (และ root)
 > อ่านได้ ถ้า token อยู่ใน env มันอยู่ตรงนี้
 
@@ -280,7 +280,7 @@ journalctl -u myapi --since "1 hour ago" -p err
 
 **`systemctl reload` vs `restart`** — `reload` ส่ง SIGHUP ให้โหลด config ใหม่
 โดยไม่ตัด connection ส่วน `restart` คือหยุดแล้วเริ่มใหม่
-(ถ้าทำ graceful shutdown ไว้ตามบทที่ 28.8 การ restart ก็ไม่ตัด request กลางคัน)
+(ถ้าทำ graceful shutdown ไว้ตาม[บทที่ 28.8](28-observability-and-deployment.md) การ restart ก็ไม่ตัด request กลางคัน)
 
 ## 35.10 เมื่อ RAM หมด — OOM killer
 
@@ -300,7 +300,7 @@ Out of memory: Killed process 12345 (python3) total-vm:8000000kB
 SIGKILL ซึ่ง**จับไม่ได้** (ข้อ 35.4) — ต้องไปดูที่ log ของเคอร์เนล
 
 **ป้องกัน:** ตั้ง memory limit ให้ service, ตรวจ memory leak, และ**ตั้ง alert
-ที่ memory ก่อนถึงขีด** (บทที่ 28.6)
+ที่ memory ก่อนถึงขีด** ([บทที่ 28.6](28-observability-and-deployment.md))
 
 ## 35.11 เชื่อมกับสิ่งที่เจอมาแล้วในคอร์ส
 

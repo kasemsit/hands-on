@@ -163,7 +163,7 @@ flowchart TD
    ซึ่งกับ rotation = **ทำลาย family ตัวเอง** ต้องมี **mutex/single-flight**:
    request แรกเรียก refresh ที่เหลือรอผลแล้วใช้ token เดียวกัน
    > นี่คือบั๊กอันดับหนึ่งที่คนทำ refresh rotation เจอ
-3. **แยก 401 กับ 403** — 403 ห้าม refresh (บทที่ 9)
+3. **แยก 401 กับ 403** — 403 ห้าม refresh ([บทที่ 9](09-authentication.md))
 
 **Proactive refresh** (ดีกว่ารอ 401): ถ้า access token เหลืออายุ < 60 วินาที
 ให้ refresh ก่อนยิง ลดโอกาสเจอ 401 กลางคัน
@@ -227,7 +227,7 @@ ph.verify(hashed, password_input)   # ตรวจ - โยน exception ถ้�
 (botnet, residential proxy) จะเดารหัสของ user คนเดียวได้เรื่อย ๆ
 กลับกัน ถ้าจำกัดแค่ username ผู้โจมตีจะ lock บัญชีคนอื่นเล่นได้ (DoS)
 
-ตอบด้วย `429` + `Retry-After` เสมอ (บทที่ 12)
+ตอบด้วย `429` + `Retry-After` เสมอ ([บทที่ 12](12-api-design-practices.md))
 
 ## 11.10 กติกาสำคัญอื่น ๆ
 
@@ -270,7 +270,7 @@ HTTP 426 Upgrade Required
 ## 11.11 Checklist ก่อนขึ้น production
 
 **Transport & storage**
-- [ ] HTTPS ทุก endpoint + HSTS (บทที่ 7)
+- [ ] HTTPS ทุก endpoint + HSTS ([บทที่ 7](07-tls-https.md))
 - [ ] token เก็บใน Keychain/Keystore ไม่ใช่ SharedPreferences
 - [ ] ไม่มี secret ฝังใน APK/IPA
 

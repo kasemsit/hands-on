@@ -2,7 +2,7 @@
 
 > ได้ประโยชน์ทั้งสองด้านของงานคุณ — ฝั่งที่**ยิง** request และฝั่งที่**รับ** request
 >
-> และเป็นคำตอบว่าทำไมบทที่ 29 ถึงบอกว่า SSE ต้องใช้ ASGI
+> และเป็นคำตอบว่าทำไม[บทที่ 29](29-realtime-push-and-offline.md) ถึงบอกว่า SSE ต้องใช้ ASGI
 
 ## 33.1 ปัญหาที่ concurrency แก้
 
@@ -19,7 +19,7 @@
 | ชนิดงาน | ติดที่ไหน | แก้ด้วย |
 |---------|-----------|---------|
 | **I/O-bound** — ยิง HTTP, อ่าน DB, อ่านไฟล์ | รอ | **async / thread** ✅ |
-| **CPU-bound** — แก้ PoW (บทที่ 16), ประมวลผลรูป | คำนวณ | **process หลายตัว** |
+| **CPU-bound** — แก้ PoW ([บทที่ 16](16-altcha-pow.md)), ประมวลผลรูป | คำนวณ | **process หลายตัว** |
 
 > ⚠️ **ใช้ async กับงาน CPU-bound ไม่ได้ช่วยอะไรเลย** — ยังช้าเท่าเดิม
 > แถมบล็อก event loop ทำให้งานอื่นค้างด้วย
@@ -63,7 +63,7 @@ with ThreadPoolExecutor(max_workers=10) as pool:
         print(book_id, status)
 ```
 
-**ใช้ `Session` เดียวร่วมกันเพื่อให้ reuse connection** (บทที่ 26.8):
+**ใช้ `Session` เดียวร่วมกันเพื่อให้ reuse connection** ([บทที่ 26.8](26-proxy-caching-cdn.md)):
 
 ```python
 import threading
@@ -129,7 +129,7 @@ async def good():
 
 ## 33.5 จำกัดความเร็ว — สำคัญกว่าความเร็ว
 
-**ยิงเร็วที่สุดที่ทำได้ = พฤติกรรมของบอทที่แย่** (บทที่ 22.4) และจะโดน 429 อยู่ดี
+**ยิงเร็วที่สุดที่ทำได้ = พฤติกรรมของบอทที่แย่** ([บทที่ 22.4](22-ethics-and-limits.md)) และจะโดน 429 อยู่ดี
 
 ```python
 class Limiter:
@@ -166,7 +166,7 @@ async def polite_get(client, path):
 
 ## 33.6 Retry ที่ถูกต้อง
 
-โยงกับบทที่ 12.5 และ 20.6 — คราวนี้ในเวอร์ชัน async
+โยงกับ[บทที่ 12.5](12-api-design-practices.md) และ 20.6 — คราวนี้ในเวอร์ชัน async
 
 ```python
 import random
@@ -199,7 +199,7 @@ async def get_with_retry(client, path, max_attempts=5):
 
 ## 33.7 ฝั่ง server — ทำไม SSE ต้องใช้ ASGI
 
-นี่คือคำตอบของบทที่ 29.2 ข้อ 3
+นี่คือคำตอบของ[บทที่ 29.2](29-realtime-push-and-offline.md) ข้อ 3
 
 | แบบ | หนึ่ง request กิน | รับพร้อมกันได้ |
 |-----|-------------------|----------------|
@@ -226,7 +226,7 @@ async def get_order(order_id: int, user = Depends(current_user)):
 
 ## 33.8 Connection pool — ตั้งให้พอดี
 
-โยงกับบทที่ 27.4 โดยตรง
+โยงกับ[บทที่ 27.4](27-database-and-performance.md) โดยตรง
 
 ```
 pool ของ client × จำนวน instance  ≤  max_connections ของ DB
@@ -261,7 +261,7 @@ async def in_batches(urls, size=100):
 
 หรือใช้ `asyncio.Queue` ที่มี `maxsize` — พอคิวเต็ม ฝั่งผลิตจะถูกบล็อกเอง
 
-**นี่คือปัญหาเดียวกับ WebSocket backpressure ในบทที่ 29.3** — ถ้า client
+**นี่คือปัญหาเดียวกับ WebSocket backpressure ใน[บทที่ 29.3](29-realtime-push-and-offline.md)** — ถ้า client
 รับช้ากว่าที่คุณส่ง buffer จะบวมจนหน่วยความจำเต็ม
 
 ## 33.10 Debug โค้ด async
@@ -281,7 +281,7 @@ asyncio.run(main(), debug=True)     # เตือนเมื่อมี corou
 
 ทุกอย่างในบทนี้ทำให้คุณยิงได้เร็วขึ้นมาก **ซึ่งแปลว่าทำให้ระบบคนอื่นล่มได้ง่ายขึ้นมากด้วย**
 
-- ยิงเว็บของคนอื่น → เริ่มที่ 1-2 เส้น + หน่วง 1 วินาที (บทที่ 22.4)
+- ยิงเว็บของคนอื่น → เริ่มที่ 1-2 เส้น + หน่วง 1 วินาที ([บทที่ 22.4](22-ethics-and-limits.md))
 - เคารพ `429` และ `Retry-After` เสมอ
 - หยุดทันทีเมื่อเจอ 5xx ติดกัน — อาจเป็นเพราะคุณทำให้เขาล่ม
 - ทดสอบความเร็วสูงกับ **lab ของตัวเองเท่านั้น**

@@ -30,7 +30,7 @@ Authorization: Bearer <token ที่ถูกต้องของ myuser>
 
 1. **แอปส่ง id ตรง ๆ มา** — `GET /orders/1002` เป็นรูปแบบที่เป็นธรรมชาติที่สุด
 2. **นักพัฒนาคิดว่า "แอปเราส่งเฉพาะ id ของตัวเองอยู่แล้ว"** — แต่คนที่ใช้ curl ส่งอะไรก็ได้
-   (ย้อนกลับไปกฎเหล็กในบทที่ 15: **อย่าให้ความปลอดภัยขึ้นกับ client**)
+   (ย้อนกลับไปกฎเหล็กใน[บทที่ 15](15-captcha-and-antibot.md): **อย่าให้ความปลอดภัยขึ้นกับ client**)
 3. **middleware ตรวจ auth ให้แล้ว** — ทำให้รู้สึกว่า "ปลอดภัยแล้ว" ทั้งที่ middleware
    ตรวจได้แค่ว่า token ใช้ได้ ไม่รู้เรื่องความเป็นเจ้าของข้อมูล
 4. **หาไม่เจอด้วย scanner อัตโนมัติ** — เพราะ scanner ไม่รู้ว่าข้อมูลไหนควรเป็นของใคร
@@ -106,7 +106,7 @@ def get_order(order_id: int, current_user: str):
 ถ้าตอบ 403 ผู้โจมตีจะไล่หาได้ว่า id ไหนมีข้อมูลอยู่ (**object enumeration**)
 ซึ่งเป็นข้อมูลที่มีค่าในตัวมันเอง เช่น รู้จำนวนลูกค้า หรือรู้ว่าคนนี้เป็นลูกค้าหรือเปล่า
 
-> เป็นหลักการเดียวกับ "ตอบ error เท่ากันเสมอ" ตอน login ในบทที่ 11.10
+> เป็นหลักการเดียวกับ "ตอบ error เท่ากันเสมอ" ตอน login ใน[บทที่ 11.10](11-mobile-api-auth-design.md)
 
 **ข้อยกเว้น**: ในระบบที่ผู้ใช้ *รู้อยู่แล้ว* ว่าทรัพยากรนั้นมีอยู่ (เช่นเอกสารที่แชร์กันในทีม
 แต่คุณไม่ได้อยู่ในทีมนั้น) การตอบ 403 ชัดเจนกว่าและช่วยผู้ใช้มากกว่า
@@ -159,7 +159,7 @@ order = scope.orders().find(order_id)
 | **Bulk operation** | `POST /orders/bulk-delete` กับ `{"ids": [1001,1002,...]}` — ต้องเช็คทุก id |
 | **ไฟล์** | `GET /files/report.pdf` หรือ `GET /avatars/{user_id}.jpg` |
 | **Query parameter** | `GET /orders?user_id=2` — ผู้ใช้ส่ง user_id เองได้! |
-| **ค่าที่ซ่อนใน body** | `PATCH /orders/1001` กับ `{"user_id": 999}` (ดู mass assignment บทที่ 25) |
+| **ค่าที่ซ่อนใน body** | `PATCH /orders/1001` กับ `{"user_id": 999}` (ดู mass assignment [บทที่ 25](25-input-validation-and-injection.md)) |
 | **Export / รายงาน** | endpoint ที่ดึงข้อมูลเป็นชุด มักถูกลืม |
 | **Webhook / callback** | `GET /webhooks/{id}/deliveries` |
 | **GraphQL** | ตรวจที่ resolver ของแต่ละ field ไม่ใช่แค่ที่ query ชั้นบนสุด |
@@ -168,7 +168,7 @@ order = scope.orders().find(order_id)
 
 ## 24.7 UUID ไม่ใช่การป้องกัน
 
-ในบทที่ 12 ผมแนะนำ UUID/ULID แทน auto-increment ซึ่งดีจริง — **แต่เพื่อคนละเหตุผล**
+ใน[บทที่ 12](12-api-design-practices.md) ผมแนะนำ UUID/ULID แทน auto-increment ซึ่งดีจริง — **แต่เพื่อคนละเหตุผล**
 
 ```
 auto-increment (1, 2, 3...)  → เดา id คนอื่นได้ทันที

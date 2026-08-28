@@ -60,7 +60,7 @@ trap 'rm -f "$COOKIE_JAR" "$RESPONSE"' EXIT
 ```
 
 `trap ... EXIT` ทำงานแม้สคริปต์จะจบด้วย error หรือถูก Ctrl-C
-— **สำคัญมากเพราะ cookie jar คือ credential** (บทที่ 18)
+— **สำคัญมากเพราะ cookie jar คือ credential** ([บทที่ 18](18-playwright-cookies-to-curl.md))
 
 ถ้าต้องการทั้งโฟลเดอร์:
 
@@ -184,7 +184,7 @@ curl มี retry ในตัวด้วย ใช้ได้เลยถ้�
 curl --retry 5 --retry-delay 2 --retry-max-time 60 --retry-all-errors "$URL"
 ```
 
-> ⚠️ **อย่า retry POST ที่ไม่ idempotent** — ใช้ `Idempotency-Key` (บทที่ 12)
+> ⚠️ **อย่า retry POST ที่ไม่ idempotent** — ใช้ `Idempotency-Key` ([บทที่ 12](12-api-design-practices.md))
 > หรือจำกัด retry เฉพาะ GET
 
 ## 20.7 เคารพ rate limit

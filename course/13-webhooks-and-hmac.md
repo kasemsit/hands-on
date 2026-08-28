@@ -1,7 +1,7 @@
 # บทที่ 13 · Webhook และ HMAC Signature
 
 > บทนี้เชื่อมสองเรื่องเข้าด้วยกัน: การรับ callback จากระบบอื่น (เช่น payment gateway)
-> และ **signature ใน ALTCHA challenge** ที่คุณจะเจอในบทที่ 16 — มันคือกลไกเดียวกัน
+> และ **signature ใน ALTCHA challenge** ที่คุณจะเจอใน[บทที่ 16](16-altcha-pow.md) — มันคือกลไกเดียวกัน
 
 ## 13.1 Webhook คืออะไร
 
@@ -164,7 +164,7 @@ signature = hmac.new(HMAC_KEY, challenge.encode(), hashlib.sha256).hexdigest()
 
 - **Stateless token ที่ไม่ต้องเก็บ DB**: `data.HMAC(key, data)` — นี่คือหลักการของ JWT
 - **Signed URL / pre-signed download link**: `?expires=...&sig=...`
-- **Pagination cursor ที่ client แก้ไม่ได้** (บทที่ 12)
+- **Pagination cursor ที่ client แก้ไม่ได้** ([บทที่ 12](12-api-design-practices.md))
 - **Password reset token**
 - **CSRF token แบบ stateless** (double-submit pattern)
 
@@ -191,7 +191,7 @@ def unsign(token: str, key: bytes) -> str | None:
 ```
 
 > ข้อจำกัดที่ต้องรู้: signed token แบบนี้ **เพิกถอนก่อนหมดอายุไม่ได้**
-> (ปัญหาเดียวกับ JWT ในบทที่ 10) จึงควรตั้ง TTL สั้น ๆ
+> (ปัญหาเดียวกับ JWT ใน[บทที่ 10](10-jwt-deep-dive.md)) จึงควรตั้ง TTL สั้น ๆ
 
 ## 13.6 ออกแบบ webhook ที่คุณ *ส่ง* ให้คนอื่น
 

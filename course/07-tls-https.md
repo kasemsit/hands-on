@@ -124,7 +124,7 @@ openssl s_client -connect example.com:443 -servername example.com < /dev/null 2>
   แต่ public key คงเดิมได้ถ้าใช้ key เดิม
 - ⚠️ **ต้องมี backup pin เสมอ** — ถ้า key เดียวแล้วต้องเปลี่ยนกะทันหัน แอปทุกเครื่องจะใช้ไม่ได้
   และแก้ได้ทางเดียวคือให้ผู้ใช้อัปเดตแอป
-- ⚠️ pinning จะทำให้คุณ**ดัก traffic ตัวเองด้วย mitmproxy ไม่ได้** (บทที่ 19)
+- ⚠️ pinning จะทำให้คุณ**ดัก traffic ตัวเองด้วย mitmproxy ไม่ได้** ([บทที่ 19](19-mitmproxy-mobile-traffic.md))
   ให้ทำ build variant สำหรับ debug ที่ปิด pinning
 
 ## 7.7 HSTS

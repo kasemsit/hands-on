@@ -252,7 +252,7 @@ NVIDIA GeForce RTX 3090, 24576 MiB
 เข้าไปใน container — **container ใช้ driver ของ host เสมอ ไม่มี driver ของตัวเอง**
 
 > ⚠️ เวอร์ชัน CUDA ใน container ต้องไม่ใหม่กว่าที่ driver ของ host รองรับ
-> (บทที่ 46.3) — อัปเดต driver บน host กระทบทุก container พร้อมกัน
+> ([บทที่ 46.3](46-gpu-101.md)) — อัปเดต driver บน host กระทบทุก container พร้อมกัน
 
 ## 49.6 โหมดที่ 1 — Native
 
@@ -479,7 +479,7 @@ MIG ทำให้ 80% ของการ์ดถูกจองไว้เ�
 
 ## 49.9 โหมดที่ 4 — Time-slicing
 
-GPU สลับกันทำงานให้แต่ละ process เหมือน CPU สลับ process (บทที่ 35.3)
+GPU สลับกันทำงานให้แต่ละ process เหมือน CPU สลับ process ([บทที่ 35.3](35-linux-internals.md))
 
 > ## ⚠️ ก่อนอื่น — GPU มัน time-slice อยู่แล้วโดยธรรมชาติ
 >
@@ -798,7 +798,7 @@ flowchart TD
 | โควตาชั่วโมง (training) | **Slurm accounting**, k8s ResourceQuota |
 | **โควตา token/ค่าใช้จ่าย (inference)** | **[LiteLLM](https://github.com/BerriAI/litellm)** — budget ต่อ user/team + virtual key |
 | แบ่ง GPU | Native, MIG, **HAMi**, time-slicing, MPS |
-| monitoring + usage | DCGM Exporter + Prometheus + Grafana (บทที่ 51) |
+| monitoring + usage | DCGM Exporter + Prometheus + Grafana ([บทที่ 51](51-gpu-observability-and-cost.md)) |
 | แพลตฟอร์มสำเร็จ | Kubeflow, Open Data Hub, Konduktor |
 
 > **ทุกข้อในตารางนี้เป็นของฟรีที่มหาวิทยาลัยทั่วโลกใช้จริง** — คำถามจึงไม่ใช่

@@ -13,7 +13,7 @@
 | **Bearer token** | `Authorization: Bearer xxx` | **mobile app**, SPA | ต้องจัดการอายุ/refresh |
 | **Session cookie** | `Cookie: sid=xxx` | เว็บที่ render ฝั่ง server | ต้องกัน CSRF, ไม่เหมาะกับ native app |
 
-**คำตอบสั้น ๆ สำหรับ mobile API: ใช้ Bearer token** — รายละเอียดการออกแบบอยู่ในบทที่ 11
+**คำตอบสั้น ๆ สำหรับ mobile API: ใช้ Bearer token** — รายละเอียดการออกแบบอยู่ใน[บทที่ 11](11-mobile-api-auth-design.md)
 
 ## 9.2 HTTP Basic Authentication
 
@@ -141,7 +141,7 @@ curl -s $B/api/me | jq
 | หน้าตา | สุ่มมั่ว `a7f3k9...` | `eyJhbGc.eyJzdWI.SflKx` |
 | server รู้ได้ยังไงว่าใคร | เปิดดูในฐานข้อมูล | ถอดรหัสจากตัว token เอง |
 | ต้องแตะ DB ทุก request | ใช่ | ไม่ |
-| revoke ทันที | ✅ ลบจาก DB จบ | ❌ ยาก (ดูบทที่ 10) |
+| revoke ทันที | ✅ ลบจาก DB จบ | ❌ ยาก (ดู[บทที่ 10](10-jwt-deep-dive.md)) |
 | ขนาด | เล็ก | ใหญ่กว่า |
 
 lab server ใช้ opaque token (เก็บใน dict `TOKENS`) เพราะเข้าใจง่ายกว่า

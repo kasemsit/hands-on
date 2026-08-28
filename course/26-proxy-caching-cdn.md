@@ -1,6 +1,6 @@
 # บทที่ 26 · Reverse proxy, X-Forwarded-For, Caching และ CDN
 
-> บทที่ 12 บอกให้ทำ rate limit ตาม IP
+> [บทที่ 12](12-api-design-practices.md) บอกให้ทำ rate limit ตาม IP
 > บทนี้บอกว่า **ถ้าไม่รู้เรื่อง `X-Forwarded-For` rate limit นั้นจะไม่ทำงาน**
 > — หรือแย่กว่านั้นคือบล็อกผู้ใช้ทั้งโลกพร้อมกัน
 

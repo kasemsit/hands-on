@@ -81,7 +81,7 @@ GET /v1/books?limit=20&cursor=eyJpZCI6NDJ9
 ```
 
 cursor คือ base64 ของตำแหน่งล่าสุด (เช่น `{"id":42,"created_at":"..."}`)
-**ปิดผนึกด้วย HMAC ถ้าไม่อยากให้ client เดา/แก้** (ดูบทที่ 13)
+**ปิดผนึกด้วย HMAC ถ้าไม่อยากให้ client เดา/แก้** (ดู[บทที่ 13](13-webhooks-and-hmac.md))
 
 ## 12.4 Idempotency — สำคัญมากกับ mobile
 

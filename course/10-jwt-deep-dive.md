@@ -12,7 +12,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJleHAiOjE3MDB9.dBjftJeZ4C
 └──────────── header ────────────┘ └────────── payload ──────────┘ └────────── signature ──────────┘
 ```
 
-สามส่วนคั่นด้วยจุด แต่ละส่วนเป็น **base64url** (ไม่ใช่ base64 ธรรมดา — ดูบทที่ 6)
+สามส่วนคั่นด้วยจุด แต่ละส่วนเป็น **base64url** (ไม่ใช่ base64 ธรรมดา — ดู[บทที่ 6](06-encoding-and-charset.md))
 
 **decode ด้วยมือ:**
 

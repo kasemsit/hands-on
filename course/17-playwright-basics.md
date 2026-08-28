@@ -31,7 +31,7 @@ curl -s http://127.0.0.1:8080/spa
 | ต้องรัน JS เพื่อคำนวณ token/signature | **Playwright** |
 | CAPTCHA ที่ต้องให้ widget ทำงาน | **Playwright** |
 | ต้อง login ผ่าน OAuth/SSO หลายขั้น | **Playwright** |
-| ยิงซ้ำ ๆ เยอะ ๆ | **curl** (หรือลูกผสม — บทที่ 18) |
+| ยิงซ้ำ ๆ เยอะ ๆ | **curl** (หรือลูกผสม — [บทที่ 18](18-playwright-cookies-to-curl.md)) |
 
 > **หลักการ: ใช้ Playwright เท่าที่จำเป็น แล้วส่งงานที่เหลือให้ curl**
 > Playwright เปิด browser จริง กินแรม 100-300 MB ต่อ instance และช้ากว่ามาก
