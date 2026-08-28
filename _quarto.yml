@@ -43,6 +43,8 @@ book:
         - course/08-json-api-and-jq.md
         - course/09-authentication.md
         - course/10-jwt-deep-dive.md
+        - course/53-oauth-and-oidc.md
+        - course/54-passkeys-and-webauthn.md
         - course/11-mobile-api-auth-design.md
         - course/12-api-design-practices.md
         - course/13-webhooks-and-hmac.md
@@ -55,12 +57,15 @@ book:
         - course/27-database-and-performance.md
         - course/28-observability-and-deployment.md
         - course/29-realtime-push-and-offline.md
+        - course/56-background-jobs-and-queues.md
+        - course/57-scaling-out.md
 
     - part: "ส่วนที่ 4 · เครื่องมือของคนทำงาน"
       chapters:
         - course/30-git.md
         - course/20-shell-scripting-for-curl.md
         - course/32-testing-with-pytest.md
+        - course/55-ci-cd.md
         - course/33-concurrency-and-async.md
         - course/21-debugging-and-pitfalls.md
         - course/A1-netcat.md

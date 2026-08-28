@@ -294,4 +294,4 @@ jobs:
 7. เขียน `.github/workflows/test.yml` แล้ว push ขึ้น GitHub ดูว่ารันจริงไหม
 
 ***
-[⬅ เขียน bash ให้ปลอดภัยและไม่พังเงียบ ](20-shell-scripting-for-curl.md) · [สารบัญ](../README.md) · [Concurrency และ async ➡](33-concurrency-and-async.md)
+[⬅ เขียน bash ให้ปลอดภัยและไม่พังเงียบ ๆ](20-shell-scripting-for-curl.md) · [สารบัญ](../README.md) · [CI/CD ➡](55-ci-cd.md)

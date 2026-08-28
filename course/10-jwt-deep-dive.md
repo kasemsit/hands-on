@@ -227,4 +227,4 @@ for name, part in (('header', h), ('payload', p)):
    แล้วอธิบายว่าทำไม opaque token ถึง revoke ได้ทันที
 
 ***
-[⬅ Authentication](09-authentication.md) · [สารบัญ](../README.md) · [ออกแบบ Authentication ให้ Mobile API ➡](11-mobile-api-auth-design.md)
+[⬅ Authentication — Basic, API key, Bearer](09-authentication.md) · [สารบัญ](../README.md) · [OAuth 2.0 และ OpenID Connect ➡](53-oauth-and-oidc.md)

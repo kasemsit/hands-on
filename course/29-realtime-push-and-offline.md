@@ -328,4 +328,4 @@ If-Match: "v3"
 5. ทำแบบฝึกหัดใน [lab/README.md](../lab/README.md) ที่ยังค้างอยู่
 
 ***
-[⬅ Observability และ Deployment](28-observability-and-deployment.md) · [สารบัญ](../README.md) · [Git ➡](30-git.md)
+[⬅ Observability และ Deployment](28-observability-and-deployment.md) · [สารบัญ](../README.md) · [งานเบื้องหลังและคิวงาน ➡](56-background-jobs-and-queues.md)

@@ -310,4 +310,4 @@ HTTP 426 Upgrade Required
 6. วาดผังลำดับ (sequence diagram) ของ interceptor ที่จัดการ 401 พร้อม single-flight
 
 ***
-[⬅ JWT เจาะลึก](10-jwt-deep-dive.md) · [สารบัญ](../README.md) · [API Design ที่ดี ➡](12-api-design-practices.md)
+[⬅ Passkey และ WebAuthn](54-passkeys-and-webauthn.md) · [สารบัญ](../README.md) · [API Design ที่ดี ➡](12-api-design-practices.md)

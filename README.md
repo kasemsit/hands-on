@@ -68,6 +68,8 @@ curl -i http://127.0.0.1:8080/
 | [บทที่ 8](course/08-json-api-and-jq.md) | JSON API และ jq |
 | [บทที่ 9](course/09-authentication.md) | Authentication — Basic, API key, Bearer |
 | [บทที่ 10](course/10-jwt-deep-dive.md) | JWT เจาะลึก |
+| [บทที่ 53](course/53-oauth-and-oidc.md) | OAuth 2.0 และ OpenID Connect |
+| [บทที่ 54](course/54-passkeys-and-webauthn.md) | Passkey และ WebAuthn |
 | [บทที่ 11](course/11-mobile-api-auth-design.md) | ออกแบบ Authentication ให้ Mobile API |
 | [บทที่ 12](course/12-api-design-practices.md) | API Design ที่ดี |
 | [บทที่ 13](course/13-webhooks-and-hmac.md) | Webhook และ HMAC Signature |
@@ -82,6 +84,8 @@ curl -i http://127.0.0.1:8080/
 | [บทที่ 27](course/27-database-and-performance.md) | Database และ Performance ของ API |
 | [บทที่ 28](course/28-observability-and-deployment.md) | Observability และ Deployment |
 | [บทที่ 29](course/29-realtime-push-and-offline.md) | Push, Real-time, Upload และ Offline |
+| [บทที่ 56](course/56-background-jobs-and-queues.md) | งานเบื้องหลังและคิวงาน |
+| [บทที่ 57](course/57-scaling-out.md) | ขยายระบบออกหลายเครื่อง |
 
 ### ส่วนที่ 4 · เครื่องมือของคนทำงาน
 
@@ -90,6 +94,7 @@ curl -i http://127.0.0.1:8080/
 | [บทที่ 30](course/30-git.md) | Git — อย่าทำงานโดยไม่มีตาข่ายรองรับ |
 | [บทที่ 20](course/20-shell-scripting-for-curl.md) | เขียน bash ให้ปลอดภัยและไม่พังเงียบ ๆ |
 | [บทที่ 32](course/32-testing-with-pytest.md) | เขียนเทสต์ให้ API |
+| [บทที่ 55](course/55-ci-cd.md) | CI/CD — ท่อที่เชื่อมทุกอย่างเข้าด้วยกัน |
 | [บทที่ 33](course/33-concurrency-and-async.md) | Concurrency และ async |
 | [บทที่ 21](course/21-debugging-and-pitfalls.md) | Debug และกับดักที่เจอบ่อย |
 | [ภาคผนวก A](course/A1-netcat.md) | netcat (`nc`) — เครื่องมือดูของจริง |
@@ -161,7 +166,7 @@ curl -i http://127.0.0.1:8080/
 ├── Makefile             ← คำสั่งลัด (make help)
 ├── _quarto.yml          ← ตั้งค่าหนังสือ (เว็บ / PDF / EPUB)
 ├── index.qmd            ← หน้าแรกของหนังสือ
-├── course/              ← บทเรียน 53 บท
+├── course/              ← บทเรียน 58 บท
 │   └── img/             ← รูปประกอบ SVG (รองรับธีมสว่าง/มืด)
 └── lab/
     ├── server.py        ← lab server (stdlib ล้วน ไม่ต้องลงอะไร)

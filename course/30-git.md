@@ -222,4 +222,4 @@ git bisect reset
 7. ทำ commit 5 อัน แล้วใช้ `git log -p` ดูว่าเห็นเนื้อหาที่เคยลบไปแล้วหรือเปล่า
 
 ***
-[⬅ Push, Real-time, Upload และ Offline](29-realtime-push-and-offline.md) · [สารบัญ](../README.md) · [เขียน bash ให้ปลอดภัยและไม่พังเงียบ  ➡](20-shell-scripting-for-curl.md)
+[⬅ ขยายระบบออกหลายเครื่อง](57-scaling-out.md) · [สารบัญ](../README.md) · [เขียน bash ให้ปลอดภัย ➡](20-shell-scripting-for-curl.md)
