@@ -3,7 +3,7 @@
 > curl เห็นแค่ HTML ที่ server ส่งมา
 > Playwright เห็นสิ่งที่**ผู้ใช้เห็นจริง** หลัง JavaScript ทำงานเสร็จแล้ว
 
-## 17.1 ทำไมต้องมี Playwright — ดูด้วยตาตัวเอง
+## 17.1 ทำไมต้องมี Playwright — ดูด้วยตาตัวเอง {#s17-1}
 
 lab มีหน้า `/spa` ที่เนื้อหาถูกสร้างด้วย JavaScript ลองเทียบดู:
 
@@ -21,7 +21,7 @@ curl -s http://127.0.0.1:8080/spa
 
 นี่คือสาเหตุที่ต้องมีเครื่องมือที่รัน JS ได้
 
-## 17.2 เมื่อไรใช้อะไร
+## 17.2 เมื่อไรใช้อะไร {#s17-2}
 
 | สถานการณ์ | ใช้ |
 |-----------|-----|
@@ -37,7 +37,7 @@ curl -s http://127.0.0.1:8080/spa
 > Playwright เปิด browser จริง กินแรม 100-300 MB ต่อ instance และช้ากว่ามาก
 > บทถัดไปสอนวิธีผสมสองอย่างเข้าด้วยกัน
 
-## 17.3 ติดตั้ง
+## 17.3 ติดตั้ง {#s17-3}
 
 ```bash
 pip install playwright
@@ -57,7 +57,7 @@ playwright install chromium
 Node.js ก็ใช้ได้: `npm i -D @playwright/test && npx playwright install chromium`
 บทนี้ใช้ Python เพราะเข้ากับ lab
 
-## 17.4 สคริปต์แรก
+## 17.4 สคริปต์แรก {#s17-4}
 
 ```python
 from playwright.sync_api import sync_playwright
@@ -80,7 +80,7 @@ with sync_playwright() as p:
 browser = p.chromium.launch(headless=False, slow_mo=500)
 ```
 
-## 17.5 Selector
+## 17.5 Selector {#s17-5}
 
 Playwright แนะนำให้ใช้ locator ที่อ้างอิงสิ่งที่**ผู้ใช้เห็น** เพราะทนต่อการเปลี่ยน HTML:
 
@@ -99,7 +99,7 @@ page.locator("xpath=//div[@id='app']")      # XPath (ใช้เป็นทา
 **อย่าใช้ CSS selector ที่ยาวและเปราะ** เช่น `div > div:nth-child(3) > span.a1b2c3`
 — class ที่ถูก generate (`.css-1x2y3z`) จะเปลี่ยนทุกครั้งที่ build
 
-## 17.6 รอ — เรื่องที่สำคัญที่สุด
+## 17.6 รอ — เรื่องที่สำคัญที่สุด {#s17-6}
 
 **อย่าใช้ `time.sleep()`** มันช้าเกินจำเป็นเมื่อเว็บเร็ว และไม่พอเมื่อเว็บช้า
 
@@ -125,7 +125,7 @@ response = resp_info.value
 print(response.status, response.json())
 ```
 
-## 17.7 กรอกฟอร์ม
+## 17.7 กรอกฟอร์ม {#s17-7}
 
 ```python
 page.goto("http://127.0.0.1:8080/login")
@@ -140,7 +140,7 @@ print(page.inner_text("body"))
 token กับ cookie จึงถูกส่งไปเองอัตโนมัติเหมือนที่เบราว์เซอร์ทำ
 นี่คือข้อได้เปรียบใหญ่ที่สุดของมัน
 
-## 17.8 ดักและแทรกแซง network
+## 17.8 ดักและแทรกแซง network {#s17-8}
 
 ความสามารถที่ทรงพลังที่สุดของ Playwright:
 
@@ -163,7 +163,7 @@ page.route("**/api/**", lambda route: route.continue_(
 
 `page.route` กับการบล็อกรูปช่วยให้เร็วขึ้น 2-5 เท่าในเว็บที่มีรูปเยอะ
 
-## 17.9 เรียก JavaScript ในหน้า
+## 17.9 เรียก JavaScript ในหน้า {#s17-9}
 
 ```python
 title = page.evaluate("() => document.title")
@@ -179,7 +179,7 @@ result = page.evaluate("""async () => {
 **นี่คือทางออกเวลาเจอ logic ที่ reverse-engineer ยาก** — แทนที่จะแกะว่า
 เขาคำนวณ signature ยังไง ก็ให้หน้าเว็บคำนวณให้แล้วดึงค่าออกมา
 
-## 17.10 Debug
+## 17.10 Debug {#s17-10}
 
 ```bash
 PWDEBUG=1 python3 myscript.py          # เปิด Playwright Inspector
@@ -206,7 +206,7 @@ playwright codegen http://127.0.0.1:8080/login
 คลิกในเบราว์เซอร์ที่เปิดขึ้นมา แล้วมันจะเขียนโค้ดให้ — วิธีเริ่มต้นที่เร็วที่สุด
 (แต่โค้ดที่ได้มักใช้ selector ที่ไม่สวย ควรแก้เอง)
 
-## 17.11 ข้อควรระวัง
+## 17.11 ข้อควรระวัง {#s17-11}
 
 | เรื่อง | รายละเอียด |
 |-------|-----------|
@@ -222,7 +222,7 @@ playwright codegen http://127.0.0.1:8080/login
 
 ## แบบฝึกหัด
 
-1. ติดตั้ง Playwright แล้วรันสคริปต์ในข้อ 17.4 ให้เห็นข้อความที่ curl มองไม่เห็น
+1. ติดตั้ง Playwright แล้วรันสคริปต์ใน[ข้อ 17.4](#s17-4) ให้เห็นข้อความที่ curl มองไม่เห็น
 2. เขียนสคริปต์ที่ login เข้า `/dashboard` แล้วพิมพ์ session id ออกมา
 3. ใช้ `page.on("request", ...)` แล้วนับว่าการโหลด `/spa` ยิง request กี่ครั้ง
 4. ใช้ `expect_response` ดักผลของ `/api/spa-data` แล้วพิมพ์ JSON ออกมา

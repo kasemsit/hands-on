@@ -3,7 +3,7 @@
 > บทนี้แก้ปัญหา "ทำไมภาษาไทยกลายเป็น à¸«à¸™" และ "ทำไม + กลายเป็น space"
 > ซึ่งเป็นบั๊กที่กินเวลา debug มากที่สุดเรื่องหนึ่ง
 
-## 6.1 สามชั้นที่ต้องแยกให้ออก
+## 6.1 สามชั้นที่ต้องแยกให้ออก {#s6-1}
 
 คนสับสนเพราะเอาสามเรื่องนี้มาปนกัน:
 
@@ -29,7 +29,7 @@ bytes ที่ส่งจริงบนสาย
 
 ![สามชั้นของการเข้ารหัสข้อความ](img/encoding-layers.svg)
 
-## 6.2 Percent-encoding (URL encoding)
+## 6.2 Percent-encoding (URL encoding) {#s6-2}
 
 กติกา: ตัวอักษรที่ "ไม่ปลอดภัย" ถูกแทนด้วย `%` ตามด้วยเลขฐาน 16 ของแต่ละ byte
 
@@ -55,7 +55,7 @@ bytes ที่ส่งจริงบนสาย
 
 นี่คือเหตุผลที่ `-d 'query=1+1'` ทำให้ server เห็น `1 1`
 
-## 6.3 ให้ curl encode ให้
+## 6.3 ให้ curl encode ให้ {#s6-3}
 
 ```bash
 # วิธีที่ถูกและง่ายที่สุด
@@ -78,7 +78,7 @@ python3 -c "import urllib.parse,sys; print(urllib.parse.unquote(sys.argv[1]))" '
 jq -rn --arg s 'a b&c' '$s|@uri'
 ```
 
-## 6.4 charset ในการตอบกลับ
+## 6.4 charset ในการตอบกลับ {#s6-4}
 
 ```
 Content-Type: text/html; charset=utf-8
@@ -107,7 +107,7 @@ curl -s URL | file -        # เดาว่าเป็น encoding อะไ�
 curl -sI URL | grep -i content-type
 ```
 
-## 6.5 base64 — ไม่ใช่การเข้ารหัส
+## 6.5 base64 — ไม่ใช่การเข้ารหัส {#s6-5}
 
 base64 แปลง binary เป็นข้อความ ASCII 64 ตัว เพื่อให้ส่งผ่านช่องที่รับแต่ข้อความได้
 
@@ -146,7 +146,7 @@ print(base64.urlsafe_b64decode(s).decode())
 > **ย้ำ: base64 ไม่ใช่การเข้ารหัส** ใครก็ decode ได้ ไม่ต้องมีกุญแจ
 > อย่าเอาไป "ซ่อน" ความลับเด็ดขาด
 
-## 6.6 JSON escaping — อีกชั้นที่ต้องระวัง
+## 6.6 JSON escaping — อีกชั้นที่ต้องระวัง {#s6-6}
 
 ภายใน JSON string มีกติกาของตัวเอง:
 
@@ -170,7 +170,7 @@ curl -d "$BODY" URL
 
 ในบท 16 (`lab/solutions/pow-flow.sh`) เราใช้เทคนิคนี้กับ payload ของ ALTCHA
 
-## 6.7 ชื่อไฟล์และ header ที่มีภาษาไทย
+## 6.7 ชื่อไฟล์และ header ที่มีภาษาไทย {#s6-7}
 
 HTTP header เป็น ASCII เท่านั้น ถ้าต้องใส่ชื่อไฟล์ภาษาไทย:
 

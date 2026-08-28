@@ -6,7 +6,7 @@
 > นี่คือช่องทางที่โตเร็วที่สุดในรอบหลายปี และเป็นเรื่องที่คนสาย data science
 > เจอเยอะเป็นพิเศษ เพราะ dependency tree ของ ML ลึกมาก
 
-## 42.1 ปัญหาในหนึ่งคำสั่ง
+## 42.1 ปัญหาในหนึ่งคำสั่ง {#s42-1}
 
 ```bash
 pip install pandas
@@ -38,7 +38,7 @@ flowchart TD
 
 โปรเจกต์ ML ทั่วไปมี dependency ทางอ้อมหลายร้อยตัว **คุณไว้ใจทุกตัวโดยปริยาย**
 
-## 42.2 รูปแบบการโจมตี
+## 42.2 รูปแบบการโจมตี {#s42-2}
 
 | รูปแบบ | ทำอย่างไร | ตัวอย่างจริง |
 |--------|-----------|--------------|
@@ -64,7 +64,7 @@ flowchart TD
 > **บทเรียน: ไม่มีเครื่องมืออัตโนมัติตัวไหนจับเรื่องนี้ได้** — สิ่งที่ช่วยได้คือ
 > การลด dependency ให้น้อยลง และการที่มีคนสังเกตความผิดปกติ
 
-## 42.3 `pip install` รันโค้ดได้ตอนติดตั้ง
+## 42.3 `pip install` รันโค้ดได้ตอนติดตั้ง {#s42-3}
 
 **หลายคนไม่รู้ข้อนี้** — `setup.py` เป็นโค้ด Python ที่รันตอนติดตั้ง
 
@@ -95,10 +95,10 @@ pip install --dry-run package
 python3 -m venv .venv       # ← ที่คอร์สนี้ทำมาตลอด (บทที่ 32.2)
 ```
 
-> **นี่คือเหตุผลอีกข้อที่ PEP 668 บล็อก `pip install` ระดับระบบ** ([บทที่ 32.2](32-testing-with-pytest.md))
+> **นี่คือเหตุผลอีกข้อที่ PEP 668 บล็อก `pip install` ระดับระบบ** ([บทที่ 32.2](32-testing-with-pytest.md#s32-2))
 > การติดตั้งใน venv จำกัดความเสียหายไว้ในโปรเจกต์เดียว
 
-## 42.4 ล็อกเวอร์ชัน — ขั้นพื้นฐานที่ต้องทำ
+## 42.4 ล็อกเวอร์ชัน — ขั้นพื้นฐานที่ต้องทำ {#s42-4}
 
 ```bash
 # ❌ เวอร์ชันเปลี่ยนได้ทุกครั้งที่ติดตั้ง
@@ -126,7 +126,7 @@ pip install --require-hashes -r requirements.txt
 
 **commit ไฟล์ล็อกลง git เสมอ** ([บทที่ 30](30-git.md)) — ไม่งั้นทุกคนในทีมได้เวอร์ชันต่างกัน
 
-## 42.5 สแกนหาช่องโหว่
+## 42.5 สแกนหาช่องโหว่ {#s42-5}
 
 ```bash
 # Python
@@ -143,7 +143,7 @@ trivy image myapi:latest
 grype myapi:latest
 ```
 
-**ต่อยอดจาก[บทที่ 25.8](25-input-validation-and-injection.md) และ 37.7** — ใส่ใน CI ให้รันทุก PR:
+**ต่อยอดจาก[บทที่ 25.8](25-input-validation-and-injection.md#s25-8) และ 37.7** — ใส่ใน CI ให้รันทุก PR:
 
 ```yaml
 # .github/workflows/security.yml
@@ -157,7 +157,7 @@ grype myapi:latest
 > ช่องทาง supply chain ให้ตัวเอง เทสต์ใน[บทที่ 32](32-testing-with-pytest.md) คือสิ่งที่ทำให้การอัปเดต
 > อัตโนมัติปลอดภัยพอจะใช้ได้จริง
 
-## 42.6 SBOM — รายการวัสดุของซอฟต์แวร์
+## 42.6 SBOM — รายการวัสดุของซอฟต์แวร์ {#s42-6}
 
 **SBOM (Software Bill of Materials)** = รายการทุกอย่างที่อยู่ในระบบคุณ
 
@@ -178,7 +178,7 @@ syft dir:. -o cyclonedx-json > sbom.json      # ครอบคลุมกว�
 jq '.components[] | select(.name | test("log4j"))' sbom.json
 ```
 
-## 42.7 ความเสี่ยงเฉพาะของสาย data science / AI
+## 42.7 ความเสี่ยงเฉพาะของสาย data science / AI {#s42-7}
 
 นี่คือส่วนที่ต่างจาก web development ชัดเจน
 
@@ -189,7 +189,7 @@ import torch
 model = torch.load("model.pt")        # ⚠️ ใช้ pickle — รันโค้ดอะไรก็ได้
 ```
 
-**`pickle` deserialize = รันโค้ด** ([บทที่ 25.7](25-input-validation-and-injection.md)) ไฟล์โมเดลจาก Hugging Face
+**`pickle` deserialize = รันโค้ด** ([บทที่ 25.7](25-input-validation-and-injection.md#s25-7)) ไฟล์โมเดลจาก Hugging Face
 หรือที่ไหนก็ตามที่เป็น `.pt`/`.pkl` **สามารถยึดเครื่องคุณได้ตอนโหลด**
 
 ```python
@@ -227,7 +227,7 @@ with open(sys.argv[1],'rb') as f:
 " model.pkl
 ```
 
-## 42.8 การเซ็นและตรวจสอบที่มา
+## 42.8 การเซ็นและตรวจสอบที่มา {#s42-8}
 
 | เทคโนโลยี | ทำอะไร |
 |-----------|--------|
@@ -245,7 +245,7 @@ cosign verify --certificate-identity-regexp '.*' \
 **reproducible build คือคำตอบของ XZ** — ถ้า tarball ที่ปล่อยออกมาต้องสร้างซ้ำได้
 จาก git และได้ผลเหมือนเดิม การแทรกโค้ดที่ไม่มีใน git จะถูกจับได้ทันที
 
-## 42.9 ลดพื้นที่เสี่ยงตั้งแต่ต้น
+## 42.9 ลดพื้นที่เสี่ยงตั้งแต่ต้น {#s42-9}
 
 **วิธีที่ได้ผลที่สุดคือ "ใช้ dependency ให้น้อยลง"**
 
@@ -264,7 +264,7 @@ cosign verify --certificate-identity-regexp '.*' \
 pip install --dry-run --report - some-package | jq '.install | length'
 ```
 
-## 42.10 Checklist
+## 42.10 Checklist {#s42-10}
 
 **พื้นฐาน**
 - [ ] ใช้ venv / container แยกทุกโปรเจกต์
@@ -294,7 +294,7 @@ pip install --dry-run --report - some-package | jq '.install | length'
    แล้วลองแก้ hash ให้ผิด ดูว่า `--require-hashes` จับได้ไหม
 5. สร้าง SBOM ด้วย `cyclonedx-py` แล้วใช้ `jq` ค้นหา package ตัวหนึ่ง
 6. **เขียนไฟล์ pickle ที่รันคำสั่งตอนโหลด** (ใช้ `__reduce__`) แล้วตรวจจับมัน
-   ด้วยสคริปต์ `pickletools` ในข้อ 42.7 — **ทำในเครื่องตัวเองเท่านั้น**
+   ด้วยสคริปต์ `pickletools` ใน[ข้อ 42.7](#s42-7) — **ทำในเครื่องตัวเองเท่านั้น**
 7. ดาวน์โหลดโมเดลเล็ก ๆ จาก Hugging Face แล้วดูว่าเป็น `.bin` หรือ `.safetensors`
    ถ้าเป็น `.bin` ลองหาเวอร์ชัน safetensors
 8. ตรวจ `torch.load` ในโค้ดเก่าของคุณ — มี `weights_only=True` ครบไหม

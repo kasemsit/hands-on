@@ -3,7 +3,7 @@
 > บทนี้เจาะ ALTCHA ซึ่งเป็น CAPTCHA แบบ Proof of Work ที่เจอบ่อยขึ้นเรื่อย ๆ
 > และจะชี้จุดที่ตัวอย่างตามอินเทอร์เน็ตมักเข้าใจคลาดเคลื่อน
 
-## 16.1 PoW ทำงานยังไง
+## 16.1 PoW ทำงานยังไง {#s16-1}
 
 ```mermaid
 sequenceDiagram
@@ -27,7 +27,7 @@ sequenceDiagram
 
 ![ขั้นตอนของ Proof of Work แบบ ALTCHA](img/pow-flow.svg)
 
-## 16.2 ⚠️ ความเข้าใจผิดที่พบบ่อยที่สุด
+## 16.2 ⚠️ ความเข้าใจผิดที่พบบ่อยที่สุด {#s16-2}
 
 ตัวอย่างโค้ดที่เจอตามบล็อกและคำแนะนำทั่วไปมักเขียนแบบนี้:
 
@@ -59,7 +59,7 @@ curl -s http://127.0.0.1:8080/api/solution \
      --json '{"captcha": {"algorithm": "SHA-256"}}' | jq -r .error
 ```
 
-## 16.3 โครงสร้าง challenge
+## 16.3 โครงสร้าง challenge {#s16-3}
 
 ```json
 {
@@ -86,7 +86,7 @@ curl -s http://127.0.0.1:8080/api/solution \
 > curl -s 'https://yoursite/captcha/challenge/62025269' | jq
 > ```
 
-## 16.4 แก้โจทย์
+## 16.4 แก้โจทย์ {#s16-4}
 
 ```python
 for n in range(max_number + 1):
@@ -102,7 +102,7 @@ for n in range(max_number + 1):
 **เวลาที่ใช้โดยเฉลี่ย = maxNumber / 2 ครั้งของการ hash**
 Python ทำได้ราว 1-2 ล้าน hash/วินาที ดังนั้น `maxNumber=200000` ใช้เวลาไม่ถึง 0.2 วินาที
 
-## 16.5 สร้าง payload
+## 16.5 สร้าง payload {#s16-5}
 
 ```python
 payload = {
@@ -125,7 +125,7 @@ b64 = base64.b64encode(json.dumps(payload, separators=(",", ":")).encode()).deco
 > server ส่วนใหญ่ไม่ตรวจ field นี้ แต่ถ้าเว็บคุณตรวจ ก็ต้องใส่ให้ครบ
 > — **วิธีเช็คที่ชัวร์ที่สุด: ดู Request Payload จริงใน DevTools** ([บทที่ 14](14-devtools-to-curl.md))
 
-## 16.6 flow เต็มด้วย curl
+## 16.6 flow เต็มด้วย curl {#s16-6}
 
 ```bash
 bash lab/solutions/pow-flow.sh
@@ -157,7 +157,7 @@ curl -fsS -b "$JAR" "$B/api/protected" | jq '{ok, note}'
 PoW ไม่ได้ปกป้อง endpoint โดยตรง — มันแลกเป็น "ตั๋วผ่าน" ที่มีอายุจำกัด
 (lab ตั้งไว้ 5 นาที) นี่คือรูปแบบที่ระบบจริงใช้กัน
 
-## 16.7 ALTCHA v1 vs v2
+## 16.7 ALTCHA v1 vs v2 {#s16-7}
 
 | | v1 (legacy) | v2 |
 |---|------------|-----|
@@ -183,7 +183,7 @@ JSON ที่มีหน้าตาแบบนี้ (`{algorithm, challenge
 curl -s https://yoursite/page | grep -oE '[^"]*altcha[^"]*\.(js|mjs)'
 ```
 
-## 16.8 ถ้าคุณเป็นคน *ทำ* ระบบ PoW เอง
+## 16.8 ถ้าคุณเป็นคน *ทำ* ระบบ PoW เอง {#s16-8}
 
 จาก [lab/server.py](../lab/server.py) — จุดที่ต้องทำให้ครบ:
 
@@ -201,7 +201,7 @@ curl -s https://yoursite/page | grep -oE '[^"]*altcha[^"]*\.(js|mjs)'
 **ข้อ "กันใช้ซ้ำ" สำคัญมาก**: ถ้าไม่ทำ ผู้โจมตีแก้โจทย์ครั้งเดียว
 แล้วเอา payload เดิมยิงซ้ำหมื่นครั้งได้จนกว่า salt จะหมดอายุ — PoW ก็ไร้ความหมายทันที
 
-## 16.9 ข้อจำกัดที่ต้องยอมรับ
+## 16.9 ข้อจำกัดที่ต้องยอมรับ {#s16-9}
 
 | ประเด็น | ความจริง |
 |---------|----------|

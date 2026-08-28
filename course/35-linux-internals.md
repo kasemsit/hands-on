@@ -5,7 +5,7 @@
 >
 > บทนี้อธิบายว่าทำไมสิ่งเหล่านั้นเป็นแบบนั้น
 
-## 35.1 ทุกอย่างคือไฟล์ (หรือทำตัวเหมือนไฟล์)
+## 35.1 ทุกอย่างคือไฟล์ (หรือทำตัวเหมือนไฟล์) {#s35-1}
 
 นี่คือแนวคิดหลักของ Unix ที่อธิบายเรื่องอื่นเกือบทั้งหมด
 
@@ -35,7 +35,7 @@ lrwx------ 3 -> socket:[4475429]
 และเป็นเหตุผลที่ `nc -l ... > raw.bin` แยกข้อมูลออกจากข้อความสถานะได้
 (ภาคผนวก A.4) เพราะสองอย่างนั้นออกคนละ fd
 
-## 35.2 File descriptor หมด = server ตาย
+## 35.2 File descriptor หมด = server ตาย {#s35-2}
 
 ```bash
 grep 'open files' /proc/$PID/limits
@@ -64,7 +64,7 @@ with open("data.txt") as f:
 OSError: [Errno 24] Too many open files
 ```
 
-**วิธีตรวจ** (โยงกับ `CLOSE-WAIT` ใน[บทที่ 31.5](31-tcpip-and-tcpdump.md)):
+**วิธีตรวจ** (โยงกับ `CLOSE-WAIT` ใน[บทที่ 31.5](31-tcpip-and-tcpdump.md#s31-5)):
 
 ```bash
 ls /proc/$PID/fd | wc -l           # ใช้ไปเท่าไรแล้ว
@@ -74,7 +74,7 @@ ss -tan state close-wait | wc -l   # connection ที่ลืมปิด
 
 **ถ้าตัวเลขนี้โตขึ้นเรื่อย ๆ ตามเวลา = รั่วแน่นอน** ไม่ใช่โหลดเยอะ
 
-## 35.3 Process — เกิด ตาย และผีดิบ
+## 35.3 Process — เกิด ตาย และผีดิบ {#s35-3}
 
 ```mermaid
 flowchart LR
@@ -108,7 +108,7 @@ proc.wait()          # ← ต้องมี ไม่งั้นได้ zom
 **สถานะ `D` คือตัวที่น่ากลัวกว่า** — `kill -9` ก็ไม่ตาย เพราะมันติดอยู่ใน
 syscall ที่ขัดจังหวะไม่ได้ (เช่นรอ disk หรือ NFS ที่ค้าง) ต้องแก้ที่ต้นเหตุ
 
-## 35.4 Signal — วิธีบอกให้ process ทำอะไร
+## 35.4 Signal — วิธีบอกให้ process ทำอะไร {#s35-4}
 
 | Signal | เลข | ความหมาย | จับได้ไหม |
 |--------|-----|----------|-----------|
@@ -118,7 +118,7 @@ syscall ที่ขัดจังหวะไม่ได้ (เช่นร�
 | `SIGHUP` | 1 | terminal ปิด / "โหลด config ใหม่" | ✅ |
 | `SIGPIPE` | 13 | เขียนลง pipe ที่อีกฝั่งปิดแล้ว | ✅ |
 
-**นี่คือหัวใจของ graceful shutdown ใน[บทที่ 28.8](28-observability-and-deployment.md)**
+**นี่คือหัวใจของ graceful shutdown ใน[บทที่ 28.8](28-observability-and-deployment.md#s28-8)**
 
 ```python
 import signal
@@ -138,7 +138,7 @@ signal.signal(signal.SIGTERM, handle_sigterm)
 จะเขียนเสร็จ server จะได้ SIGPIPE ซึ่งใน `lab/server.py` เราจับไว้ด้วย
 `except BrokenPipeError`
 
-## 35.5 หา process ให้ถูกตัว
+## 35.5 หา process ให้ถูกตัว {#s35-5}
 
 จำเรื่องที่ผมพลาดตอนต้นคอร์สได้ไหม — `pkill -f "lab/server.py"` **ฆ่า shell ตัวเอง**
 เพราะ `-f` เทียบกับ command line ทั้งบรรทัด และ shell ที่รันคำสั่งนั้น
@@ -164,7 +164,7 @@ lsof -ti :8080 | xargs -r kill
 | `fuser -k 8080/tcp` | **ฆ่าคนที่ถือพอร์ต — ปลอดภัยที่สุด** |
 | `ss -tlnp` | ดู listening socket ทั้งหมด |
 
-## 35.6 `/proc` — หน้าต่างเข้าไปดูในเคอร์เนล
+## 35.6 `/proc` — หน้าต่างเข้าไปดูในเคอร์เนล {#s35-6}
 
 `/proc` ไม่ใช่ไฟล์จริงบนดิสก์ — เป็นหน้าต่างที่เคอร์เนลเปิดให้ดูสถานะระบบ
 
@@ -176,7 +176,7 @@ ls /proc/$PID/task | wc -l             # จำนวน thread
 cat /proc/$PID/io                      # อ่าน/เขียนไปเท่าไร
 ```
 
-> ⚠️ **`/proc/PID/environ` คือเหตุผลที่[บทที่ 20.4](20-shell-scripting-for-curl.md) บอกว่า environment variable
+> ⚠️ **`/proc/PID/environ` คือเหตุผลที่[บทที่ 20.4](20-shell-scripting-for-curl.md#s20-4) บอกว่า environment variable
 > ยังไม่ใช่ที่ปลอดภัยที่สุดสำหรับ secret** — เจ้าของ process (และ root)
 > อ่านได้ ถ้า token อยู่ใน env มันอยู่ตรงนี้
 
@@ -188,7 +188,7 @@ cat /proc/meminfo      # หน่วยความจำ
 **อ่าน load average ให้ถูก** — ตัวเลข `2.5` บนเครื่อง 4 core แปลว่าใช้ไป
 ประมาณ 62% ไม่ใช่ 250% **ต้องเทียบกับจำนวน core เสมอ** (`nproc`)
 
-## 35.7 `strace` — เห็นทุก syscall ที่โปรแกรมเรียก
+## 35.7 `strace` — เห็นทุก syscall ที่โปรแกรมเรียก {#s35-7}
 
 `strace` คือ `tcpdump` ของ syscall — เห็นทุกคำสั่งที่โปรแกรมขอจากเคอร์เนล
 
@@ -221,7 +221,7 @@ openat(AT_FDCWD, "/etc/myapp.conf", O_RDONLY) = -1 ENOENT (No such file or direc
 
 บรรทัดเดียวนี้ตอบคำถามได้ทันทีว่าโปรแกรมหา config ที่ไหน
 
-## 35.8 Environment variable และ process
+## 35.8 Environment variable และ process {#s35-8}
 
 ```bash
 env | sort                 # ของ shell ปัจจุบัน
@@ -240,7 +240,7 @@ API_TOKEN=xxx python3 app.py   # ตั้งเฉพาะคำสั่ง�
 และเป็นเหตุผลที่ **การ `export` ใน shell script ไม่มีผลกับ shell แม่**
 เพราะ script รันใน process ลูก
 
-## 35.9 systemd — วิธีที่ service จริงถูกรัน
+## 35.9 systemd — วิธีที่ service จริงถูกรัน {#s35-9}
 
 lab server ของเรารันด้วย `python3 lab/server.py &` ซึ่งตายเมื่อปิด terminal
 ของจริงต้องใช้ service manager
@@ -280,9 +280,9 @@ journalctl -u myapi --since "1 hour ago" -p err
 
 **`systemctl reload` vs `restart`** — `reload` ส่ง SIGHUP ให้โหลด config ใหม่
 โดยไม่ตัด connection ส่วน `restart` คือหยุดแล้วเริ่มใหม่
-(ถ้าทำ graceful shutdown ไว้ตาม[บทที่ 28.8](28-observability-and-deployment.md) การ restart ก็ไม่ตัด request กลางคัน)
+(ถ้าทำ graceful shutdown ไว้ตาม[บทที่ 28.8](28-observability-and-deployment.md#s28-8) การ restart ก็ไม่ตัด request กลางคัน)
 
-## 35.10 เมื่อ RAM หมด — OOM killer
+## 35.10 เมื่อ RAM หมด — OOM killer {#s35-10}
 
 Linux ยอมให้จองหน่วยความจำเกินที่มีจริง (overcommit) พอใช้จริงจนหมด
 เคอร์เนลจะ**เลือกฆ่า process สักตัว**
@@ -297,12 +297,12 @@ Out of memory: Killed process 12345 (python3) total-vm:8000000kB
 ```
 
 **อาการที่หลอกตา:** แอปหายไปเฉย ๆ ไม่มี error ใน log ของแอปเอง เพราะมันถูก
-SIGKILL ซึ่ง**จับไม่ได้** (ข้อ 35.4) — ต้องไปดูที่ log ของเคอร์เนล
+SIGKILL ซึ่ง**จับไม่ได้** ([ข้อ 35.4](#s35-4)) — ต้องไปดูที่ log ของเคอร์เนล
 
 **ป้องกัน:** ตั้ง memory limit ให้ service, ตรวจ memory leak, และ**ตั้ง alert
-ที่ memory ก่อนถึงขีด** ([บทที่ 28.6](28-observability-and-deployment.md))
+ที่ memory ก่อนถึงขีด** ([บทที่ 28.6](28-observability-and-deployment.md#s28-6))
 
-## 35.11 เชื่อมกับสิ่งที่เจอมาแล้วในคอร์ส
+## 35.11 เชื่อมกับสิ่งที่เจอมาแล้วในคอร์ส {#s35-11}
 
 | เคยเจอที่ไหน | คำอธิบายระดับ OS |
 |--------------|------------------|

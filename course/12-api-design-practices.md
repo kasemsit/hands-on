@@ -3,7 +3,7 @@
 > เรื่องที่ต้องตัดสินใจตอนออกแบบ API ให้ mobile app
 > ตัดสินใจผิดตอนต้น แก้ทีหลังยากมาก เพราะแอปเก่ายังอยู่ในมือผู้ใช้
 
-## 12.1 Versioning
+## 12.1 Versioning {#s12-1}
 
 แอปเวอร์ชันเก่าจะอยู่กับคุณไปอีกนาน **ต้องมี version ตั้งแต่วันแรก**
 
@@ -29,7 +29,7 @@
 
 **กฎทอง: client ต้องเพิกเฉยต่อ field ที่ไม่รู้จัก** เขียนไว้ในเอกสารและบังคับใน code review
 
-## 12.2 รูปแบบ URL
+## 12.2 รูปแบบ URL {#s12-2}
 
 ```
 GET    /v1/books           รายการ
@@ -46,7 +46,7 @@ GET    /v1/books/42/reviews  ทรัพยากรลูก
   — **เลือกอย่างใดอย่างหนึ่งแล้วใช้ให้เหมือนกันทั้งระบบ**
 - action ที่ไม่ใช่ CRUD ยอมให้ใช้กริยาได้: `POST /v1/orders/42/cancel`
 
-## 12.3 Pagination
+## 12.3 Pagination {#s12-3}
 
 **อย่าตอบ array เปล่า ๆ** เพราะเพิ่ม metadata ทีหลังไม่ได้โดยไม่ break
 
@@ -83,7 +83,7 @@ GET /v1/books?limit=20&cursor=eyJpZCI6NDJ9
 cursor คือ base64 ของตำแหน่งล่าสุด (เช่น `{"id":42,"created_at":"..."}`)
 **ปิดผนึกด้วย HMAC ถ้าไม่อยากให้ client เดา/แก้** (ดู[บทที่ 13](13-webhooks-and-hmac.md))
 
-## 12.4 Idempotency — สำคัญมากกับ mobile
+## 12.4 Idempotency — สำคัญมากกับ mobile {#s12-4}
 
 มือถือเน็ตหลุดบ่อย สถานการณ์นี้เกิดขึ้นจริงทุกวัน:
 
@@ -122,7 +122,7 @@ flowchart TD
 
 Stripe, Square และ payment API แทบทุกเจ้าทำแบบนี้ — ลอกมาได้เลย
 
-## 12.5 Rate limiting
+## 12.5 Rate limiting {#s12-5}
 
 ตอบ `429` พร้อม header ที่บอกสถานะให้ client รู้ตัว:
 
@@ -158,7 +158,7 @@ delay = min(base * 2^attempt, max_delay) + random(0, jitter)
 **jitter จำเป็น** ไม่งั้นเมื่อ server ล่มแล้วฟื้น ทุกเครื่องจะยิงพร้อมกันเป๊ะ ๆ
 แล้วล่มซ้ำ (thundering herd)
 
-## 12.6 CORS — เกี่ยวกับเว็บ ไม่เกี่ยวกับ mobile
+## 12.6 CORS — เกี่ยวกับเว็บ ไม่เกี่ยวกับ mobile {#s12-6}
 
 **CORS ไม่ใช่ระบบความปลอดภัยของ server** — มันคือกฎที่**เบราว์เซอร์**บังคับตัวเอง
 
@@ -182,7 +182,7 @@ Access-Control-Max-Age: 86400
 (มี custom header เช่น `Authorization`) — server ต้องตอบ `OPTIONS` ให้ถูก
 ไม่งั้นเว็บเรียกไม่ได้เลย ใช้ `Access-Control-Max-Age` ลดจำนวน preflight
 
-## 12.7 รูปแบบ response ที่คงเส้นคงวา
+## 12.7 รูปแบบ response ที่คงเส้นคงวา {#s12-7}
 
 เลือกรูปแบบเดียวแล้วใช้ทั้งระบบ:
 
@@ -203,7 +203,7 @@ Access-Control-Max-Age: 86400
   (client ต้องเช็คสองที่ และ HTTP tooling ทั้งหมดจะเข้าใจผิด)
 - ❌ เปลี่ยนโครงสร้าง error ตาม endpoint
 
-## 12.8 Observability
+## 12.8 Observability {#s12-8}
 
 **`request_id` คือของขวัญที่ให้ตัวเองในอนาคต**
 
@@ -221,7 +221,7 @@ Server log:   {"request_id": "...", "user_id": ..., "path": ..., "status": ..., 
 
 ควรมี `GET /health` ที่ไม่ต้อง auth สำหรับ load balancer ด้วย
 
-## 12.9 เรื่องอื่นที่ควรคิดถึง
+## 12.9 เรื่องอื่นที่ควรคิดถึง {#s12-9}
 
 | เรื่อง | สรุปสั้น ๆ |
 |-------|-----------|

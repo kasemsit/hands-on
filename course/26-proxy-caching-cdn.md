@@ -4,7 +4,7 @@
 > บทนี้บอกว่า **ถ้าไม่รู้เรื่อง `X-Forwarded-For` rate limit นั้นจะไม่ทำงาน**
 > — หรือแย่กว่านั้นคือบล็อกผู้ใช้ทั้งโลกพร้อมกัน
 
-## 26.1 ของจริงไม่มีใครให้ app แตะอินเทอร์เน็ตตรง ๆ
+## 26.1 ของจริงไม่มีใครให้ app แตะอินเทอร์เน็ตตรง ๆ {#s26-1}
 
 ```
 ผู้ใช้ ──▶ CDN/WAF ──▶ Load Balancer ──▶ nginx ──▶ app ของคุณ
@@ -16,7 +16,7 @@ reverse proxy ทำหน้าที่: จบ TLS, กระจายโห�
 
 **ผลข้างเคียงที่ต้องรู้: แอปของคุณจะเห็น IP ของ proxy ไม่ใช่ของผู้ใช้**
 
-## 26.2 ปัญหา IP — ลองด้วยตัวเอง
+## 26.2 ปัญหา IP — ลองด้วยตัวเอง {#s26-2}
 
 ```bash
 B=http://127.0.0.1:8080
@@ -43,7 +43,7 @@ X-Forwarded-For: 203.0.113.9, 70.41.3.18, 150.172.238.178
 
 มาตรฐานใหม่กว่าคือ `Forwarded` (RFC 7239) แต่ `X-Forwarded-For` ยังใช้กันแพร่หลายกว่ามาก
 
-## 26.3 ⚠️ ห้ามเชื่อ X-Forwarded-For ทั้งก้อน
+## 26.3 ⚠️ ห้ามเชื่อ X-Forwarded-For ทั้งก้อน {#s26-3}
 
 ```bash
 # ใครก็ปลอมได้ในหนึ่งบรรทัด
@@ -98,7 +98,7 @@ def client_ip(remote_addr: str, xff_header: str | None) -> str:
 
 ![X-Forwarded-For chain และวิธีอ่าน IP ผู้ใช้จริง](img/xff-chain.svg)
 
-## 26.4 Header อื่นที่ proxy ส่งมา
+## 26.4 Header อื่นที่ proxy ส่งมา {#s26-4}
 
 | Header | บอกอะไร | ทำไมสำคัญ |
 |--------|---------|-----------|
@@ -112,7 +112,7 @@ def client_ip(remote_addr: str, xff_header: str | None) -> str:
 คุยกับแอปด้วย http แอปเห็นว่าเป็น http เลย redirect ไป https → proxy รับ → ส่ง http
 ให้แอปอีก → วนไม่จบ
 
-## 26.5 Caching — ประหยัดเน็ตผู้ใช้มือถือ
+## 26.5 Caching — ประหยัดเน็ตผู้ใช้มือถือ {#s26-5}
 
 ### Cache-Control
 
@@ -188,7 +188,7 @@ curl -X PATCH -H "If-Match: $ETAG" --json '{"item":"..."}' $B/api/v2/orders/1001
 เป็น **optimistic locking** ที่ทำงานผ่าน HTTP โดยตรง — ป้องกันกรณีสองคนแก้พร้อมกัน
 แล้วคนที่บันทึกทีหลังทับงานของคนแรก
 
-## 26.6 CDN
+## 26.6 CDN {#s26-6}
 
 CDN เก็บสำเนาไว้ตามจุดต่าง ๆ ทั่วโลก ผู้ใช้ในไทยดึงจากเซิร์ฟเวอร์ในสิงคโปร์
 แทนที่จะข้ามไปอเมริกา
@@ -216,7 +216,7 @@ Vary: Accept-Language, Accept-Encoding
 ทางที่ง่ายกว่าคือ **ใส่ hash ในชื่อไฟล์** (`app.a1b2c3.js`) แล้วตั้ง `immutable`
 — ไม่ต้อง purge เลยเพราะไฟล์ใหม่คือชื่อใหม่
 
-## 26.7 nginx ตัวอย่างสำหรับ API
+## 26.7 nginx ตัวอย่างสำหรับ API {#s26-7}
 
 ```nginx
 upstream app { server 127.0.0.1:8000; keepalive 32; }
@@ -259,7 +259,7 @@ server {
 **`$proxy_add_x_forwarded_for` ต่อท้าย ไม่ใช่เขียนทับ** — ถ้าใช้ `$remote_addr`
 เฉย ๆ จะเสีย chain ไป
 
-## 26.8 Connection reuse — เรื่องที่มีผลกับ mobile มาก
+## 26.8 Connection reuse — เรื่องที่มีผลกับ mobile มาก {#s26-8}
 
 การเปิดการเชื่อมต่อใหม่ทุกครั้งแพงมากบนมือถือ (DNS + TCP + TLS handshake
 อาจใช้ 300-500 ms บน 4G)
@@ -282,7 +282,7 @@ curl -sI --http2 https://example.com | head -1        # HTTP/2 200
 curl -sI --http3 https://example.com | head -1        # ถ้า curl รองรับ
 ```
 
-## 26.9 Checklist
+## 26.9 Checklist {#s26-9}
 
 - [ ] app ไม่เปิดให้ยิงตรงจากอินเทอร์เน็ต (bind `127.0.0.1` / security group)
 - [ ] อ่าน client IP ผ่าน library ที่รู้จัก trusted proxy ไม่ใช่อ่าน header ดิบ
@@ -299,14 +299,14 @@ curl -sI --http3 https://example.com | head -1        # ถ้า curl รอง
 ## แบบฝึกหัด
 
 1. ยิง `/api/echo-ip` พร้อม `X-Forwarded-For` ปลอม ๆ แล้วดูว่า server เห็นอะไร
-2. เขียนฟังก์ชัน `client_ip()` ตามข้อ 26.3 แล้วทดสอบกับ chain หลายชั้น
+2. เขียนฟังก์ชัน `client_ip()` ตาม[ข้อ 26.3](#s26-3) แล้วทดสอบกับ chain หลายชั้น
    รวมถึงกรณีที่ผู้โจมตีใส่ IP ปลอมนำหน้า
 3. ทดสอบ ETag: ยิง `/api/cached` สองครั้ง ดูว่าครั้งที่สองได้ 0 bytes จริง
 4. เพิ่ม `Cache-Control: private, max-age=60` ให้ `/api/me` แล้วอธิบายว่า
    ทำไมห้ามใช้ `public`
 5. เพิ่มการรองรับ `If-Match` ให้ `PATCH /api/v2/orders/{id}` แล้วทดสอบว่าได้ 412
    เมื่อ ETag ไม่ตรง
-6. ตั้ง nginx ตามข้อ 26.7 หน้า lab server แล้วยิงผ่านมัน ดูว่า `/api/echo-ip`
+6. ตั้ง nginx ตาม[ข้อ 26.7](#s26-7) หน้า lab server แล้วยิงผ่านมัน ดูว่า `/api/echo-ip`
    รายงาน IP ถูกต้องไหม
 7. วัดความต่างของเวลาระหว่างการยิง 10 request แบบแยกการเชื่อมต่อ กับแบบ reuse
    (`curl` ยิงหลาย URL ในคำสั่งเดียวจะ reuse ให้เอง)

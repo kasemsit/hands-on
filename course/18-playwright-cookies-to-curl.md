@@ -3,7 +3,7 @@
 > เทคนิคที่ใช้งานได้จริงที่สุดในคอร์สนี้:
 > **ให้ browser ทำส่วนที่ยาก แล้วให้ curl ทำส่วนที่ต้องทำซ้ำเยอะ ๆ**
 
-## 18.1 ปัญหาและทางออก
+## 18.1 ปัญหาและทางออก {#s18-1}
 
 | | Playwright | curl |
 |---|-----------|------|
@@ -30,7 +30,7 @@ flowchart LR
 
 ![เทคนิคลูกผสม Playwright กับ curl](img/hybrid-playwright-curl.svg)
 
-## 18.2 ดึง cookie ออกจาก Playwright
+## 18.2 ดึง cookie ออกจาก Playwright {#s18-2}
 
 ```python
 cookies = context.cookies()
@@ -70,7 +70,7 @@ context.storage_state(path="state.json")
 **`storage_state` ครอบคลุมกว่า `cookies()`** เพราะเว็บสมัยใหม่หลายเจ้าเก็บ token
 ไว้ใน `localStorage` แทน cookie — ถ้าดึงแต่ cookie แล้ว curl ยังไม่ผ่าน ให้มาดูตรงนี้
 
-## 18.3 แปลงเป็น cookie jar ให้ curl อ่านได้
+## 18.3 แปลงเป็น cookie jar ให้ curl อ่านได้ {#s18-3}
 
 นี่คือใจกลางของบทนี้ — โค้ดเต็มอยู่ที่
 [lab/solutions/playwright_cookies.py](../lab/solutions/playwright_cookies.py)
@@ -115,7 +115,7 @@ header = "; ".join(f"{c['name']}={c['value']}" for c in cookies)
 
 แต่วิธีนี้เสีย path/domain/expiry ไป ใช้ได้เมื่อยิงโดเมนเดียวเท่านั้น
 
-## 18.4 ลองของจริง
+## 18.4 ลองของจริง {#s18-4}
 
 **โหมด demo (ไม่ต้องติดตั้ง Playwright)** — ดูว่าตัวแปลงทำงานยังไง:
 
@@ -138,7 +138,7 @@ python3 lab/solutions/playwright_cookies.py
 
 จะเห็น: Playwright login → แปลง cookie → curl เข้า `/dashboard` ได้โดยไม่ต้อง login ซ้ำ
 
-## 18.5 ทางกลับกัน: จาก curl ไป Playwright
+## 18.5 ทางกลับกัน: จาก curl ไป Playwright {#s18-5}
 
 บางทีคุณ login ด้วย curl ไว้แล้ว อยากเอา session ไปเปิดใน browser
 
@@ -172,7 +172,7 @@ def netscape_to_playwright(path: str) -> list[dict]:
 context.add_cookies(netscape_to_playwright("cookies.txt"))
 ```
 
-## 18.6 ใช้ storage_state ซ้ำ — ไม่ต้อง login ทุกครั้ง
+## 18.6 ใช้ storage_state ซ้ำ — ไม่ต้อง login ทุกครั้ง {#s18-6}
 
 ```python
 from pathlib import Path
@@ -204,7 +204,7 @@ if "login" in page.url or page.title() == "401":
 > ⚠️ `state.json` มี session ที่ใช้งานได้จริงอยู่ข้างใน — **ใส่ใน `.gitignore`
 > และ `chmod 600`** อย่า commit เด็ดขาด
 
-## 18.7 กรณีที่ token อยู่ใน localStorage ไม่ใช่ cookie
+## 18.7 กรณีที่ token อยู่ใน localStorage ไม่ใช่ cookie {#s18-7}
 
 เว็บสมัยใหม่จำนวนมากเก็บ Bearer token ไว้ใน `localStorage`
 — curl ไม่มี localStorage ต้องดึงค่าออกมาแล้วส่งเป็น header เอง
@@ -228,7 +228,7 @@ for origin in state["origins"]:
             print(item["value"])
 ```
 
-## 18.8 สคริปต์ลูกผสมแบบเต็ม
+## 18.8 สคริปต์ลูกผสมแบบเต็ม {#s18-8}
 
 ```python
 #!/usr/bin/env python3
@@ -273,7 +273,7 @@ finally:
     jar.unlink(missing_ok=True)     # ลบ session ทิ้งเมื่อเสร็จ
 ```
 
-## 18.9 เมื่อไรควรใช้แบบผสม เมื่อไรไม่ควร
+## 18.9 เมื่อไรควรใช้แบบผสม เมื่อไรไม่ควร {#s18-9}
 
 **ควรใช้เมื่อ:**
 - login/CAPTCHA ซับซ้อนแต่ทำครั้งเดียวแล้วอยู่ได้นาน
@@ -288,16 +288,16 @@ finally:
 **ถ้า cookie ถูกต้องแต่ curl ยังไม่ผ่าน ให้ไล่ตรวจตามนี้:**
 
 1. cookie ครบทุกตัวไหม (บางตัวถูกตั้งจาก subdomain อื่น)
-2. token อยู่ใน localStorage หรือเปล่า (ข้อ 18.7)
+2. token อยู่ใน localStorage หรือเปล่า ([ข้อ 18.7](#s18-7))
 3. มี header พิเศษที่ JS ใส่ให้ไหม เช่น `X-CSRF-Token` (ดู DevTools [บทที่ 14](14-devtools-to-curl.md))
 4. server เช็ค `User-Agent` / `Referer` / `Origin` ไหม → ใส่ให้ตรงกับตอนที่ browser ยิง
 5. เป็น TLS fingerprint ไหม → ถ้าใช่ ต้องกลับไปใช้ Playwright
 
-## 18.10 ความปลอดภัย
+## 18.10 ความปลอดภัย {#s18-10}
 
 - cookie jar และ `state.json` = **credential ที่ใช้งานได้จริง**
 - ใส่ใน `.gitignore` เสมอ + `chmod 600`
-- ใช้ `tempfile.mkstemp()` แล้วลบทิ้งเมื่อเสร็จ (ดูตัวอย่างในข้อ 18.8)
+- ใช้ `tempfile.mkstemp()` แล้วลบทิ้งเมื่อเสร็จ (ดูตัวอย่างใน[ข้อ 18.8](#s18-8))
 - อย่าส่งไฟล์เหล่านี้ให้ใคร รวมถึงอย่าแปะใน issue/chat
 
 ## แบบฝึกหัด
@@ -305,7 +305,7 @@ finally:
 1. รัน `python3 lab/solutions/playwright_cookies.py --demo` แล้วตรวจด้วย
    `cat -A` ว่าคั่นด้วย tab จริง
 2. ติดตั้ง Playwright แล้วรันโหมดเต็ม ให้ curl เข้า `/dashboard` ได้สำเร็จ
-3. เขียนฟังก์ชัน `netscape_to_playwright` (ข้อ 18.5) แล้วทดสอบไป-กลับ:
+3. เขียนฟังก์ชัน `netscape_to_playwright` ([ข้อ 18.5](#s18-5)) แล้วทดสอบไป-กลับ:
    Playwright → jar → Playwright ได้ cookie เท่าเดิมไหม
 4. แก้ `/spa` ใน [lab/server.py](../lab/server.py) ให้เก็บ token ไว้ใน `localStorage`
    แล้วเขียนสคริปต์ที่ดึงออกมาส่งให้ curl เป็น Bearer header

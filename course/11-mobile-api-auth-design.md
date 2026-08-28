@@ -3,7 +3,7 @@
 > บทนี้ตอบคำถามตรง ๆ ว่า "จะทำ API ให้ mobile app เชื่อมต่ออย่างไรให้ดี
 > และต้อง renew key อย่างไร"
 
-## 11.1 ทำไม mobile ต่างจากเว็บ
+## 11.1 ทำไม mobile ต่างจากเว็บ {#s11-1}
 
 | | เว็บ (เบราว์เซอร์) | Mobile app |
 |---|-------------------|------------|
@@ -17,7 +17,7 @@
 สองข้อล่างสำคัญมากกับการออกแบบ: **API ของคุณต้องรองรับแอปเวอร์ชันเก่า**
 และ **ต้องทนกับ request ที่ขาดกลางคัน**
 
-## 11.2 สถาปัตยกรรมที่แนะนำ
+## 11.2 สถาปัตยกรรมที่แนะนำ {#s11-2}
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ flowchart TD
 2. **refresh token อายุยาว** (30-90 วัน) — ใช้เฉพาะตอนขอ access ใหม่ เก็บอย่างดี
 3. **refresh token หมุนทุกครั้งที่ใช้ (rotation)** — ใบเก่าใช้ไม่ได้อีก
 
-## 11.3 ทำไมต้องมีสองใบ
+## 11.3 ทำไมต้องมีสองใบ {#s11-3}
 
 ถ้ามีใบเดียว คุณติดกับดัก:
 
@@ -57,7 +57,7 @@ flowchart TD
 | revoke ได้ | ไม่จำเป็น (หมดเองเร็ว) | **ต้องได้** |
 | ส่งไป endpoint ไหน | ทุก endpoint | เฉพาะ `/auth/refresh` |
 
-## 11.4 Refresh token rotation + reuse detection
+## 11.4 Refresh token rotation + reuse detection {#s11-4}
 
 นี่คือหัวใจของคำถาม "renew key อย่างไร"
 
@@ -111,7 +111,7 @@ curl -s --json "$(jq -nc --arg r "$R2" '{refresh_token:$r}')" $B/api/refresh | j
 
 โค้ดฝั่ง server อยู่ที่ `post_refresh` ใน [lab/server.py](../lab/server.py) ลองอ่านประกอบ
 
-## 11.5 เก็บ token บนเครื่องผู้ใช้ยังไง
+## 11.5 เก็บ token บนเครื่องผู้ใช้ยังไง {#s11-5}
 
 | ที่เก็บ | Android | iOS | ปลอดภัยไหม |
 |---------|---------|-----|------------|
@@ -132,7 +132,7 @@ Cross-platform:
 **ถ้าต้องการความปลอดภัยระดับสูง**: ผูก refresh token กับ biometric
 (ต้องสแกนนิ้ว/หน้าก่อนถึงจะอ่าน key ออกจาก Keystore ได้)
 
-## 11.6 การจัดการ 401 ในฝั่งแอป (interceptor pattern)
+## 11.6 การจัดการ 401 ในฝั่งแอป (interceptor pattern) {#s11-6}
 
 ```mermaid
 flowchart TD
@@ -168,7 +168,7 @@ flowchart TD
 **Proactive refresh** (ดีกว่ารอ 401): ถ้า access token เหลืออายุ < 60 วินาที
 ให้ refresh ก่อนยิง ลดโอกาสเจอ 401 กลางคัน
 
-## 11.7 Endpoint ที่ควรมี
+## 11.7 Endpoint ที่ควรมี {#s11-7}
 
 | Endpoint | ทำอะไร | หมายเหตุ |
 |----------|--------|----------|
@@ -183,7 +183,7 @@ flowchart TD
 | `POST /auth/password/reset` | ตั้งรหัสใหม่ | ต้อง **logout-all** หลังเปลี่ยนรหัส |
 | `GET /me` | ข้อมูลผู้ใช้ปัจจุบัน | ให้แอปเช็คว่า token ใช้ได้ไหม |
 
-## 11.8 เก็บ password ยังไง
+## 11.8 เก็บ password ยังไง {#s11-8}
 
 **ห้ามเก็บ password ตรง ๆ และห้ามใช้ MD5/SHA1/SHA256 เปล่า ๆ**
 (SHA256 เร็วเกินไป — GPU ลองได้พันล้านครั้งต่อวินาที)
@@ -212,7 +212,7 @@ ph.verify(hashed, password_input)   # ตรวจ - โยน exception ถ้�
 - อย่าจำกัดความยาวสูงสุดต่ำกว่า 64 ตัว
 - อย่าห้าม paste (ทำให้คนใช้ password manager ไม่ได้)
 
-## 11.9 Rate limiting สำหรับ endpoint auth
+## 11.9 Rate limiting สำหรับ endpoint auth {#s11-9}
 
 จุดที่ต้องจำกัดหนักที่สุด:
 
@@ -229,7 +229,7 @@ ph.verify(hashed, password_input)   # ตรวจ - โยน exception ถ้�
 
 ตอบด้วย `429` + `Retry-After` เสมอ ([บทที่ 12](12-api-design-practices.md))
 
-## 11.10 กติกาสำคัญอื่น ๆ
+## 11.10 กติกาสำคัญอื่น ๆ {#s11-10}
 
 **ตอบ error เท่ากันเสมอ**
 
@@ -267,7 +267,7 @@ HTTP 426 Upgrade Required
 - ให้ recovery code สำรอง 8-10 ชุด
 - ตอน login สำเร็จขั้นแรก ให้ token ชั่วคราวที่ใช้ได้แค่ endpoint ยืนยัน OTP เท่านั้น
 
-## 11.11 Checklist ก่อนขึ้น production
+## 11.11 Checklist ก่อนขึ้น production {#s11-11}
 
 **Transport & storage**
 - [ ] HTTPS ทุก endpoint + HSTS ([บทที่ 7](07-tls-https.md))
@@ -300,7 +300,7 @@ HTTP 426 Upgrade Required
 
 ## แบบฝึกหัด
 
-1. รัน flow ในข้อ 11.4 ให้เห็น reuse detection ทำงานด้วยตาตัวเอง
+1. รัน flow ใน[ข้อ 11.4](#s11-4) ให้เห็น reuse detection ทำงานด้วยตาตัวเอง
 2. อ่าน `issue_token_pair` และ `post_refresh` ใน [lab/server.py](../lab/server.py)
    แล้วอธิบายว่า `family` ถูกใช้ทำอะไร
 3. เพิ่ม endpoint `POST /api/logout` ใน lab ที่ลบ refresh token ใบปัจจุบัน

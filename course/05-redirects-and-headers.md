@@ -1,6 +1,6 @@
 # บทที่ 5 · Redirect และ Header
 
-## 5.1 Redirect คืออะไร
+## 5.1 Redirect คืออะไร {#s5-1}
 
 server ตอบว่า "ของที่คุณหาไม่ได้อยู่ตรงนี้ ไปที่นี่แทน" ด้วย status 3xx + header `Location`
 
@@ -19,7 +19,7 @@ curl **ไม่ตามให้อัตโนมัติ** (ต่างจ
 curl -L ...
 ```
 
-## 5.2 3xx แต่ละตัวต่างกันตรงไหน
+## 5.2 3xx แต่ละตัวต่างกันตรงไหน {#s5-2}
 
 ความต่างที่สำคัญคือ **หลัง redirect แล้ว method เปลี่ยนไหม**
 
@@ -36,7 +36,7 @@ curl -L ...
 form submit → POST → 302/303 → GET หน้าผล
 มีไว้เพื่อไม่ให้ผู้ใช้กด refresh แล้ว submit ซ้ำ — lab server ก็ใช้ pattern นี้ที่ `/login`
 
-## 5.3 `-X POST` + `-L` = กับดัก
+## 5.3 `-X POST` + `-L` = กับดัก {#s5-3}
 
 ```bash
 # ผิด: บังคับ POST ทำให้ตอนตาม redirect ไป /dashboard ก็ยัง POST อยู่
@@ -58,7 +58,7 @@ curl จะ POST ซ้ำไปที่ปลายทางด้วย
 
 ![ความต่างของ 3xx เรื่องการเปลี่ยน method](img/redirect-methods.svg)
 
-## 5.4 ตรวจสอบเส้นทาง redirect
+## 5.4 ตรวจสอบเส้นทาง redirect {#s5-4}
 
 ```bash
 # ดูว่าจบที่ไหน และผ่านกี่ทอด
@@ -71,7 +71,7 @@ curl -sIL URL | grep -iE '^(HTTP|location)'
 curl -L --max-redirs 5 URL
 ```
 
-## 5.5 Header ที่ต้องรู้จัก
+## 5.5 Header ที่ต้องรู้จัก {#s5-5}
 
 ### ขาส่ง (request headers)
 
@@ -103,7 +103,7 @@ curl -L --max-redirs 5 URL
 | `Access-Control-Allow-*` | กติกา CORS ([บทที่ 12](12-api-design-practices.md)) |
 | `Strict-Transport-Security` | บังคับ HTTPS |
 
-## 5.6 `--compressed` — ที่คนลืมบ่อย
+## 5.6 `--compressed` — ที่คนลืมบ่อย {#s5-6}
 
 server หลายเจ้าบีบอัด response ด้วย gzip/brotli แต่จะส่งมาก็ต่อเมื่อคุณบอกว่ารับได้
 
@@ -113,7 +113,7 @@ curl --compressed URL      # ส่ง Accept-Encoding แล้วคลาย�
 
 ถ้าไม่ใส่แล้วเจอข้อมูลอ่านไม่ออก (ตัวอักษรมั่ว) นั่นแหละคืออาการ
 
-## 5.7 User-Agent — header ที่มีผลกับ anti-bot มากที่สุด
+## 5.7 User-Agent — header ที่มีผลกับ anti-bot มากที่สุด {#s5-7}
 
 ค่าเริ่มต้นของ curl คือ:
 
@@ -138,7 +138,7 @@ curl -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) 
 User-Agent: MyApp/2.3.1 (Android 14; Pixel 7)
 ```
 
-## 5.8 ส่ง header หลายตัว
+## 5.8 ส่ง header หลายตัว {#s5-8}
 
 ```bash
 curl -H 'Accept: application/json' \
@@ -153,7 +153,7 @@ curl -H @headers.txt URL
 curl -H 'Accept:' URL          # ใส่ชื่อแล้วตามด้วย : เปล่า ๆ
 ```
 
-## 5.9 ทดลองกับ lab
+## 5.9 ทดลองกับ lab {#s5-9}
 
 endpoint `/headers` สะท้อนทุก header กลับมา:
 

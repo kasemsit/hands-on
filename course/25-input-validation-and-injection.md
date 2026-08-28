@@ -4,7 +4,7 @@
 > **แยก "ข้อมูล" ออกจาก "คำสั่ง" ให้ขาดจากกัน**
 > ช่องโหว่ injection ทุกชนิดเกิดจากการที่สองอย่างนี้ปนกัน
 
-## 25.1 Input validation — allowlist เสมอ
+## 25.1 Input validation — allowlist เสมอ {#s25-1}
 
 ```python
 # ❌ blocklist — ห้ามสิ่งที่รู้ว่าไม่ดี (มีทางเลี่ยงเสมอ)
@@ -33,7 +33,7 @@ class CreateOrder(BaseModel):
     model_config = {"extra": "forbid"}   # ← field แปลกปลอม = error
 ```
 
-`extra: forbid` สำคัญมาก — ดูหัวข้อ 25.6 (mass assignment)
+`extra: forbid` สำคัญมาก — ดูหัว[ข้อ 25.6](#s25-6) (mass assignment)
 
 **ตรวจอะไรบ้าง:** ชนิด, ช่วงค่า, ความยาว, รูปแบบ, ค่าที่อนุญาต (enum),
 **และขนาดของ request ทั้งก้อน** (กัน payload ขนาด 1 GB มาถล่ม)
@@ -41,7 +41,7 @@ class CreateOrder(BaseModel):
 > ⚠️ **validate ที่ client ไม่ใช่ security** — มันคือ UX ที่ดี (บอกผู้ใช้เร็ว)
 > แต่ผู้โจมตีใช้ curl ข้ามได้หมด **ต้อง validate ที่ server เสมอ**
 
-## 25.2 SQL Injection
+## 25.2 SQL Injection {#s25-2}
 
 ```python
 # ❌ ต่อ string — ช่องโหว่คลาสสิกที่ยังเจอทุกปี
@@ -78,7 +78,7 @@ User.objects.raw(f"SELECT * FROM users WHERE name='{name}'")     # ❌ ยัง
 User.objects.filter(name=name)                                    # ✅
 ```
 
-## 25.3 Injection ชนิดอื่นที่หลักการเดียวกัน
+## 25.3 Injection ชนิดอื่นที่หลักการเดียวกัน {#s25-3}
 
 | ชนิด | เกิดเมื่อ | แก้ด้วย |
 |------|-----------|---------|
@@ -104,7 +104,7 @@ subprocess.run(["curl", "-s", url], check=True)
 
 ใน bash หลักการเดียวกันคือ **ใส่ quote รอบตัวแปรเสมอ** ([บทที่ 20](20-shell-scripting-for-curl.md))
 
-## 25.4 SSRF — ช่องโหว่ที่คนทำ API มักเจอ
+## 25.4 SSRF — ช่องโหว่ที่คนทำ API มักเจอ {#s25-4}
 
 **SSRF (Server-Side Request Forgery)** = หลอกให้ server ของคุณยิง request แทน
 
@@ -189,7 +189,7 @@ def safe_fetch(url: str):
 > **โยงกับ[บทที่ 13](13-webhooks-and-hmac.md)**: webhook URL ที่ลูกค้าตั้งเองก็คือ SSRF surface
 > — ต้องตรวจแบบเดียวกันก่อนยิง
 
-## 25.5 การอัปโหลดไฟล์
+## 25.5 การอัปโหลดไฟล์ {#s25-5}
 
 ```bash
 curl -F 'file=@evil.php' $B/upload      # จะเกิดอะไรขึ้น?
@@ -252,7 +252,7 @@ client_max_body_size 10M;      # nginx — ตัดตั้งแต่ชั�
 รูปถ่ายมี **EXIF ที่มีพิกัด GPS** — ถ้าแสดงต่อสาธารณะ ควรลบทิ้ง
 และควรสแกนไวรัส (ClamAV) ถ้าไฟล์จะถูกดาวน์โหลดโดยผู้ใช้คนอื่น
 
-## 25.6 Mass assignment (BOPLA)
+## 25.6 Mass assignment (BOPLA) {#s25-6}
 
 ```python
 # ❌ รับทุก field ที่ส่งมา
@@ -272,12 +272,12 @@ updates = {k: v for k, v in request.json.items() if k in ALLOWED}
 user.update(**updates)
 ```
 
-หรือใช้ schema ที่ `extra: forbid` (ข้อ 25.1) ซึ่งจะ **error ทันที**
+หรือใช้ schema ที่ `extra: forbid` ([ข้อ 25.1](#s25-1)) ซึ่งจะ **error ทันที**
 เมื่อเจอ field แปลกปลอม — ดีกว่าเงียบ ๆ เพราะคุณจะรู้ว่ามีคนพยายาม
 
-**ขาออกก็ต้อง allowlist เหมือนกัน** (ข้อ 24.8) — อย่าโยน DB object ออกไปตรง ๆ
+**ขาออกก็ต้อง allowlist เหมือนกัน** ([ข้อ 24.8](24-authorization-and-bola.md#s24-8)) — อย่าโยน DB object ออกไปตรง ๆ
 
-## 25.7 เรื่องอื่นที่ควรรู้
+## 25.7 เรื่องอื่นที่ควรรู้ {#s25-7}
 
 | ช่องโหว่ | เกี่ยวกับ API คุณไหม | สรุปวิธีกัน |
 |----------|---------------------|-------------|
@@ -297,7 +297,7 @@ re.match(r"^(a+)+$", "a" * 30 + "!")     # ใช้เวลาเป็นว�
 
 ถ้า regex นั้นใช้ validate input ผู้โจมตีทำให้ CPU เต็มได้ด้วย request ไม่กี่ตัว
 
-## 25.8 Dependency และ secret
+## 25.8 Dependency และ secret {#s25-8}
 
 ช่องโหว่ที่คุณไม่ได้เขียนเองก็ทำให้ระบบพังได้:
 
@@ -312,7 +312,7 @@ npm audit --production          # Node
 - ถ้า secret หลุดขึ้น git แล้ว: **หมุน secret ทันที** — การลบ commit ไม่พอ
   เพราะมันถูก clone/index ไปแล้ว
 
-## 25.9 Checklist
+## 25.9 Checklist {#s25-9}
 
 **Input**
 - [ ] validate ด้วย schema ที่ขอบของระบบ ใช้ allowlist ไม่ใช่ blocklist
@@ -347,7 +347,7 @@ npm audit --production          # Node
 ## แบบฝึกหัด
 
 1. เปิด `LAB_ENABLE_SSRF=1` แล้วใช้ `/api/fetch` ดึง `file:///etc/hostname` ให้สำเร็จ
-2. เขียนฟังก์ชัน `safe_fetch` ตามข้อ 25.4 แล้วแทนที่ `api_fetch` ใน lab
+2. เขียนฟังก์ชัน `safe_fetch` ตาม[ข้อ 25.4](#s25-4) แล้วแทนที่ `api_fetch` ใน lab
    ทดสอบว่ากัน `127.0.0.1`, `[::1]`, `2130706433`, และ `file://` ได้ครบ
 3. ลองยิง `/api/fetch?url=http://2130706433/` — การป้องกันของคุณกันได้ไหม
 4. เพิ่มการตรวจ magic bytes ให้ `/upload` ปฏิเสธไฟล์ที่ไม่ใช่รูปหรือ PDF

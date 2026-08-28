@@ -3,7 +3,7 @@
 > เว็บสมัยใหม่ไม่ค่อยส่ง HTML form กันแล้ว
 > มันคุยกันด้วย JSON — และนี่คือสิ่งที่ mobile app ของคุณจะใช้
 
-## 8.1 ส่ง JSON ด้วย curl
+## 8.1 ส่ง JSON ด้วย curl {#s8-1}
 
 ```bash
 curl -X POST http://127.0.0.1:8080/api/token \
@@ -35,7 +35,7 @@ curl --json @payload.json URL
 echo '{"a":1}' | curl --json @- URL
 ```
 
-## 8.2 สร้าง JSON อย่างปลอดภัยด้วย jq
+## 8.2 สร้าง JSON อย่างปลอดภัยด้วย jq {#s8-2}
 
 **อย่าต่อ string เอง** (เหตุผลอยู่ใน[บทที่ 6](06-encoding-and-charset.md)):
 
@@ -59,7 +59,7 @@ jq -nc --slurpfile d f.json '{data: $d[0]}'      # เอาไฟล์ JSON �
 
 จำง่าย ๆ: `--arg` = ส่งเป็น string เสมอ, `--argjson` = ส่งเป็น JSON ตามที่เขียน
 
-## 8.3 jq ที่ใช้จริง 90%
+## 8.3 jq ที่ใช้จริง 90% {#s8-3}
 
 ```bash
 B=http://127.0.0.1:8080
@@ -121,7 +121,7 @@ else
 fi
 ```
 
-## 8.4 แยก body กับ status code
+## 8.4 แยก body กับ status code {#s8-4}
 
 ปัญหาคลาสสิก: อยากได้ทั้งเนื้อหาและ status code ในคำสั่งเดียว
 
@@ -139,7 +139,7 @@ BODY=$(sed '$d' <<< "$RESP")
 
 วิธีที่ 1 ปลอดภัยกว่าเพราะไม่ยุ่งกับเนื้อหา body เลย
 
-## 8.5 รูปแบบ error ที่ดี
+## 8.5 รูปแบบ error ที่ดี {#s8-5}
 
 เวลา API ของคุณตอบ error ให้ตอบเป็น JSON ที่มีโครงสร้างคงที่ **อย่าตอบ HTML**
 เพราะ mobile app จะ parse ไม่ได้แล้ว crash
@@ -163,7 +163,7 @@ BODY=$(sed '$d' <<< "$RESP")
 **หลักการ: `error` สำหรับเครื่องอ่าน, `message` สำหรับคนอ่าน** อย่าให้ client
 ตัดสินใจจากข้อความภาษาไทย เพราะวันหนึ่งคุณจะแก้ข้อความแล้วแอปพัง
 
-## 8.6 Content-Type ที่ควรรู้
+## 8.6 Content-Type ที่ควรรู้ {#s8-6}
 
 | Content-Type | ใช้เมื่อไร | curl |
 |--------------|-----------|------|
@@ -178,7 +178,7 @@ BODY=$(sed '$d' <<< "$RESP")
 > **`-d` กับ `--data-binary` ต่างกัน**: `-d` ตัด newline ออกจากไฟล์
 > ถ้าส่งไฟล์ binary หรือต้องการรักษาทุก byte ต้องใช้ `--data-binary @file`
 
-## 8.7 อ่าน stream (SSE / NDJSON)
+## 8.7 อ่าน stream (SSE / NDJSON) {#s8-7}
 
 ```bash
 curl -N -H 'Accept: text/event-stream' $B/api/stream
@@ -187,7 +187,7 @@ curl -N -H 'Accept: text/event-stream' $B/api/stream
 `-N` = ปิด buffer ทำให้เห็นข้อมูลทันทีที่มาถึง แทนที่จะรอจนจบ
 ใช้บ่อยเวลา debug API ที่ stream คำตอบทีละชิ้น
 
-## 8.8 ทดลองกับ lab แบบเต็ม flow
+## 8.8 ทดลองกับ lab แบบเต็ม flow {#s8-8}
 
 ```bash
 B=http://127.0.0.1:8080

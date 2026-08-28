@@ -2,7 +2,7 @@
 
 > สี่ฟีเจอร์ที่ mobile app แทบทุกตัวต้องใช้ และไม่มีอยู่ในบทก่อนหน้า
 
-## 29.1 เลือกวิธีสื่อสารแบบ real-time
+## 29.1 เลือกวิธีสื่อสารแบบ real-time {#s29-1}
 
 | วิธี | ทิศทาง | ใช้เมื่อ | ต้นทุน |
 |------|--------|---------|--------|
@@ -28,7 +28,7 @@
 
 ![แผนผังการเลือกวิธีสื่อสารแบบ real-time](img/realtime-choice.svg)
 
-## 29.2 Server-Sent Events
+## 29.2 Server-Sent Events {#s29-2}
 
 ลองใน lab:
 
@@ -76,13 +76,13 @@ self.wfile.flush()          # ← ต้อง flush ทุกครั้ง �
 **สามกับดักของ SSE:**
 
 1. **proxy buffer** — nginx จะเก็บ response ไว้จนเต็มก่อนส่ง
-   ต้องตั้ง `proxy_buffering off` ([บทที่ 26.7](26-proxy-caching-cdn.md))
+   ต้องตั้ง `proxy_buffering off` ([บทที่ 26.7](26-proxy-caching-cdn.md#s26-7))
 2. **timeout** — proxy ตัดการเชื่อมต่อที่เงียบนานเกินไป
    → ส่ง heartbeat (`: ping\n\n` — บรรทัดที่ขึ้นต้นด้วย `:` คือ comment) ทุก 30 วินาที
 3. **จำนวนการเชื่อมต่อ** — แต่ละ client กิน 1 connection ค้างไว้
    ต้องใช้ async server (ASGI/uvicorn) ไม่ใช่ worker แบบ thread ต่อ request
 
-## 29.3 WebSocket
+## 29.3 WebSocket {#s29-3}
 
 ```
 GET /ws HTTP/1.1
@@ -105,7 +105,7 @@ HTTP/1.1 101 Switching Protocols     ← หลังจากนี้ไม่
 | **Heartbeat** | ping/pong เพื่อรู้ว่าอีกฝั่งยังอยู่ |
 | **Backpressure** | ถ้า client รับช้ากว่าที่ส่ง → buffer บวมจนหน่วยความจำเต็ม |
 
-## 29.4 Push notification
+## 29.4 Push notification {#s29-4}
 
 **นี่คือทางเดียวที่จะส่งข้อความถึงผู้ใช้ตอนแอปปิดอยู่**
 
@@ -150,7 +150,7 @@ Server ของคุณ ──▶ FCM (Android) / APNs (iOS) ──▶ เค�
 - **จัดกลุ่ม** อย่าส่ง 50 notification รวดเดียว
 - **ระวัง timezone** — อย่าส่งตอนตี 3 ของผู้ใช้ ([บทที่ 12](12-api-design-practices.md): เก็บ UTC แต่รู้ timezone ผู้ใช้)
 
-## 29.5 อัปโหลดไฟล์ระดับใช้งานจริง
+## 29.5 อัปโหลดไฟล์ระดับใช้งานจริง {#s29-5}
 
 `-F 'file=@x.jpg'` ใน[บทที่ 3](03-html-forms.md) ใช้ได้กับไฟล์เล็ก แต่ของจริงมีปัญหา:
 ไฟล์ใหญ่กินหน่วยความจำ server, เน็ตมือถือหลุดกลางคัน, และ server ต้องรับ
@@ -173,7 +173,7 @@ traffic ทั้งหมดโดยไม่จำเป็น
 **ข้อควรระวัง:**
 - presigned URL ต้อง **หมดอายุเร็ว** (5-15 นาที)
 - **จำกัดขนาดใน policy ของ presigned URL** ไม่ใช่แค่เชื่อค่า `size` ที่แอปบอก
-- ขั้นตอนที่ 6 ต้องตรวจไฟล์จริงเสมอ (magic bytes — [บทที่ 25.5](25-input-validation-and-injection.md))
+- ขั้นตอนที่ 6 ต้องตรวจไฟล์จริงเสมอ (magic bytes — [บทที่ 25.5](25-input-validation-and-injection.md#s25-5))
   **อย่าเชื่อว่าแอปอัปโหลดสิ่งที่บอกไว้**
 - ตั้ง lifecycle rule ลบไฟล์ที่อัปโหลดค้าง (ขั้นที่ 4 สำเร็จแต่ไม่มีขั้นที่ 5)
 
@@ -185,7 +185,7 @@ traffic ทั้งหมดโดยไม่จำเป็น
 - **tus.io** — โปรโตคอลมาตรฐานสำหรับ resumable upload
 - ทำเองด้วย `Content-Range` ก็ได้ แต่ใช้ของที่มีอยู่แล้วดีกว่า
 
-## 29.6 Offline-first และการ sync
+## 29.6 Offline-first และการ sync {#s29-6}
 
 เรื่องใหญ่ที่สุดของ mobile ที่ backend ต้องออกแบบรองรับ
 
@@ -248,7 +248,7 @@ GET /v1/sync?since=2026-08-27T10:00:00Z&cursor=...
 | **ให้ผู้ใช้เลือก** | แสดงทั้งสองเวอร์ชัน | ข้อมูลสำคัญ |
 | **CRDT** | โครงสร้างที่รวมกันเองได้ | collaborative editing |
 
-**ใช้ version/ETag ตรวจ conflict** (โยงกับ[บทที่ 26.5](26-proxy-caching-cdn.md)):
+**ใช้ version/ETag ตรวจ conflict** (โยงกับ[บทที่ 26.5](26-proxy-caching-cdn.md#s26-5)):
 
 ```bash
 PATCH /v1/orders/1001
@@ -262,7 +262,7 @@ If-Match: "v3"
 ถ้ายังไม่มีความต้องการจริง — แต่เก็บ `updated_at` และ `version` ไว้ตั้งแต่วันแรก
 เพราะเพิ่มทีหลังยาก
 
-## 29.7 Checklist
+## 29.7 Checklist {#s29-7}
 
 **Real-time**
 - [ ] เลือกวิธีตามความต้องการจริง (SSE พอไหมก่อนจะไป WebSocket)
@@ -281,7 +281,7 @@ If-Match: "v3"
 **Upload**
 - [ ] ไฟล์ใหญ่ใช้ presigned URL ไม่ผ่าน API server
 - [ ] presigned URL หมดอายุเร็ว + จำกัดขนาดใน policy
-- [ ] ตรวจไฟล์จริงหลังอัปโหลด ([บทที่ 25.5](25-input-validation-and-injection.md))
+- [ ] ตรวจไฟล์จริงหลังอัปโหลด ([บทที่ 25.5](25-input-validation-and-injection.md#s25-5))
 - [ ] resumable สำหรับไฟล์ใหญ่
 - [ ] ลบไฟล์ที่อัปโหลดค้าง
 
@@ -318,8 +318,8 @@ If-Match: "v3"
 
 **สิ่งที่ควรทำต่อทันที** — ตามลำดับความคุ้มค่า:
 
-1. เอา checklist [บทที่ 11.11](11-mobile-api-auth-design.md) (auth)
-   และ [บทที่ 24.11](24-authorization-and-bola.md) (BOLA) ไปตรวจ API จริงของคุณ
+1. เอา checklist [บทที่ 11.11](11-mobile-api-auth-design.md#s11-11) (auth)
+   และ [บทที่ 24.11](24-authorization-and-bola.md#s24-11) (BOLA) ไปตรวจ API จริงของคุณ
    — **สองอันนี้คือช่องโหว่ที่พบบ่อยที่สุดและเสียหายมากที่สุด**
 2. เขียนเทสต์ BOLA ด้วย 2 บัญชี ใส่ CI
 3. เพิ่ม `request_id` + structured log ([บทที่ 28](28-observability-and-deployment.md))

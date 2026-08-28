@@ -4,7 +4,7 @@
 >
 > และเป็นคำตอบว่าทำไม[บทที่ 29](29-realtime-push-and-offline.md) ถึงบอกว่า SSE ต้องใช้ ASGI
 
-## 33.1 ปัญหาที่ concurrency แก้
+## 33.1 ปัญหาที่ concurrency แก้ {#s33-1}
 
 ```
 ยิง 100 request แบบทีละอัน   ยิงพร้อมกัน 20 เส้น
@@ -24,7 +24,7 @@
 > ⚠️ **ใช้ async กับงาน CPU-bound ไม่ได้ช่วยอะไรเลย** — ยังช้าเท่าเดิม
 > แถมบล็อก event loop ทำให้งานอื่นค้างด้วย
 
-## 33.2 สามวิธีใน Python
+## 33.2 สามวิธีใน Python {#s33-2}
 
 ```mermaid
 flowchart TD
@@ -44,7 +44,7 @@ flowchart TD
 มีแค่ thread เดียวที่รัน Python bytecode ได้ในเวลาหนึ่ง **แต่ตอนรอ I/O มันปล่อย GIL**
 thread จึงยังช่วยงาน I/O ได้เต็มที่
 
-## 33.3 วิธีที่ง่ายที่สุด — ThreadPoolExecutor
+## 33.3 วิธีที่ง่ายที่สุด — ThreadPoolExecutor {#s33-3}
 
 ถ้ามีโค้ดที่ใช้ `requests` อยู่แล้ว วิธีนี้แทบไม่ต้องแก้อะไร
 
@@ -63,7 +63,7 @@ with ThreadPoolExecutor(max_workers=10) as pool:
         print(book_id, status)
 ```
 
-**ใช้ `Session` เดียวร่วมกันเพื่อให้ reuse connection** ([บทที่ 26.8](26-proxy-caching-cdn.md)):
+**ใช้ `Session` เดียวร่วมกันเพื่อให้ reuse connection** ([บทที่ 26.8](26-proxy-caching-cdn.md#s26-8)):
 
 ```python
 import threading
@@ -80,7 +80,7 @@ def fetch(path: str):
     return session().get(f"{BASE}{path}", timeout=5)
 ```
 
-## 33.4 asyncio — เมื่อมีงานเยอะจริง
+## 33.4 asyncio — เมื่อมีงานเยอะจริง {#s33-4}
 
 ```python
 import asyncio
@@ -127,9 +127,9 @@ async def good():
     await asyncio.to_thread(blocking_function, arg)
 ```
 
-## 33.5 จำกัดความเร็ว — สำคัญกว่าความเร็ว
+## 33.5 จำกัดความเร็ว — สำคัญกว่าความเร็ว {#s33-5}
 
-**ยิงเร็วที่สุดที่ทำได้ = พฤติกรรมของบอทที่แย่** ([บทที่ 22.4](22-ethics-and-limits.md)) และจะโดน 429 อยู่ดี
+**ยิงเร็วที่สุดที่ทำได้ = พฤติกรรมของบอทที่แย่** ([บทที่ 22.4](22-ethics-and-limits.md#s22-4)) และจะโดน 429 อยู่ดี
 
 ```python
 class Limiter:
@@ -164,9 +164,9 @@ async def polite_get(client, path):
 ถ้าไม่มีตัวนี้ `gather` กับ 10,000 task จะเปิด connection พร้อมกัน 10,000 เส้น
 แล้วทั้งเครื่องคุณและ server ปลายทางจะล่มพร้อมกัน
 
-## 33.6 Retry ที่ถูกต้อง
+## 33.6 Retry ที่ถูกต้อง {#s33-6}
 
-โยงกับ[บทที่ 12.5](12-api-design-practices.md) และ 20.6 — คราวนี้ในเวอร์ชัน async
+โยงกับ[บทที่ 12.5](12-api-design-practices.md#s12-5) และ 20.6 — คราวนี้ในเวอร์ชัน async
 
 ```python
 import random
@@ -197,9 +197,9 @@ async def get_with_retry(client, path, max_attempts=5):
 **อย่า retry 4xx** (ยกเว้น 429) — ส่งผิดกี่ครั้งก็ผิดเหมือนเดิม
 และ **อย่า retry POST ที่ไม่ idempotent** ถ้าไม่มี `Idempotency-Key`
 
-## 33.7 ฝั่ง server — ทำไม SSE ต้องใช้ ASGI
+## 33.7 ฝั่ง server — ทำไม SSE ต้องใช้ ASGI {#s33-7}
 
-นี่คือคำตอบของ[บทที่ 29.2](29-realtime-push-and-offline.md) ข้อ 3
+นี่คือคำตอบของ[บทที่ 29.2](29-realtime-push-and-offline.md#s29-2) ข้อ 3
 
 | แบบ | หนึ่ง request กิน | รับพร้อมกันได้ |
 |-----|-------------------|----------------|
@@ -224,9 +224,9 @@ async def get_order(order_id: int, user = Depends(current_user)):
 > จะค้างทุกครั้งที่ query — ต้องใช้ `asyncpg`/`psycopg3 async` หรือ
 > ห่อด้วย `asyncio.to_thread`
 
-## 33.8 Connection pool — ตั้งให้พอดี
+## 33.8 Connection pool — ตั้งให้พอดี {#s33-8}
 
-โยงกับ[บทที่ 27.4](27-database-and-performance.md) โดยตรง
+โยงกับ[บทที่ 27.4](27-database-and-performance.md#s27-4) โดยตรง
 
 ```
 pool ของ client × จำนวน instance  ≤  max_connections ของ DB
@@ -246,7 +246,7 @@ PostgreSQL max_connections = 100
 
 ต้องตั้ง **timeout ของการรอ connection** ด้วยเสมอ ไม่งั้น request จะกองรอไม่รู้จบ
 
-## 33.9 Backpressure — เมื่อผลิตเร็วกว่าที่บริโภคได้
+## 33.9 Backpressure — เมื่อผลิตเร็วกว่าที่บริโภคได้ {#s33-9}
 
 ```python
 # ❌ อ่านทุกอย่างเข้าหน่วยความจำก่อน
@@ -261,10 +261,10 @@ async def in_batches(urls, size=100):
 
 หรือใช้ `asyncio.Queue` ที่มี `maxsize` — พอคิวเต็ม ฝั่งผลิตจะถูกบล็อกเอง
 
-**นี่คือปัญหาเดียวกับ WebSocket backpressure ใน[บทที่ 29.3](29-realtime-push-and-offline.md)** — ถ้า client
+**นี่คือปัญหาเดียวกับ WebSocket backpressure ใน[บทที่ 29.3](29-realtime-push-and-offline.md#s29-3)** — ถ้า client
 รับช้ากว่าที่คุณส่ง buffer จะบวมจนหน่วยความจำเต็ม
 
-## 33.10 Debug โค้ด async
+## 33.10 Debug โค้ด async {#s33-10}
 
 ```python
 asyncio.run(main(), debug=True)     # เตือนเมื่อมี coroutine ที่บล็อกนานเกินไป
@@ -277,11 +277,11 @@ asyncio.run(main(), debug=True)     # เตือนเมื่อมี corou
 | task พังเงียบ | ไม่มี error แต่ผลไม่ครบ | `return_exceptions=True` แล้วตรวจผล |
 | ค้างไม่จบ | ไม่มีอะไรเกิดขึ้น | ตั้ง timeout ทุกจุด `asyncio.wait_for` |
 
-## 33.11 ⚠️ อย่าลืมมารยาท
+## 33.11 ⚠️ อย่าลืมมารยาท {#s33-11}
 
 ทุกอย่างในบทนี้ทำให้คุณยิงได้เร็วขึ้นมาก **ซึ่งแปลว่าทำให้ระบบคนอื่นล่มได้ง่ายขึ้นมากด้วย**
 
-- ยิงเว็บของคนอื่น → เริ่มที่ 1-2 เส้น + หน่วง 1 วินาที ([บทที่ 22.4](22-ethics-and-limits.md))
+- ยิงเว็บของคนอื่น → เริ่มที่ 1-2 เส้น + หน่วง 1 วินาที ([บทที่ 22.4](22-ethics-and-limits.md#s22-4))
 - เคารพ `429` และ `Retry-After` เสมอ
 - หยุดทันทีเมื่อเจอ 5xx ติดกัน — อาจเป็นเพราะคุณทำให้เขาล่ม
 - ทดสอบความเร็วสูงกับ **lab ของตัวเองเท่านั้น**
@@ -291,7 +291,7 @@ asyncio.run(main(), debug=True)     # เตือนเมื่อมี corou
 1. เขียนสคริปต์ยิง `/api/books` 100 ครั้งแบบทีละอัน จับเวลา จากนั้นเปลี่ยนเป็น
    `ThreadPoolExecutor(max_workers=10)` เทียบเวลา
 2. ทำเวอร์ชัน `asyncio` + `httpx` แล้วเทียบทั้งสามวิธี
-3. ใช้ `Limiter` ในข้อ 33.5 จำกัดที่ 5 เส้น ห่างกัน 200ms แล้วยืนยันด้วย
+3. ใช้ `Limiter` ใน[ข้อ 33.5](#s33-5) จำกัดที่ 5 เส้น ห่างกัน 200ms แล้วยืนยันด้วย
    `ss -tan | grep 8080 | wc -l` ว่าไม่เกิน 5 จริง
 4. **พิสูจน์ว่า async ไม่ช่วยงาน CPU** — เอา `solve_pow` จาก
    [lab/solve_pow.py](../lab/solve_pow.py) มารันด้วย `asyncio.gather` 4 ตัว

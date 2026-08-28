@@ -3,7 +3,7 @@
 > จำได้ไหมว่า[บทที่ 1](01-http-basics.md) บอกว่า HTTP ไม่มีความจำ
 > บทนี้คือคำตอบว่าเว็บ "จำ" คุณได้อย่างไร
 
-## 4.1 Cookie คืออะไร
+## 4.1 Cookie คืออะไร {#s4-1}
 
 Cookie คือข้อความสั้น ๆ ที่ server ฝากไว้กับ client แล้วบอกว่า "ครั้งหน้าส่งกลับมาด้วยนะ"
 
@@ -30,7 +30,7 @@ sequenceDiagram
 
 ![ลำดับการทำงานของ cookie และ session](img/cookie-session.svg)
 
-## 4.2 Attribute ของ cookie
+## 4.2 Attribute ของ cookie {#s4-2}
 
 ```
 Set-Cookie: sid=abc123; Path=/; Domain=example.com; Max-Age=3600;
@@ -56,7 +56,7 @@ Set-Cookie: sid=abc123; Path=/; Domain=example.com; Max-Age=3600;
 > ([บทที่ 9](09-authentication.md)-11) เพราะไม่มี cookie jar อัตโนมัติแบบเบราว์เซอร์ และ CSRF ไม่ใช่ปัญหา
 > ของ native app แต่ถ้าใช้ WebView ต้องคิดเรื่อง cookie ด้วย
 
-## 4.3 curl กับ cookie: `-c` และ `-b`
+## 4.3 curl กับ cookie: `-c` และ `-b` {#s4-3}
 
 จำง่าย ๆ:
 
@@ -78,7 +78,7 @@ curl -b cookies.txt -c cookies.txt URL   # ทั้งส่งและอั�
 curl -b 'sid=abc123; theme=dark' URL
 ```
 
-## 4.4 หน้าตาไฟล์ cookie jar
+## 4.4 หน้าตาไฟล์ cookie jar {#s4-4}
 
 curl ใช้ **Netscape cookie file format** ซึ่งเป็น TSV (คั่นด้วย tab):
 
@@ -106,7 +106,7 @@ curl ใช้ **Netscape cookie file format** ซึ่งเป็น TSV (ค
 > ⚠️ คอลัมน์คั่นด้วย **tab จริง ๆ** ไม่ใช่ space ถ้าเขียนเองแล้ว curl ไม่อ่าน
 > ให้เช็คตรงนี้ก่อนเลย (`cat -A cookies.txt` จะเห็น `^I` แทน tab)
 
-## 4.5 Session คืออะไร (ต่างจาก cookie ยังไง)
+## 4.5 Session คืออะไร (ต่างจาก cookie ยังไง) {#s4-5}
 
 คนสับสนสองคำนี้บ่อยมาก
 
@@ -127,7 +127,7 @@ cookie ที่ส่งให้ client มีแค่ `sid` ส่วนข�
 **บทเรียนสำคัญ: อย่าเก็บข้อมูลที่เชื่อถือได้ใน cookie**
 ถ้าคุณส่ง `Set-Cookie: role=admin` client แก้เป็นอะไรก็ได้
 
-## 4.6 CSRF — ทำไมต้องมี token
+## 4.6 CSRF — ทำไมต้องมี token {#s4-6}
 
 **CSRF (Cross-Site Request Forgery)** คือการที่เว็บร้าย หลอกให้เบราว์เซอร์คุณ
 ยิง request ไปเว็บดี **พร้อม cookie ของคุณ** โดยที่คุณไม่รู้ตัว
@@ -156,7 +156,7 @@ POST /login  →  Cookie: sid=abc  +  csrf_token=???  ✗ ไม่ตรง 403
 
 ![การโจมตีแบบ CSRF และการป้องกันด้วย token](img/csrf.svg)
 
-## 4.7 ทำ flow เต็มด้วยมือ
+## 4.7 ทำ flow เต็มด้วยมือ {#s4-7}
 
 ```bash
 JAR=$(mktemp)
@@ -193,7 +193,7 @@ curl -s -b "$JAR" -X POST http://127.0.0.1:8080/login \
 # → 403 CSRF token ไม่ถูกต้อง
 ```
 
-## 4.8 กับดักที่เจอบ่อย
+## 4.8 กับดักที่เจอบ่อย {#s4-8}
 
 | อาการ | สาเหตุ |
 |-------|--------|
@@ -210,7 +210,7 @@ curl -sv http://127.0.0.1:8080/login 2>&1 | grep -i 'set-cookie'
 
 ## แบบฝึกหัด
 
-1. รัน flow ในข้อ 4.7 ให้ผ่าน แล้วเปิดไฟล์ cookie jar ดูว่ามีกี่คอลัมน์
+1. รัน flow ใน[ข้อ 4.7](#s4-7) ให้ผ่าน แล้วเปิดไฟล์ cookie jar ดูว่ามีกี่คอลัมน์
    ใช้ `cat -A "$JAR"` เพื่อยืนยันว่าคั่นด้วย tab
 2. login สำเร็จแล้ว ลองเอา `sid` จาก jar ไปใส่ `-b 'sid=...'` ตรง ๆ แทนไฟล์ ได้ผลเหมือนกันไหม
 3. แก้ค่า `sid` ในไฟล์ jar ให้ผิดไป 1 ตัวอักษร แล้วยิง `/dashboard` — ได้ status อะไร

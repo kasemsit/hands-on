@@ -5,7 +5,7 @@
 >
 > ถ้าตอบไม่ได้ แปลว่าระบบคุณยังไม่มี observability
 
-## 28.1 สามเสาหลัก
+## 28.1 สามเสาหลัก {#s28-1}
 
 | เสา | ตอบคำถาม | เครื่องมือ |
 |-----|----------|-----------|
@@ -15,7 +15,7 @@
 
 เริ่มจาก **logs** ก่อน (คุ้มที่สุดต่อแรงที่ลง) แล้วค่อยเพิ่ม metrics และ traces
 
-## 28.2 Structured logging
+## 28.2 Structured logging {#s28-2}
 
 ```python
 # ❌ log ที่ค้นหาไม่ได้
@@ -72,7 +72,7 @@ def redact(d: dict) -> dict:
 **ถ้า token หลุดลง log ให้ถือว่ามันรั่วแล้ว** — ต้องเพิกถอนและหมุนใหม่
 เพราะ log ถูกส่งต่อไปยังระบบอื่น ถูก backup และมีคนเข้าถึงได้มากกว่าที่คิด
 
-## 28.3 Request ID — ของขวัญที่ให้ตัวเองในอนาคต
+## 28.3 Request ID — ของขวัญที่ให้ตัวเองในอนาคต {#s28-3}
 
 ```mermaid
 flowchart TD
@@ -104,9 +104,9 @@ def middleware(request):
 ```
 
 > ⚠️ **อย่าเชื่อ request_id ที่ client ส่งมาแบบไม่ตรวจ** — จำกัดความยาวและ
-> อนุญาตเฉพาะ `[A-Za-z0-9_-]` ไม่งั้นเป็นช่องทาง log injection ([บทที่ 25.3](25-input-validation-and-injection.md))
+> อนุญาตเฉพาะ `[A-Za-z0-9_-]` ไม่งั้นเป็นช่องทาง log injection ([บทที่ 25.3](25-input-validation-and-injection.md#s25-3))
 
-## 28.4 Metrics — RED และ USE
+## 28.4 Metrics — RED และ USE {#s28-4}
 
 **RED** สำหรับ API (ดูจากมุมผู้ใช้):
 
@@ -134,7 +134,7 @@ LATENCY = Histogram("http_request_duration_seconds", "", ["method", "path"])
 จำนวนคน login สำเร็จ/ล้มเหลว, ออเดอร์ต่อชั่วโมง, การ refresh token,
 **จำนวนครั้งที่ตรวจพบ refresh token reuse** ([บทที่ 11](11-mobile-api-auth-design.md))
 
-## 28.5 Distributed tracing
+## 28.5 Distributed tracing {#s28-5}
 
 ```
 POST /v1/orders                                    [████████████ 850ms]
@@ -163,7 +163,7 @@ library ยอดนิยมให้ฟรี
 ในระบบเล็ก ๆ trace อาจยังไม่คุ้ม — เริ่มจากบันทึก `duration_ms` แยกส่วน
 ลงใน log ก่อนก็ได้ผลใกล้เคียง
 
-## 28.6 Alert ที่มีประโยชน์
+## 28.6 Alert ที่มีประโยชน์ {#s28-6}
 
 **alert ที่ดี = มีคนต้องลงมือทำอะไรบางอย่าง** ถ้าไม่ต้องทำอะไร นั่นคือ dashboard ไม่ใช่ alert
 
@@ -186,7 +186,7 @@ library ยอดนิยมให้ฟรี
 **Alert fatigue คือศัตรู** — ถ้า alert ดังบ่อยจนคนเริ่มเมิน มันแย่กว่าไม่มี alert
 ทบทวนทุกเดือนว่าอันไหนดังแล้วไม่มีใครทำอะไร แล้วลบทิ้ง
 
-## 28.7 Health check
+## 28.7 Health check {#s28-7}
 
 **ต้องมี 3 แบบ แยกกัน** (ตามแนวคิดของ Kubernetes):
 
@@ -216,7 +216,7 @@ def startup(): ...
 `/health` ไม่ควรต้อง auth แต่**ไม่ควรเปิดเผยรายละเอียดภายใน**
 (เวอร์ชัน library, hostname, connection string)
 
-## 28.8 Graceful shutdown
+## 28.8 Graceful shutdown {#s28-8}
 
 ตอน deploy เวอร์ชันใหม่ **ห้ามตัด request ที่กำลังทำงานอยู่ทิ้ง**
 
@@ -245,7 +245,7 @@ signal.signal(signal.SIGTERM, handle_sigterm)
 
 **ทดสอบด้วย:** ยิง load ค้างไว้แล้ว deploy — ต้องไม่มี request ไหนได้ 502
 
-## 28.9 Deploy ให้ปลอดภัย
+## 28.9 Deploy ให้ปลอดภัย {#s28-9}
 
 | กลยุทธ์ | ทำยังไง | เหมาะกับ |
 |---------|---------|---------|
@@ -268,9 +268,9 @@ deploy โค้ดขึ้นไปก่อนโดยยังปิดอ�
 แต่ flag ฝั่ง server เปลี่ยนได้ทันที
 
 **Rollback ต้องซ้อมไว้** — รู้ว่ากดอะไร ใช้เวลากี่นาที และ **migration ที่ทำไปแล้ว
-ต้องเข้ากันได้กับโค้ดเวอร์ชันเก่า** ([บทที่ 27.6](27-database-and-performance.md) — นี่คือเหตุผลที่ต้อง expand/contract)
+ต้องเข้ากันได้กับโค้ดเวอร์ชันเก่า** ([บทที่ 27.6](27-database-and-performance.md#s27-6) — นี่คือเหตุผลที่ต้อง expand/contract)
 
-## 28.10 Config และ secret
+## 28.10 Config และ secret {#s28-10}
 
 **ตาม 12-factor: config มาจาก environment ไม่ใช่ไฟล์ในโค้ด**
 
@@ -291,7 +291,7 @@ DEBUG = os.environ.get("DEBUG") == "1"
 **ต้องหมุน secret ได้โดยไม่ downtime** — รองรับสองค่าพร้อมกันช่วงเปลี่ยนผ่าน
 (หลักการเดียวกับ backup pin ใน[บทที่ 7](07-tls-https.md) และ webhook secret ใน[บทที่ 13](13-webhooks-and-hmac.md))
 
-## 28.11 Checklist
+## 28.11 Checklist {#s28-11}
 
 **Logging**
 - [ ] JSON structured log

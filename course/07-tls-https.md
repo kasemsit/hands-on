@@ -3,7 +3,7 @@
 > ถ้าคุณกำลังทำ API ให้ mobile app บทนี้ไม่ใช่ทางเลือก
 > เพราะ token ทุกใบที่คุณออกจะเดินทางผ่านชั้นนี้
 
-## 7.1 HTTPS ให้อะไรบ้าง (3 อย่าง)
+## 7.1 HTTPS ให้อะไรบ้าง (3 อย่าง) {#s7-1}
 
 | ให้อะไร | แปลว่า | ถ้าไม่มี |
 |---------|--------|----------|
@@ -13,7 +13,7 @@
 
 ข้อ 3 คือส่วนที่คนมองข้ามที่สุด และเป็นเหตุผลที่ certificate มีอยู่
 
-## 7.2 Handshake โดยย่อ
+## 7.2 Handshake โดยย่อ {#s7-2}
 
 ```mermaid
 sequenceDiagram
@@ -35,7 +35,7 @@ TLS 1.3 (ปัจจุบัน) เร็วกว่า 1.2 เพราะ 
 
 ![TLS handshake และการตรวจ certificate](img/tls-handshake.svg)
 
-## 7.3 ดู certificate ด้วย curl
+## 7.3 ดู certificate ด้วย curl {#s7-3}
 
 ```bash
 curl -vI https://example.com 2>&1 | grep -E 'SSL|subject|issuer|expire|ALPN'
@@ -57,7 +57,7 @@ openssl s_client -connect example.com:443 -servername example.com < /dev/null 2>
 curl -sIv https://example.com 2>&1 | grep -i 'expire date'
 ```
 
-## 7.4 `-k` / `--insecure` — เข้าใจให้ถูกว่ามันปิดอะไร
+## 7.4 `-k` / `--insecure` — เข้าใจให้ถูกว่ามันปิดอะไร {#s7-4}
 
 ```bash
 curl -k https://self-signed.example.com     # ข้ามการตรวจ cert
@@ -79,7 +79,7 @@ curl --cacert /path/to/my-ca.pem https://internal.example.com
 curl --capath /etc/ssl/certs https://example.com
 ```
 
-## 7.5 error ที่เจอบ่อยและวิธีอ่าน
+## 7.5 error ที่เจอบ่อยและวิธีอ่าน {#s7-5}
 
 | ข้อความ | สาเหตุ | แก้ยังไง |
 |---------|--------|----------|
@@ -99,7 +99,7 @@ openssl s_client -connect example.com:443 -servername example.com -showcerts < /
 
 ถ้าเห็น cert แค่ใบเดียว = ขาด chain
 
-## 7.6 Certificate pinning (สำคัญกับ mobile)
+## 7.6 Certificate pinning (สำคัญกับ mobile) {#s7-6}
 
 ปกติ app เชื่อ CA ทุกใบที่ OS เชื่อ (มีเป็นร้อย) ถ้า CA ใดใบหนึ่งถูกเจาะ
 หรือมีคนติดตั้ง CA ปลอมลงเครื่อง → ดัก traffic ของ app คุณได้
@@ -127,7 +127,7 @@ openssl s_client -connect example.com:443 -servername example.com < /dev/null 2>
 - ⚠️ pinning จะทำให้คุณ**ดัก traffic ตัวเองด้วย mitmproxy ไม่ได้** ([บทที่ 19](19-mitmproxy-mobile-traffic.md))
   ให้ทำ build variant สำหรับ debug ที่ปิด pinning
 
-## 7.7 HSTS
+## 7.7 HSTS {#s7-7}
 
 ```
 Strict-Transport-Security: max-age=31536000; includeSubDomains
@@ -138,7 +138,7 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains
 
 **ตั้งบน API server ของคุณด้วย** และอย่าเปิด endpoint ที่รับ token บน HTTP เด็ดขาด
 
-## 7.8 checklist สำหรับ API server ของคุณ
+## 7.8 checklist สำหรับ API server ของคุณ {#s7-8}
 
 - [ ] TLS 1.2 ขั้นต่ำ (แนะนำ 1.3)
 - [ ] ส่ง full certificate chain (leaf + intermediate)
@@ -156,7 +156,7 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains
 3. ลองเว็บทดสอบเหล่านี้แล้วเทียบ error กัน:
    `https://self-signed.badssl.com`, `https://wrong.host.badssl.com`,
    `https://untrusted-root.badssl.com`
-4. หา public key pin ของเว็บหนึ่งด้วยคำสั่งในข้อ 7.6 แล้วลองใช้ `--pinnedpubkey`
+4. หา public key pin ของเว็บหนึ่งด้วยคำสั่งใน[ข้อ 7.6](#s7-6) แล้วลองใช้ `--pinnedpubkey`
    จากนั้นลองใส่ค่ามั่ว ๆ ดูว่า error ต่างกันอย่างไร
 5. ตอบตัวเอง: ถ้าแอปคุณใช้ `-k` แล้วมีคนตั้ง Wi-Fi ปลอมในร้านกาแฟ จะเกิดอะไรขึ้น
 

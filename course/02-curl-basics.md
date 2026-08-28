@@ -2,7 +2,7 @@
 
 > curl มี option มากกว่า 250 ตัว แต่คุณใช้จริงประมาณ 20 ตัว บทนี้คือ 20 ตัวนั้น
 
-## 2.1 รูปแบบคำสั่ง
+## 2.1 รูปแบบคำสั่ง {#s2-1}
 
 ```bash
 curl [options] <URL>
@@ -15,7 +15,7 @@ curl 'http://127.0.0.1:8080/api/books?tag=curl'     # ถูก
 curl http://127.0.0.1:8080/api/books?tag=curl       # & จะทำให้ shell พัง
 ```
 
-## 2.2 Option ที่ใช้ 90% ของเวลา
+## 2.2 Option ที่ใช้ 90% ของเวลา {#s2-2}
 
 | Option | ยาว | ทำอะไร |
 |--------|-----|--------|
@@ -55,7 +55,7 @@ curl -fsSL 'URL'
 > **ทำไมต้อง `-f`**: ถ้าไม่ใส่ เวลา server ตอบ 500 พร้อม HTML หน้า error
 > curl จะถือว่า "สำเร็จ" (exit 0) แล้ว script ของคุณจะทำงานต่อกับข้อมูลขยะ
 
-## 2.3 อ่าน `-v` ให้เป็น
+## 2.3 อ่าน `-v` ให้เป็น {#s2-3}
 
 ```bash
 curl -v 'http://127.0.0.1:8080/api/books?tag=curl'
@@ -84,7 +84,7 @@ curl -v 'http://127.0.0.1:8080/api/books?tag=curl'
 curl --trace-ascii trace.txt 'http://127.0.0.1:8080/api/books'
 ```
 
-## 2.4 `-w` — ดึงตัวเลขออกมาใช้ต่อ
+## 2.4 `-w` — ดึงตัวเลขออกมาใช้ต่อ {#s2-4}
 
 `--write-out` ให้คุณพิมพ์ค่าที่ curl รู้ออกมาได้ เหมาะกับ script และการวัดความเร็ว
 
@@ -115,7 +115,7 @@ curl -s -o /dev/null -w 'dns=%{time_namelookup} tcp=%{time_connect} tls=%{time_a
 
 ถ้า `tls` โตกว่าชาวบ้าน = ปัญหาที่ handshake, ถ้า `total` ห่างจาก `tls` มาก = server คิดนาน
 
-## 2.5 Timeout และ retry
+## 2.5 Timeout และ retry {#s2-5}
 
 ```bash
 curl --max-time 10 --connect-timeout 3 --retry 3 --retry-delay 2 'URL'
@@ -136,7 +136,7 @@ curl --max-time 5 http://127.0.0.1:8080/slow    # จะผ่าน
 > ⚠️ **อย่า retry method ที่ไม่ idempotent แบบสุ่มสี่สุ่มห้า** — `--retry` กับ POST
 > "สร้างคำสั่งซื้อ" อาจได้ออเดอร์ซ้ำ เรื่องนี้อธิบายเต็มใน[บทที่ 12](12-api-design-practices.md) (idempotency key)
 
-## 2.6 exit code
+## 2.6 exit code {#s2-6}
 
 ```bash
 curl -fsS http://127.0.0.1:8080/dashboard; echo "exit=$?"
@@ -161,7 +161,7 @@ if ! curl -fsS "$URL" -o out.json; then
 fi
 ```
 
-## 2.7 ไฟล์ `.curlrc` และการซ่อนความลับ
+## 2.7 ไฟล์ `.curlrc` และการซ่อนความลับ {#s2-7}
 
 **อย่าใส่ token ใน command line** เพราะคนอื่นบนเครื่องเดียวกันเห็นได้ผ่าน `ps aux`
 และมันจะติดไปใน shell history ด้วย
@@ -183,7 +183,7 @@ echo '{"a":1}' | curl -d @- 'URL'
 
 `-d @file` = อ่าน body จากไฟล์, `-d @-` = อ่านจาก stdin
 
-## 2.8 แปลง curl ↔ ภาษาอื่น
+## 2.8 แปลง curl ↔ ภาษาอื่น {#s2-8}
 
 - **จาก DevTools มาเป็น curl**: คลิกขวาที่ request → Copy → Copy as cURL ([บทที่ 14](14-devtools-to-curl.md))
 - **จาก curl ไปเป็นโค้ด**: <https://curlconverter.com> แปลงเป็น Python/JS/Go ได้

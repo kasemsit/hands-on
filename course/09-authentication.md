@@ -4,7 +4,7 @@
 > **Authorization** = คุณทำอะไรได้บ้าง (สิทธิ์)
 > สองคำนี้ต่างกัน แต่ header ที่ใช้ดันชื่อ `Authorization` — เป็นความสับสนที่ติดมาตั้งแต่ปี 1996
 
-## 9.1 ภาพรวม: 4 วิธีที่เจอบ่อย
+## 9.1 ภาพรวม: 4 วิธีที่เจอบ่อย {#s9-1}
 
 | วิธี | ส่งยังไง | เหมาะกับ | ปัญหา |
 |------|----------|----------|-------|
@@ -15,7 +15,7 @@
 
 **คำตอบสั้น ๆ สำหรับ mobile API: ใช้ Bearer token** — รายละเอียดการออกแบบอยู่ใน[บทที่ 11](11-mobile-api-auth-design.md)
 
-## 9.2 HTTP Basic Authentication
+## 9.2 HTTP Basic Authentication {#s9-2}
 
 ```bash
 curl -u myuser:mypass http://127.0.0.1:8080/basic
@@ -55,7 +55,7 @@ WWW-Authenticate: Basic realm="Lab"
 - ไม่มีทาง logout ที่ดี (เบราว์เซอร์จำ credential ไว้)
 - **ไม่เหมาะกับ mobile app** เพราะต้องเก็บ password ไว้ในเครื่อง
 
-## 9.3 API key
+## 9.3 API key {#s9-3}
 
 ```bash
 curl -H 'X-API-Key: demo-key-123' http://127.0.0.1:8080/api/keyed | jq
@@ -94,7 +94,7 @@ APK/IPA ถูกแกะได้ง่ายมาก (`unzip` + `strings` �
 - มี scope จำกัดสิทธิ์ (read-only / write)
 - รองรับการหมุน: สร้างใบใหม่ → เปลี่ยนใช้ → ลบใบเก่า โดยไม่ต้อง downtime
 
-## 9.4 Bearer token
+## 9.4 Bearer token {#s9-4}
 
 ```bash
 curl -H 'Authorization: Bearer eyJhbGci...' http://127.0.0.1:8080/api/me
@@ -134,7 +134,7 @@ curl -s $B/api/me | jq
 `expires_in` เป็น**วินาที** และเป็น "อีกกี่วินาทีจะหมด" ไม่ใช่เวลาสัมบูรณ์
 — ทำแบบนี้เพราะนาฬิกาของ client อาจไม่ตรง
 
-## 9.5 Token แบบ opaque vs JWT
+## 9.5 Token แบบ opaque vs JWT {#s9-5}
 
 | | Opaque token | JWT |
 |---|-------------|-----|
@@ -150,7 +150,7 @@ JWT อยู่ในบทถัดไป
 **คำแนะนำ:** ถ้าคุณมี server เดียว/ฐานข้อมูลเดียว **opaque token ง่ายกว่าและปลอดภัยกว่า**
 JWT คุ้มเมื่อคุณมีหลาย service ที่ต้อง verify เองโดยไม่อยากคุยกับ auth server ทุกครั้ง
 
-## 9.6 401 vs 403 ในบริบท auth (ย้ำอีกครั้ง เพราะสำคัญมาก)
+## 9.6 401 vs 403 ในบริบท auth (ย้ำอีกครั้ง เพราะสำคัญมาก) {#s9-6}
 
 ```
 401 = "token ไหน? / token นี้ใช้ไม่ได้แล้ว"   → client ควร refresh หรือ login ใหม่
@@ -171,7 +171,7 @@ curl -s -o /dev/null -w '%{http_code}\n' -H 'X-API-Key: ผิด' $B/api/keyed 
 \* จริง ๆ กรณี key ผิดควรเป็น 401 ด้วย lab ตั้งเป็น 403 ไว้ให้เห็นความต่าง —
 ลองแก้ [lab/server.py](../lab/server.py) ให้ถูกดูเป็นแบบฝึกหัด
 
-## 9.7 ตารางเปรียบเทียบสรุป
+## 9.7 ตารางเปรียบเทียบสรุป {#s9-7}
 
 | เกณฑ์ | Basic | API key | Bearer + refresh | Session cookie |
 |-------|-------|---------|------------------|----------------|

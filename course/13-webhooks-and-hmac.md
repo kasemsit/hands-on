@@ -3,7 +3,7 @@
 > บทนี้เชื่อมสองเรื่องเข้าด้วยกัน: การรับ callback จากระบบอื่น (เช่น payment gateway)
 > และ **signature ใน ALTCHA challenge** ที่คุณจะเจอใน[บทที่ 16](16-altcha-pow.md) — มันคือกลไกเดียวกัน
 
-## 13.1 Webhook คืออะไร
+## 13.1 Webhook คืออะไร {#s13-1}
 
 แทนที่คุณจะถามซ้ำ ๆ ว่า "จ่ายเงินสำเร็จหรือยัง" ให้เขายิงมาบอกเมื่อเกิดเหตุ
 
@@ -19,7 +19,7 @@ Polling (สิ้นเปลือง)              Webhook (ดีกว่�
 URL ของคุณเป็นสาธารณะ ใครก็ยิงได้ ถ้าเชื่อทุกอย่างที่เข้ามา ก็จะมีคนยิง
 `{"status":"paid","amount":1000000}` มาให้คุณ
 
-## 13.2 HMAC คืออะไร
+## 13.2 HMAC คืออะไร {#s13-2}
 
 **HMAC = Hash-based Message Authentication Code**
 ลายเซ็นที่คำนวณจาก (ข้อความ + กุญแจลับที่ทั้งสองฝ่ายรู้)
@@ -38,7 +38,7 @@ signature = HMAC-SHA256(secret_key, message)
 แต่ `HMAC(key, message)` ต้องมี key
 (และ HMAC ยังกันการโจมตีแบบ length-extension ที่ `sha256(key + message)` มีปัญหาด้วย)
 
-## 13.3 ตรวจ signature ของ webhook ที่รับเข้ามา
+## 13.3 ตรวจ signature ของ webhook ที่รับเข้ามา {#s13-3}
 
 ```python
 import hmac, hashlib, time
@@ -92,7 +92,7 @@ if hmac.compare_digest(expected, s):  # ✅
 
 ![การเซ็นและตรวจ HMAC signature](img/hmac-webhook.svg)
 
-## 13.4 ตัวอย่างของจริง
+## 13.4 ตัวอย่างของจริง {#s13-4}
 
 **Stripe:**
 ```
@@ -126,7 +126,7 @@ curl -X POST http://127.0.0.1:8080/webhooks/payment \
 
 ใช้ `--data-raw` ไม่ใช่ `-d` เพราะ `-d` จะตัด newline ออกทำให้ byte ไม่ตรง
 
-## 13.5 กลไกเดียวกันนี้ในฝั่ง server: signed challenge
+## 13.5 กลไกเดียวกันนี้ในฝั่ง server: signed challenge {#s13-5}
 
 ตอนนี้กลับมาดู PoW challenge ของ lab (และของ ALTCHA จริง):
 
@@ -193,7 +193,7 @@ def unsign(token: str, key: bytes) -> str | None:
 > ข้อจำกัดที่ต้องรู้: signed token แบบนี้ **เพิกถอนก่อนหมดอายุไม่ได้**
 > (ปัญหาเดียวกับ JWT ใน[บทที่ 10](10-jwt-deep-dive.md)) จึงควรตั้ง TTL สั้น ๆ
 
-## 13.6 ออกแบบ webhook ที่คุณ *ส่ง* ให้คนอื่น
+## 13.6 ออกแบบ webhook ที่คุณ *ส่ง* ให้คนอื่น {#s13-6}
 
 ถ้า API ของคุณต้องยิง webhook ไปหาลูกค้า:
 
@@ -206,7 +206,7 @@ def unsign(token: str, key: bytes) -> str | None:
 - [ ] timeout สั้น (5-10 วิ) — ปลายทางควรตอบ 200 ทันทีแล้วค่อยไปทำงานเบื้องหลัง
 - [ ] เอกสารระบุ IP ต้นทางให้ลูกค้า allowlist ได้
 
-## 13.7 รับ webhook อย่างปลอดภัย — checklist
+## 13.7 รับ webhook อย่างปลอดภัย — checklist {#s13-7}
 
 - [ ] ตรวจ signature **ก่อน** parse หรือทำอะไรกับข้อมูล
 - [ ] ใช้ raw body ในการคำนวณ
@@ -221,12 +221,12 @@ def unsign(token: str, key: bytes) -> str | None:
 ## แบบฝึกหัด
 
 1. เพิ่ม endpoint `POST /webhooks/payment` ใน [lab/server.py](../lab/server.py)
-   ที่ตรวจ HMAC signature + timestamp ตามหัวข้อ 13.3
-2. ยิงเข้าไปด้วยคำสั่งในข้อ 13.4 ให้ผ่าน
+   ที่ตรวจ HMAC signature + timestamp ตามหัว[ข้อ 13.3](#s13-3)
+2. ยิงเข้าไปด้วยคำสั่งใน[ข้อ 13.4](#s13-4) ให้ผ่าน
 3. แก้ body ทีหลังคำนวณ signature แล้วยิง — ต้องถูกปฏิเสธ
 4. ยิง request เดิมซ้ำหลังผ่านไป 6 นาที — ต้องถูกปฏิเสธเพราะ timestamp เก่า
 5. ลองเปลี่ยน `hmac.compare_digest` เป็น `==` แล้วอธิบายว่าเปิดช่องอะไร
-6. เขียนฟังก์ชัน `sign`/`unsign` ในข้อ 13.5 แล้วใช้ทำ pagination cursor ที่ client แก้ไม่ได้
+6. เขียนฟังก์ชัน `sign`/`unsign` ใน[ข้อ 13.5](#s13-5) แล้วใช้ทำ pagination cursor ที่ client แก้ไม่ได้
 7. อ่าน `make_challenge` และ `verify_payload` ใน lab แล้วตอบว่า:
    ถ้าเอา `signature` ออกจากระบบ ผู้โจมตีจะทำอะไรได้บ้าง
 

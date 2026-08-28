@@ -2,7 +2,7 @@
 
 > ทักษะหลักของบทนี้: เห็น `<form>` แล้วเขียน `curl` ที่เทียบเท่าได้ทันที
 
-## 3.1 อ่าน `<form>` ให้ออก
+## 3.1 อ่าน `<form>` ให้ออก {#s3-1}
 
 ```html
 <form method="POST" action="/login">
@@ -37,7 +37,7 @@ curl -X POST 'http://127.0.0.1:8080/login' \
 > แต่ **ระวัง**: ถ้าใส่ `-X POST` คู่กับ `-L` แล้วเจอ 302 curl จะ POST ซ้ำไปที่ปลายทาง
 > ซึ่งมักไม่ใช่สิ่งที่ต้องการ (ดู[บทที่ 5](05-redirects-and-headers.md))
 
-## 3.2 `-d` vs `--data-urlencode` — จุดที่คนพลาดบ่อยที่สุด
+## 3.2 `-d` vs `--data-urlencode` — จุดที่คนพลาดบ่อยที่สุด {#s3-2}
 
 `-d` **ส่งข้อความไปตรง ๆ ไม่ encode ให้**
 
@@ -90,7 +90,7 @@ curl -v --data-urlencode 'query=cats & dogs' http://127.0.0.1:8080/headers 2>&1 
 
 หรือใช้ `--trace-ascii /dev/stdout` ก็เห็น body ทุก byte
 
-## 3.3 GET form
+## 3.3 GET form {#s3-3}
 
 ```html
 <form method="GET" action="/api/books">
@@ -107,7 +107,7 @@ curl -G 'http://127.0.0.1:8080/api/books' --data-urlencode 'tag=curl'
 `-G` บอก curl ว่า "เอาข้อมูลจาก `-d`/`--data-urlencode` ไปต่อท้าย URL แทนที่จะใส่ใน body"
 วิธีนี้ดีกว่าเขียน `?tag=...` เองเพราะได้ encoding ที่ถูกต้องฟรี
 
-## 3.4 multipart/form-data — สำหรับอัปโหลดไฟล์
+## 3.4 multipart/form-data — สำหรับอัปโหลดไฟล์ {#s3-4}
 
 ```html
 <form method="POST" action="/upload" enctype="multipart/form-data">
@@ -151,7 +151,7 @@ hello
 
 **ห้ามใช้ `-F` คู่กับ `-d`** — เลือกอย่างใดอย่างหนึ่ง เพราะเป็นคนละ Content-Type
 
-## 3.5 input ชนิดอื่น ๆ
+## 3.5 input ชนิดอื่น ๆ {#s3-5}
 
 | HTML | ส่งอะไรไป |
 |------|-----------|
@@ -166,7 +166,7 @@ hello
 **จุดที่พลาดบ่อย**: checkbox ที่ไม่ติ๊ก **ไม่ส่งค่าอะไรเลย** ไม่ใช่ส่ง `agree=off`
 ดังนั้นการ "ยกเลิกติ๊ก" คือการ *ไม่ใส่* `-d 'agree=...'`
 
-## 3.6 hidden field และ CSRF token
+## 3.6 hidden field และ CSRF token {#s3-6}
 
 ```html
 <input type="hidden" name="csrf_token" value="abc123">
@@ -195,7 +195,7 @@ curl -s -b cookies.txt -c cookies.txt -L \
 ถ้าเอา token จาก session A ไปใช้กับ cookie ของ session B จะไม่ผ่าน — นี่คือหัวใจของ CSRF protection
 (อธิบายเต็มใน[บทที่ 4](04-cookies-sessions.md))
 
-## 3.7 ดึงค่าจาก HTML: grep พอไหม
+## 3.7 ดึงค่าจาก HTML: grep พอไหม {#s3-7}
 
 `grep -oP` ใช้ได้กับ HTML ง่าย ๆ แต่พังทันทีถ้า HTML ซับซ้อน (attribute สลับตำแหน่ง, ขึ้นบรรทัดใหม่)
 

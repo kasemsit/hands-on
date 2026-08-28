@@ -9,7 +9,7 @@
 python3 lab/db_demo.py
 ```
 
-## 27.1 N+1 query — ปัญหาอันดับหนึ่ง
+## 27.1 N+1 query — ปัญหาอันดับหนึ่ง {#s27-1}
 
 ```python
 orders = db.query("SELECT id, user_id, item FROM orders LIMIT 500")
@@ -68,7 +68,7 @@ LOGGING = {"loggers": {"django.db.backends": {"level": "DEBUG"}}}
 **ทำให้เป็นเทสต์อัตโนมัติ** — assert ว่า endpoint นี้ใช้ query ไม่เกิน N ครั้ง
 แล้วใส่ใน CI จะกัน regression ได้ดีกว่ามานั่งจับทีหลัง
 
-## 27.2 Index
+## 27.2 Index {#s27-2}
 
 ```
 ❌ ไม่มี index (full table scan)      345.0 ms
@@ -140,7 +140,7 @@ query plan: SEARCH orders USING COVERING INDEX idx_orders_user (user_id=?)
 
 ![N+1 query เทียบกับ JOIN และผลของ index](img/n-plus-one.svg)
 
-## 27.3 อย่าดึงสิ่งที่ไม่ได้ใช้
+## 27.3 อย่าดึงสิ่งที่ไม่ได้ใช้ {#s27-3}
 
 ```
 ❌ SELECT *                   4.8 ms
@@ -151,12 +151,12 @@ query plan: SEARCH orders USING COVERING INDEX idx_orders_user (user_id=?)
 - ทำให้ **covering index ใช้ไม่ได้** (ต้องกลับไปอ่านตาราง)
 - ดึงคอลัมน์ TEXT/BLOB ใหญ่ ๆ ที่ไม่ได้ใช้ผ่านสาย
 - **พังเงียบ ๆ เมื่อมีคนเพิ่มคอลัมน์** — และอาจทำให้ field ลับหลุดออก API
-  (โยงกับ BOPLA [บทที่ 24.8](24-authorization-and-bola.md))
+  (โยงกับ BOPLA [บทที่ 24.8](24-authorization-and-bola.md#s24-8))
 
 โยงกับ[บทที่ 12](12-api-design-practices.md): `?fields=id,title` ให้แอปเลือกเองว่าจะเอาอะไร ประหยัดทั้ง
 เวลา DB และเน็ตของผู้ใช้
 
-## 27.4 Connection pool
+## 27.4 Connection pool {#s27-4}
 
 การเปิดการเชื่อมต่อ DB ใหม่แพงมาก (TCP + auth + session setup ~5-50 ms)
 
@@ -188,7 +188,7 @@ pool = ConnectionPool(DSN, max_size=20, timeout=5)     # รอ connection ไ�
 
 ไม่งั้นเมื่อ pool หมด request จะรอไปเรื่อย ๆ จนกองกันแล้วล่มทั้งระบบ
 
-## 27.5 Transaction
+## 27.5 Transaction {#s27-5}
 
 ```python
 with db.transaction():
@@ -221,7 +221,7 @@ with db.transaction():
 **Isolation level**: ค่าเริ่มต้น (`READ COMMITTED` ใน PostgreSQL) พอสำหรับงานส่วนใหญ่
 ถ้าต้องอ่านแล้วเขียนโดยห้ามมีใครแทรก ใช้ `SELECT ... FOR UPDATE`
 
-## 27.6 Migration ตอนที่มีแอปเก่าใช้อยู่
+## 27.6 Migration ตอนที่มีแอปเก่าใช้อยู่ {#s27-6}
 
 **ปัญหาเฉพาะของ mobile: ผู้ใช้บางคนใช้แอปเวอร์ชันปีที่แล้ว**
 คุณจึงเปลี่ยน schema แบบหักดิบไม่ได้
@@ -245,7 +245,7 @@ with db.transaction():
 
 **migration ต้องกลับได้** — เขียน `down` ไว้เสมอ และทดสอบว่ามันทำงานจริง
 
-## 27.7 อะไรที่ไม่ควรอยู่ใน request
+## 27.7 อะไรที่ไม่ควรอยู่ใน request {#s27-7}
 
 **งานที่นานเกิน 1 วินาที ควรไปอยู่เบื้องหลัง**
 
@@ -265,7 +265,7 @@ GET  /v1/jobs/{id} →  {"status": "processing" | "done", "result_url": "..."}
 **งานเบื้องหลังต้อง idempotent** เพราะ queue ส่วนใหญ่รับประกันแค่ "at least once"
 — งานเดิมอาจถูกรันซ้ำ (โยงกับ Idempotency-Key [บทที่ 12](12-api-design-practices.md))
 
-## 27.8 วัดผลก่อนแก้
+## 27.8 วัดผลก่อนแก้ {#s27-8}
 
 **อย่าเดาว่าอะไรช้า — วัด**
 
@@ -300,7 +300,7 @@ EOF
 ALTER SYSTEM SET log_min_duration_statement = '200ms';
 ```
 
-## 27.9 Checklist
+## 27.9 Checklist {#s27-9}
 
 **Query**
 - [ ] ไม่มี N+1 (นับจำนวน query ต่อ request ใน dev)
