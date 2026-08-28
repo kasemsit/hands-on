@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 520" width="100%" style="max-width:830px;height:auto" role="img" aria-label="HTTP request ในระดับ byte จริง แสดงว่าเป็นข้อความ ASCII คั่นบรรทัดด้วย CR LF และมีบรรทัดว่างคั่น header กับ body">
+<style>
+  text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
+  .hex{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px}
+  .ink{fill:#1f2328}.muted{fill:#656d76}
+  .strip{fill:#f6f8fa;stroke:#d0d7de;stroke-width:1.5}
+  .card{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5}
+  .crlf{fill:#cf222e}
+  .crlfbox{fill:#ffebe9;stroke:#cf222e;stroke-width:1.2}
+  .sep{fill:#fff8c5;stroke:#d4a72c;stroke-width:1.5}
+  .h1c{fill:#0969da}.h2c{fill:#8250df}.h3c{fill:#1a7f37}
+  .a{stroke:#8c959f;stroke-width:1.6;fill:none;marker-end:url(#a)}.fa{fill:#8c959f}
+  .warn{fill:#fbefff;stroke:#8250df;stroke-width:1.5}.warntx{fill:#6639ba}
+  @media (prefers-color-scheme:dark){
+    .ink{fill:#e6edf3}.muted{fill:#9198a1}
+    .strip{fill:#161b22;stroke:#3d444d}.card{fill:#0d1117;stroke:#3d444d}
+    .crlf{fill:#ff7b72}.crlfbox{fill:#2d0f11;stroke:#f85149}
+    .sep{fill:#3d2c00;stroke:#9e6a03}
+    .h1c{fill:#58a6ff}.h2c{fill:#bc8cff}.h3c{fill:#3fb950}
+    .a{stroke:#6e7681}.fa{fill:#6e7681}
+    .warn{fill:#2b1a4d;stroke:#bc8cff}.warntx{fill:#d2a8ff}
+  }
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fa"/></marker></defs>
+
+<text x="24" y="24" class="ink" font-size="14" font-weight="700">HTTP/1.1 คือ “ข้อความ” จริง ๆ — นี่คือ 179 byte ที่วิ่งบนสาย</text>
+
+<!-- text view -->
+<rect x="24" y="38" width="470" height="196" rx="8" class="card"/>
+<text x="40" y="58" class="muted" font-size="11">สิ่งที่ตาเห็น (แต่ละบรรทัดจบด้วย <tspan class="crlf" font-weight="600">CR LF</tspan>)</text>
+
+<text x="40" y="80" class="mono h1c">POST /login HTTP/1.1<tspan class="crlf">␍␊</tspan></text>
+<text x="40" y="100" class="mono h2c">Host: 127.0.0.1:8099<tspan class="crlf">␍␊</tspan></text>
+<text x="40" y="120" class="mono h2c">User-Agent: curl/8.5.0<tspan class="crlf">␍␊</tspan></text>
+<text x="40" y="140" class="mono h2c">Accept: */*<tspan class="crlf">␍␊</tspan></text>
+<text x="40" y="160" class="mono h2c">Content-Length: 12<tspan class="crlf">␍␊</tspan></text>
+
+<rect x="36" y="168" width="120" height="20" rx="4" class="sep"/>
+<text x="44" y="182" class="mono crlf" font-weight="700">␍␊</text>
+<text x="70" y="182" class="mono muted" font-size="10.5">← บรรทัดว่าง</text>
+
+<text x="40" y="208" class="mono h3c">user=somchai</text>
+<text x="180" y="208" class="muted" font-size="10.5">12 byte พอดี ตรงกับ Content-Length</text>
+<text x="40" y="226" class="muted" font-size="10.5">ไม่มี CRLF ปิดท้าย — ความยาวมาจาก Content-Length เท่านั้น</text>
+
+<!-- hex view -->
+<rect x="510" y="38" width="296" height="196" rx="8" class="card"/>
+<text x="526" y="58" class="muted" font-size="11">byte จริง (เลขฐาน 16)</text>
+<text x="526" y="80" class="hex ink">504f 5354 202f 6c6f</text>
+<text x="526" y="97" class="hex muted">P O S T _ / l o</text>
+<text x="526" y="120" class="hex ink">2f31 2e31 <tspan class="crlf" font-weight="700">0d0a</tspan> 486f</text>
+<text x="526" y="137" class="hex muted">/ 1 . 1  <tspan class="crlf">CR LF</tspan>  H o</text>
+<text x="526" y="164" class="hex ink">6465 64<tspan class="crlf" font-weight="700">0d 0a0d 0a</tspan>75</text>
+<text x="526" y="181" class="hex muted">d e d <tspan class="crlf">CR LF CR LF</tspan> u</text>
+<rect x="522" y="192" width="270" height="34" rx="4" class="sep"/>
+<text x="532" y="212" class="ink" font-size="10.5" font-weight="600">0d0a 0d0a = จุดที่ header จบ</text>
+<text x="532" y="224" class="muted" font-size="10">server อ่านเจอลำดับนี้เมื่อไร ก็รู้ว่าต่อไปคือ body</text>
+
+<!-- why CRLF matters -->
+<rect x="24" y="248" width="386" height="112" rx="8" class="strip"/>
+<text x="42" y="270" class="ink" font-size="12.5" font-weight="700">ทำไมต้อง CR LF ไม่ใช่ LF เฉย ๆ</text>
+<text x="42" y="292" class="muted" font-size="11.5">มาตรฐาน HTTP กำหนดให้จบบรรทัดด้วย <tspan class="mono ink">\r\n</tspan> (0d 0a)</text>
+<text x="42" y="310" class="muted" font-size="11.5">ไม่ใช่ <tspan class="mono ink">\n</tspan> อย่างเดียวแบบไฟล์ข้อความบน Linux</text>
+<text x="42" y="334" class="ink" font-size="11.5" font-weight="600">นี่คือที่มาของบั๊ก \r ท้ายบรรทัด</text>
+<text x="42" y="351" class="muted" font-size="11">เวลา grep ค่าจาก header มา ต้อง <tspan class="mono ink">tr -d '\r'</tspan> เสมอ</text>
+
+<rect x="426" y="248" width="380" height="112" rx="8" class="strip"/>
+<text x="444" y="270" class="ink" font-size="12.5" font-weight="700">header เป็น ASCII เท่านั้น</text>
+<text x="444" y="292" class="muted" font-size="11.5">ใส่ภาษาไทยลงใน header ตรง ๆ ไม่ได้</text>
+<text x="444" y="312" class="mono ink" font-size="10.5">filename*=UTF-8''%E0%B8%AB...</text>
+<text x="444" y="334" class="muted" font-size="11">จึงต้องเข้ารหัสก่อน (RFC 5987 — บทที่ 6.7)</text>
+<text x="444" y="351" class="muted" font-size="11">ส่วน <tspan font-weight="600">body</tspan> เป็น byte อะไรก็ได้ รวมถึงรูปภาพ</text>
+
+<!-- caveat -->
+<rect x="24" y="374" width="782" height="132" rx="8" class="warn"/>
+<text x="44" y="398" class="warntx" font-size="13" font-weight="700">⚠ “HTTP เป็นข้อความ” จริงเฉพาะ HTTP/1.1 เท่านั้น</text>
+
+<rect x="44" y="410" width="240" height="80" rx="6" class="strip"/>
+<text x="58" y="430" class="ink" font-size="11.5" font-weight="600">HTTP/1.1</text>
+<text x="58" y="450" class="muted" font-size="11">ข้อความ ASCII อ่านด้วยตาได้</text>
+<text x="58" y="468" class="muted" font-size="11">พิมพ์ใส่ <tspan class="mono ink">nc</tspan> ด้วยมือยังได้</text>
+<text x="58" y="484" class="h3c" font-size="11" font-weight="600">← ที่เห็นในรูปนี้</text>
+
+<rect x="296" y="410" width="240" height="80" rx="6" class="strip"/>
+<text x="310" y="430" class="ink" font-size="11.5" font-weight="600">HTTP/2 และ HTTP/3</text>
+<text x="310" y="450" class="muted" font-size="11">binary แบ่งเป็น frame</text>
+<text x="310" y="468" class="muted" font-size="11">header ถูกบีบอัดด้วย HPACK</text>
+<text x="310" y="484" class="muted" font-size="11">อ่านด้วยตาเปล่าไม่ได้แล้ว</text>
+
+<rect x="548" y="410" width="240" height="80" rx="6" class="strip"/>
+<text x="562" y="430" class="ink" font-size="11.5" font-weight="600">แล้ว HTTPS ล่ะ</text>
+<text x="562" y="450" class="muted" font-size="11">ข้อความยังเป็นแบบเดิม</text>
+<text x="562" y="468" class="muted" font-size="11">แต่ถูก TLS ห่อทับอีกชั้น</text>
+<text x="562" y="484" class="muted" font-size="11">คนดักกลางทางเห็นแต่ byte มั่ว</text>
+</svg>

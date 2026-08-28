@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 430" width="100%" style="max-width:830px;height:auto" role="img" aria-label="ความต่างของ 301 302 303 307 308 เรื่องการเปลี่ยน method หลัง redirect และกับดัก -X POST กับ -L">
+<style>
+  text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px}
+  .ink{fill:#1f2328}.muted{fill:#656d76}
+  .strip{fill:#f6f8fa;stroke:#d0d7de;stroke-width:1.5}
+  .g{fill:#dafbe1;stroke:#1a7f37;stroke-width:1.5}.gt{fill:#0f5323}
+  .p{fill:#fbefff;stroke:#8250df;stroke-width:1.5}.pt{fill:#6639ba}
+  .bad{fill:#ffebe9;stroke:#cf222e;stroke-width:1.5}.badtx{fill:#a40e26}
+  .a{stroke:#8c959f;stroke-width:2;fill:none;marker-end:url(#a)}.fa{fill:#8c959f}
+  .ab{stroke:#cf222e;stroke-width:2;fill:none;marker-end:url(#r)}.fr{fill:#cf222e}
+  @media (prefers-color-scheme:dark){
+    .ink{fill:#e6edf3}.muted{fill:#9198a1}.strip{fill:#161b22;stroke:#3d444d}
+    .g{fill:#0f2916;stroke:#2ea043}.gt{fill:#3fb950}
+    .p{fill:#2b1a4d;stroke:#bc8cff}.pt{fill:#d2a8ff}
+    .bad{fill:#2d0f11;stroke:#f85149}.badtx{fill:#ff7b72}
+    .a{stroke:#6e7681}.fa{fill:#6e7681}.ab{stroke:#f85149}.fr{fill:#f85149}
+  }
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fa"/></marker>
+  <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fr"/></marker>
+</defs>
+
+<text x="24" y="26" class="ink" font-size="14" font-weight="700">ความต่างที่แท้จริงของ 3xx คือ “หลัง redirect แล้ว method เปลี่ยนไหม”</text>
+
+<!-- group 1 -->
+<rect x="24" y="44" width="382" height="126" rx="8" class="g"/>
+<text x="42" y="68" class="gt" font-size="13" font-weight="700">301 · 302 · 303 → เปลี่ยนเป็น GET</text>
+<rect x="42" y="80" width="112" height="34" rx="6" class="strip"/>
+<text x="98" y="102" text-anchor="middle" class="mono ink">POST /login</text>
+<path d="M158 97 L204 97" class="a"/>
+<text x="164" y="90" class="muted" font-size="10.5">302</text>
+<rect x="208" y="80" width="180" height="34" rx="6" class="strip"/>
+<text x="298" y="102" text-anchor="middle" class="mono gt">GET /dashboard  ✓</text>
+<text x="42" y="134" class="gt" font-size="11.5">นี่คือสิ่งที่เบราว์เซอร์ทำ และเป็นสิ่งที่คุณต้องการเกือบตลอด</text>
+<text x="42" y="154" class="muted" font-size="11">รูปแบบนี้เรียกว่า POST/Redirect/GET — กันผู้ใช้กด refresh แล้ว submit ซ้ำ</text>
+
+<!-- group 2 -->
+<rect x="424" y="44" width="382" height="126" rx="8" class="p"/>
+<text x="442" y="68" class="pt" font-size="13" font-weight="700">307 · 308 → คง method เดิม</text>
+<rect x="442" y="80" width="112" height="34" rx="6" class="strip"/>
+<text x="498" y="102" text-anchor="middle" class="mono ink">POST /old</text>
+<path d="M558 97 L604 97" class="a"/>
+<text x="564" y="90" class="muted" font-size="10.5">307</text>
+<rect x="608" y="80" width="180" height="34" rx="6" class="strip"/>
+<text x="698" y="102" text-anchor="middle" class="mono pt">POST /new  (+ body)</text>
+<text x="442" y="134" class="pt" font-size="11.5">ใช้เมื่อย้าย endpoint แล้วต้องการให้ทุกอย่างไปเหมือนเดิม</text>
+<text x="442" y="154" class="muted" font-size="11">body ก็ถูกส่งไปด้วย — ระวังถ้าปลายทางไม่ได้คาดหวัง</text>
+
+<!-- trap -->
+<rect x="24" y="188" width="782" height="140" rx="8" class="bad"/>
+<text x="44" y="212" class="badtx" font-size="13" font-weight="700">⚠ กับดักที่ทำให้เสียเวลาบ่อยที่สุด — ใส่ -X POST คู่กับ -L</text>
+
+<rect x="44" y="228" width="360" height="86" rx="6" class="strip"/>
+<text x="58" y="248" class="mono badtx">curl -X POST -L URL -d 'a=1'</text>
+<path d="M70 258 L70 276" class="ab"/>
+<text x="86" y="272" class="badtx" font-size="11">-X = "บังคับ" ให้เป็น POST ตลอดสาย</text>
+<text x="58" y="296" class="mono badtx">→ POST /dashboard  → 404</text>
+<text x="58" y="310" class="muted" font-size="10.5">เพราะ /dashboard รับแต่ GET</text>
+
+<rect x="426" y="228" width="360" height="86" rx="6" class="strip"/>
+<text x="440" y="248" class="mono gt">curl -L URL -d 'a=1'</text>
+<path d="M452 258 L452 276" class="a"/>
+<text x="468" y="272" class="muted" font-size="11">-d ทำให้เป็น POST ให้อยู่แล้ว</text>
+<text x="440" y="296" class="mono gt">→ GET /dashboard  → 200 ✓</text>
+<text x="440" y="310" class="muted" font-size="10.5">curl เปลี่ยน method ให้เองเหมือนเบราว์เซอร์</text>
+
+<!-- rule -->
+<rect x="24" y="346" width="782" height="66" rx="8" class="strip"/>
+<text x="44" y="368" class="ink" font-size="12.5" font-weight="700">กฎที่จำง่ายที่สุด: อย่าใส่ <tspan class="mono">-X POST</tspan> เลย ถ้าคุณมี <tspan class="mono">-d</tspan> อยู่แล้ว</text>
+<text x="44" y="390" class="muted" font-size="11.5">`-X` มีไว้สำหรับกรณีที่ต้องการ method ที่ curl เดาให้ไม่ได้ เช่น `-X DELETE` หรือ `-X PATCH` เท่านั้น</text>
+<text x="44" y="406" class="muted" font-size="11">ถ้าอยากคง POST ไว้จริง ๆ ตอน redirect ให้ใช้ `--post301 --post302 --post303` แทน ซึ่งชัดเจนกว่ามาก</text>
+</svg>

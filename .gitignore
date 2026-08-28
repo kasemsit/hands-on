@@ -1,0 +1,31 @@
+# ผลลัพธ์ที่ Quarto สร้าง
+_book/
+.quarto/
+index.log
+index.tex
+
+# ไฟล์ที่มี credential จริง - ห้าม commit (บทที่ 18, 20)
+*.cookies
+cookies.txt
+state.json
+*.storage.json
+*.mitm
+.env
+
+/.quarto/
+**/*.quarto_ipynb
+
+# ผลลัพธ์การ compile ของ lab 49.8
+lab/gpu/ldpreload_quota/quota.so
+lab/gpu/ldpreload_quota/app
+
+# Python venv และของที่ pip/pytest สร้าง — ห้าม commit (34 MB และผูกกับเครื่อง)
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# ของที่ระบบปฏิบัติการ/เอดิเตอร์ทิ้งไว้
+.DS_Store
+*.swp

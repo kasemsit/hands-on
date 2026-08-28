@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 500" width="100%" style="max-width:830px;height:auto" role="img" aria-label="TLS handshake การตรวจ certificate และเหตุผลที่ -k อันตราย">
+<style>
+  text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px}
+  .ink{fill:#1f2328}.muted{fill:#656d76}
+  .strip{fill:#f6f8fa;stroke:#d0d7de;stroke-width:1.5}
+  .life{stroke:#d0d7de;stroke-width:1.5;stroke-dasharray:4 4}
+  .a1{stroke:#0969da;stroke-width:2;fill:none;marker-end:url(#b)}
+  .a2{stroke:#8250df;stroke-width:2;fill:none;marker-end:url(#p)}
+  .fb{fill:#0969da}.fp{fill:#8250df}.l1{fill:#0a4d8c}.l2{fill:#6639ba}
+  .chk{fill:#dafbe1;stroke:#1a7f37;stroke-width:1.5}.chktx{fill:#0f5323}
+  .bad{fill:#ffebe9;stroke:#cf222e;stroke-width:1.5}.badtx{fill:#a40e26}
+  .enc{fill:#dafbe1;stroke:#1a7f37;stroke-width:2}
+  @media (prefers-color-scheme:dark){
+    .ink{fill:#e6edf3}.muted{fill:#9198a1}.strip{fill:#161b22;stroke:#3d444d}.life{stroke:#3d444d}
+    .a1{stroke:#58a6ff}.a2{stroke:#bc8cff}.fb{fill:#58a6ff}.fp{fill:#bc8cff}
+    .l1{fill:#79c0ff}.l2{fill:#d2a8ff}
+    .chk{fill:#0f2916;stroke:#2ea043}.chktx{fill:#3fb950}
+    .bad{fill:#2d0f11;stroke:#f85149}.badtx{fill:#ff7b72}
+    .enc{fill:#0f2916;stroke:#2ea043}
+  }
+</style>
+<defs>
+  <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fb"/></marker>
+  <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fp"/></marker>
+</defs>
+
+<rect x="40" y="18" width="150" height="32" rx="6" class="strip"/>
+<text x="115" y="39" text-anchor="middle" class="ink" font-size="12.5" font-weight="600">Client (curl)</text>
+<line x1="115" y1="50" x2="115" y2="330" class="life"/>
+
+<rect x="420" y="18" width="150" height="32" rx="6" class="strip"/>
+<text x="495" y="39" text-anchor="middle" class="ink" font-size="12.5" font-weight="600">Server</text>
+<line x1="495" y1="50" x2="495" y2="330" class="life"/>
+
+<path d="M115 80 L489 80" class="a1"/>
+<text x="128" y="74" class="mono l1">ClientHello — รองรับ TLS version / cipher อะไรบ้าง</text>
+
+<path d="M495 114 L121 114" class="a2"/>
+<text x="128" y="108" class="mono l2">ServerHello + Certificate</text>
+
+<!-- verification box -->
+<rect x="24" y="132" width="380" height="122" rx="8" class="chk"/>
+<text x="42" y="154" class="chktx" font-size="12.5" font-weight="700">client ตรวจ certificate 3 ข้อ</text>
+<text x="42" y="178" class="chktx" font-size="11.5">1. ลงนามโดย CA ที่เครื่องเราเชื่อไหม</text>
+<text x="42" y="198" class="chktx" font-size="11.5">2. ชื่อโดเมนใน cert ตรงกับที่เรากำลังต่อไหม</text>
+<text x="42" y="218" class="chktx" font-size="11.5">3. ยังไม่หมดอายุ / ไม่ถูกเพิกถอน</text>
+<text x="42" y="242" class="muted" font-size="11">ผ่านครบ 3 ข้อ = มั่นใจว่าคุยกับ server ตัวจริง</text>
+
+<rect x="424" y="132" width="382" height="122" rx="8" class="strip"/>
+<text x="442" y="154" class="ink" font-size="12.5" font-weight="600">ข้อ 1 คือที่มาของ error ที่เจอบ่อยที่สุด</text>
+<text x="442" y="178" class="mono badtx" font-size="11">unable to get local issuer certificate</text>
+<text x="442" y="200" class="muted" font-size="11.5">มักไม่ใช่ปัญหาที่ client — แต่เพราะ server</text>
+<text x="442" y="218" class="muted" font-size="11.5">ส่ง chain ไม่ครบ (ขาด intermediate cert)</text>
+<text x="442" y="240" class="muted" font-size="11">เบราว์เซอร์ให้อภัยเพราะแคชไว้ แต่ curl กับ mobile app ไม่</text>
+
+<path d="M115 286 L489 286" stroke="#1a7f37" stroke-width="2.5" fill="none"/>
+<path d="M495 286 L121 286" stroke="#1a7f37" stroke-width="2.5" fill="none"/>
+<rect x="250" y="270" width="110" height="32" rx="6" class="enc"/>
+<text x="305" y="291" text-anchor="middle" class="chktx" font-size="11.5" font-weight="600">🔒 เข้ารหัสแล้ว</text>
+
+<!-- -k explanation -->
+<rect x="24" y="344" width="782" height="140" rx="8" class="bad"/>
+<text x="44" y="368" class="badtx" font-size="13" font-weight="700">⚠ <tspan class="mono">-k</tspan> / <tspan class="mono">--insecure</tspan> ปิดอะไรกันแน่</text>
+
+<rect x="44" y="382" width="360" height="52" rx="6" class="strip"/>
+<text x="58" y="402" class="chktx" font-size="11.5" font-weight="600">✓ ยังเข้ารหัสอยู่</text>
+<text x="58" y="422" class="muted" font-size="11">ข้อมูลบนสายยังอ่านไม่ออกสำหรับคนที่ดักฟังเฉย ๆ</text>
+
+<rect x="426" y="382" width="360" height="52" rx="6" class="strip"/>
+<text x="440" y="402" class="badtx" font-size="11.5" font-weight="600">✗ ไม่ตรวจว่าคุยกับใคร</text>
+<text x="440" y="422" class="muted" font-size="11">การตรวจ 3 ข้อข้างบนถูกข้ามทั้งหมด</text>
+
+<text x="44" y="456" class="badtx" font-size="12" font-weight="600">เปรียบเทียบ: การเข้ารหัสโดยไม่ยืนยันตัวตน = คุยความลับกับคนแปลกหน้าในห้องมืด</text>
+<text x="44" y="474" class="badtx" font-size="12">คุณมั่นใจว่าไม่มีใครแอบฟัง แต่ไม่รู้เลยว่าคนที่คุยด้วยเป็นใคร — man-in-the-middle ทำได้ทันที</text>
+</svg>

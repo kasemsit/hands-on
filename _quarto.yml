@@ -1,0 +1,186 @@
+project:
+  type: book
+  output-dir: _book
+  # เอาเฉพาะไฟล์ที่เป็นส่วนของหนังสือ ไม่ต้องลาก README.md / CLAUDE.md เข้ามา
+  render:
+    - index.qmd
+    - course/*.md
+    - lab/README.md
+
+book:
+  title: "จาก curl ถึงความปลอดภัยของระบบ"
+  # subtitle เดิมเขียนว่า "anti-bot" ซึ่งตอนนี้เป็นแค่ 6 บทจาก 53 —
+  # ปรับให้ตรงกับขอบเขตจริงที่ครอบถึง OS, malware และ GPU/AI infrastructure
+  subtitle: "คู่มือลงมือทำ — HTTP, API, ความปลอดภัย และ GPU/AI infrastructure"
+  author: "บันทึกการเรียนรู้"
+  date: last-modified
+  date-format: "D MMMM YYYY"
+  language: th
+  search: true
+  page-navigation: true
+  reader-mode: true
+  # ต้องมีเพื่อให้ sitemap.xml และ meta tag ชี้ URL จริง (ลิงก์ในหน้ายังเป็น relative ตามเดิม)
+  site-url: https://kasemsit.github.io/hands-on/
+  repo-url: https://github.com/kasemsit/hands-on
+  repo-actions: [source, issue]
+  sidebar:
+    style: docked
+    collapse-level: 1
+
+  chapters:
+    - index.qmd
+
+    - part: "ส่วนที่ 1 · พื้นฐาน HTTP และ curl"
+      chapters:
+        - course/01-http-basics.md
+        - course/02-curl-basics.md
+        - course/03-html-forms.md
+        - course/04-cookies-sessions.md
+        - course/05-redirects-and-headers.md
+        - course/06-encoding-and-charset.md
+        - course/07-tls-https.md
+
+    - part: "ส่วนที่ 2 · API และ Authentication"
+      chapters:
+        - course/08-json-api-and-jq.md
+        - course/09-authentication.md
+        - course/10-jwt-deep-dive.md
+        - course/11-mobile-api-auth-design.md
+        - course/12-api-design-practices.md
+        - course/13-webhooks-and-hmac.md
+
+    - part: "ส่วนที่ 3 · ออกแบบระบบให้อยู่รอด"
+      chapters:
+        - course/24-authorization-and-bola.md
+        - course/25-input-validation-and-injection.md
+        - course/26-proxy-caching-cdn.md
+        - course/27-database-and-performance.md
+        - course/28-observability-and-deployment.md
+        - course/29-realtime-push-and-offline.md
+
+    - part: "ส่วนที่ 4 · เครื่องมือของคนทำงาน"
+      chapters:
+        - course/30-git.md
+        - course/20-shell-scripting-for-curl.md
+        - course/32-testing-with-pytest.md
+        - course/33-concurrency-and-async.md
+        - course/21-debugging-and-pitfalls.md
+        - course/A1-netcat.md
+
+    - part: "ส่วนที่ 5 · เข้าใจฝั่งตรงข้าม — Automation และ Anti-bot"
+      chapters:
+        - course/14-devtools-to-curl.md
+        - course/15-captcha-and-antibot.md
+        - course/16-altcha-pow.md
+        - course/17-playwright-basics.md
+        - course/18-playwright-cookies-to-curl.md
+        - course/19-mitmproxy-mobile-traffic.md
+
+    - part: "ส่วนที่ 6 · ชั้นใต้ HTTP และระบบปฏิบัติการ"
+      chapters:
+        - course/31-tcpip-and-tcpdump.md
+        - course/35-linux-internals.md
+        - course/36-permissions-and-isolation.md
+        - course/37-memory-and-classic-exploits.md
+        - course/38-crypto-in-practice.md
+
+    - part: "ส่วนที่ 7 · Malware และการตั้งรับ"
+      chapters:
+        - course/39-how-malware-works.md
+        - course/40-malware-analysis-basics.md
+        - course/41-detection-and-response.md
+        - course/42-supply-chain-security.md
+
+    - part: "ส่วนที่ 8 · GPU และ AI Infrastructure"
+      chapters:
+        - course/46-gpu-101.md
+        - course/47-gpu-memory-and-kv-cache.md
+        - course/48-serving-llm.md
+        - course/49-gpu-on-containers-and-k8s.md
+        - course/50-multi-gpu-and-networking.md
+        - course/51-gpu-observability-and-cost.md
+        - course/52-ai-system-security.md
+
+    - part: "ส่วนที่ 9 · คิดอย่างเป็นระบบ และก้าวต่อไป"
+      chapters:
+        - course/34-threat-modeling.md
+        - course/22-ethics-and-limits.md
+        - course/43-security-roles-and-paths.md
+        - course/44-ctf-and-legal-practice.md
+        - course/45-home-lab.md
+        - course/23-where-to-learn-more.md
+
+    - part: "ภาคผนวก"
+      chapters:
+        - lab/README.md
+
+format:
+  # ── เว็บ: อ่านออนไลน์ มีสารบัญข้างซ้าย + ค้นหาได้ ──
+  html:
+    # ปิดตัวนับของ Quarto - ทุกบทมีเลขหัวข้อเขียนไว้เองแล้ว (1.1, 1.2, ...)
+    # ถ้าเปิดไว้จะได้ "2.1 1.1 หัวข้อ" ซ้อนกัน และเลขของ Quarto
+    # จะไม่ตรงกับที่เนื้อหาอ้างถึง (มี 48 จุดที่อ้างเลขหัวข้อ)
+    number-sections: false
+    theme:
+      light: [cosmo, custom.scss]
+      dark: [darkly, custom.scss]
+    toc: true
+    toc-depth: 3
+    toc-title: "ในบทนี้"
+    code-copy: true
+    code-overflow: scroll
+    link-external-newwindow: true
+    anchor-sections: true
+    fig-align: left
+    lang: th
+    # Quarto โหลด mermaid.js ให้เฉพาะ code cell ```{mermaid} ซึ่งใช้ได้แค่ใน .qmd
+    # คอร์สนี้เก็บบทเป็น .md (เพื่อให้ GitHub render ได้) จึงต้องโหลดเอง
+    include-in-header:
+      - assets/mermaid/init.html
+
+  # ── หนังสือ PDF ──
+  # ใช้ xelatex ไม่ใช่ lualatex เพราะ lualatex โหลด selnolig มาด้วย
+  # แล้วแพ็กเกจนั้นพังเมื่อเจอตัวอักษรไทย (bad argument to 'char')
+  pdf:
+    number-sections: false
+    pdf-engine: xelatex
+    documentclass: scrbook
+    papersize: a4
+    geometry:
+      - top=25mm
+      - bottom=25mm
+      - inner=25mm
+      - outer=20mm
+    mainfont: "Sarabun"
+    sansfont: "Sarabun"
+    # Tlwg Mono เป็นฟอนต์ monospace ตัวเดียวในเครื่องที่มีภาษาไทย
+    # ส่วนเส้นตาราง (─│└┘) ที่มันไม่มี ถูกแปลงเป็น ASCII โดย pdf-symbols.lua
+    monofont: "Tlwg Mono"
+    monofontoptions:
+      - Scale=0.86
+    fontsize: 11pt
+    linestretch: 1.15
+    colorlinks: true
+    linkcolor: RoyalBlue
+    urlcolor: RoyalBlue
+    toc-depth: 2
+    lang: th
+    keep-tex: false
+    include-in-header:
+      text: |
+        \usepackage{xurl}
+        \sloppy
+
+  # ── หนังสือ EPUB: อ่านบนมือถือ/แท็บเล็ต ──
+  epub:
+    number-sections: false
+    toc: true
+    toc-depth: 2
+    lang: th
+
+filters:
+  - strip-nav.lua
+  - pdf-symbols.lua
+
+execute:
+  freeze: false

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 430" width="100%" style="max-width:830px;height:auto" role="img" aria-label="ปัญหาของ offset pagination เมื่อมีข้อมูลใหม่แทรก และวิธีที่ cursor แก้ได้">
+<style>
+  text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px}
+  .ink{fill:#1f2328}.muted{fill:#656d76}
+  .strip{fill:#f6f8fa;stroke:#d0d7de;stroke-width:1.5}
+  .row{fill:#ffffff;stroke:#d0d7de;stroke-width:1}
+  .new{fill:#fff8c5;stroke:#d4a72c;stroke-width:1.5}
+  .dup{fill:#ffebe9;stroke:#cf222e;stroke-width:1.5}.duptx{fill:#a40e26}
+  .ok{fill:#dafbe1;stroke:#1a7f37;stroke-width:1.5}.oktx{fill:#0f5323}
+  .a{stroke:#8c959f;stroke-width:2;fill:none;marker-end:url(#a)}.fa{fill:#8c959f}
+  @media (prefers-color-scheme:dark){
+    .ink{fill:#e6edf3}.muted{fill:#9198a1}.strip{fill:#161b22;stroke:#3d444d}
+    .row{fill:#0d1117;stroke:#3d444d}
+    .new{fill:#3d2c00;stroke:#9e6a03}
+    .dup{fill:#2d0f11;stroke:#f85149}.duptx{fill:#ff7b72}
+    .ok{fill:#0f2916;stroke:#2ea043}.oktx{fill:#3fb950}
+    .a{stroke:#6e7681}.fa{fill:#6e7681}
+  }
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fa"/></marker></defs>
+
+<text x="24" y="26" class="duptx" font-size="14" font-weight="700">✗ Offset — ผู้ใช้เห็นรายการซ้ำเมื่อมีของใหม่แทรกเข้ามาระหว่างเลื่อน</text>
+
+<!-- page 1 -->
+<text x="24" y="52" class="muted" font-size="11.5">หน้า 1 · <tspan class="mono">?offset=0&amp;limit=3</tspan></text>
+<rect x="24" y="60" width="150" height="26" rx="4" class="row"/><text x="36" y="78" class="mono ink">E  (ใหม่สุด)</text>
+<rect x="24" y="90" width="150" height="26" rx="4" class="row"/><text x="36" y="108" class="mono ink">D</text>
+<rect x="24" y="120" width="150" height="26" rx="4" class="row"/><text x="36" y="138" class="mono ink">C</text>
+
+<path d="M186 100 L232 100" class="a"/>
+<text x="190" y="94" class="muted" font-size="10.5">ผู้ใช้เลื่อนต่อ</text>
+
+<!-- new item arrives -->
+<rect x="240" y="52" width="180" height="100" rx="8" class="new"/>
+<text x="256" y="74" class="ink" font-size="11.5" font-weight="600">ระหว่างนั้น มีโพสต์ใหม่</text>
+<text x="256" y="96" class="mono ink">F เข้ามาบนสุด</text>
+<text x="256" y="120" class="muted" font-size="11">ทุกอย่างเลื่อนลง 1 ตำแหน่ง</text>
+<text x="256" y="140" class="muted" font-size="11">แต่ offset=3 ยังนับจากที่เดิม</text>
+
+<path d="M430 100 L476 100" class="a"/>
+
+<!-- page 2 -->
+<text x="484" y="52" class="muted" font-size="11.5">หน้า 2 · <tspan class="mono">?offset=3&amp;limit=3</tspan></text>
+<rect x="484" y="60" width="180" height="26" rx="4" class="dup"/><text x="496" y="78" class="mono duptx">C  ← ซ้ำ! เพิ่งเห็นไปแล้ว</text>
+<rect x="484" y="90" width="180" height="26" rx="4" class="row"/><text x="496" y="108" class="mono ink">B</text>
+<rect x="484" y="120" width="180" height="26" rx="4" class="row"/><text x="496" y="138" class="mono ink">A</text>
+<text x="676" y="78" class="duptx" font-size="11">และถ้ามีการ<tspan font-weight="600">ลบ</tspan>แทน</text>
+<text x="676" y="96" class="duptx" font-size="11">จะมีรายการ<tspan font-weight="600">หายไป</tspan>เลย</text>
+<text x="676" y="114" class="muted" font-size="10.5">โดยที่ผู้ใช้ไม่มีทางรู้</text>
+
+<line x1="24" y1="172" x2="806" y2="172" stroke="#d0d7de" stroke-dasharray="4 4"/>
+
+<text x="24" y="200" class="oktx" font-size="14" font-weight="700">✓ Cursor — จำ “ตำแหน่งจริง” ไม่ใช่ “ลำดับที่เท่าไร”</text>
+
+<rect x="24" y="216" width="150" height="26" rx="4" class="row"/><text x="36" y="234" class="mono ink">E</text>
+<rect x="24" y="246" width="150" height="26" rx="4" class="row"/><text x="36" y="264" class="mono ink">D</text>
+<rect x="24" y="276" width="150" height="26" rx="4" class="ok"/><text x="36" y="294" class="mono oktx">C  ← จำไว้ว่าอ่านถึงนี่</text>
+
+<path d="M186 260 L232 260" class="a"/>
+<rect x="240" y="228" width="220" height="66" rx="8" class="ok"/>
+<text x="256" y="250" class="oktx" font-size="11.5" font-weight="600">next_cursor</text>
+<text x="256" y="272" class="mono oktx" font-size="11">base64({"after_id": C})</text>
+<text x="256" y="288" class="muted" font-size="10.5">ปิดผนึกด้วย HMAC ถ้าไม่อยากให้แก้</text>
+
+<path d="M470 260 L516 260" class="a"/>
+<text x="524" y="234" class="muted" font-size="11.5">หน้า 2 · <tspan class="mono">?cursor=…</tspan></text>
+<rect x="524" y="242" width="150" height="26" rx="4" class="ok"/><text x="536" y="260" class="mono oktx">B  ✓ ต่อจาก C พอดี</text>
+<rect x="524" y="272" width="150" height="26" rx="4" class="ok"/><text x="536" y="290" class="mono oktx">A</text>
+<text x="686" y="260" class="oktx" font-size="11">F ที่เพิ่งเข้ามา</text>
+<text x="686" y="278" class="oktx" font-size="11">ไม่รบกวนอะไรเลย</text>
+
+<!-- summary -->
+<rect x="24" y="322" width="380" height="92" rx="8" class="strip"/>
+<text x="42" y="344" class="ink" font-size="12.5" font-weight="600">เลือกอย่างไร</text>
+<text x="42" y="366" class="muted" font-size="11.5">• infinite scroll ใน mobile → <tspan class="oktx" font-weight="600">cursor</tspan></text>
+<text x="42" y="385" class="muted" font-size="11.5">• ตารางที่ต้องกระโดดไปหน้า 50 → offset</text>
+<text x="42" y="404" class="muted" font-size="11.5">• ข้อมูลเยอะมาก → cursor (OFFSET 100000 ช้ามาก)</text>
+
+<rect x="426" y="322" width="380" height="92" rx="8" class="strip"/>
+<text x="444" y="344" class="ink" font-size="12.5" font-weight="600">อย่าตอบ array เปล่า ๆ ไม่ว่าจะเลือกแบบไหน</text>
+<text x="444" y="366" class="mono duptx">[{"id":1}, {"id":2}]  ← ตันตั้งแต่วันแรก</text>
+<text x="444" y="388" class="mono oktx">{"items":[…], "next_cursor":"…"}</text>
+<text x="444" y="406" class="muted" font-size="11">เพราะเพิ่ม metadata ทีหลังไม่ได้โดยไม่ break แอปเก่า</text>
+</svg>

@@ -1,0 +1,52 @@
+name: Publish book to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:          # กดรันเองได้จากหน้า Actions
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# ถ้า push ติด ๆ กัน ให้ยกเลิกอันเก่าแล้วรันอันใหม่พอ
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: "1.9.38"   # ตรึงให้ตรงกับที่ใช้เขียน ไม่งั้นผลลัพธ์อาจต่างกันเงียบ ๆ
+
+      # สร้างเฉพาะ HTML — PDF ต้องลง TeX ซึ่งกินเวลา build หลายนาทีโดยไม่จำเป็น
+      # (ถ้าอยากได้ PDF ให้ทำเป็น workflow แยกที่รันตอน release)
+      - name: Render HTML
+        run: quarto render --to html
+
+      # ตรวจว่า mermaid ทุกบล็อกยัง parse ได้ — กันหน้าเว็บพังเงียบ ๆ
+      - name: Check mermaid blocks
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+          python3 tools/check-mermaid.py
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _book
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

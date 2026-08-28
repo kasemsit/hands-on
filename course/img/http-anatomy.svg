@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 600" width="100%" style="max-width:820px;height:auto" role="img" aria-label="โครงสร้างของ HTTP request และ response แบ่งเป็นสามส่วน: request line, headers และ body คั่นด้วยบรรทัดว่าง">
+<style>
+  text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px}
+  .ink{fill:#1f2328}.muted{fill:#656d76}.card{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5}
+  .strip{fill:#f6f8fa}.sep{fill:#fff8c5;stroke:#d4a72c;stroke-width:1;stroke-dasharray:3 3}
+  .z1{fill:#0969da}.z2{fill:#8250df}.z3{fill:#1a7f37}
+  .t1{fill:#0969da}.t2{fill:#8250df}.t3{fill:#1a7f37}
+  .arrow{stroke:#8c959f;stroke-width:2;fill:none;marker-end:url(#ah)}
+  .ahf{fill:#8c959f}
+  @media (prefers-color-scheme:dark){
+    .ink{fill:#e6edf3}.muted{fill:#9198a1}
+    .card{fill:#0d1117;stroke:#3d444d}.strip{fill:#161b22}
+    .sep{fill:#3d2c00;stroke:#9e6a03}
+    .z1,.t1{fill:#58a6ff}.z2,.t2{fill:#bc8cff}.z3,.t3{fill:#3fb950}
+    .arrow{stroke:#6e7681}.ahf{fill:#6e7681}
+  }
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="ahf"/></marker></defs>
+
+<!-- ============ REQUEST ============ -->
+<rect x="24" y="46" width="600" height="212" rx="8" class="card"/>
+<rect x="24" y="46" width="600" height="30" rx="8" class="strip"/>
+<rect x="24" y="68" width="600" height="8" class="strip"/>
+<text x="40" y="66" class="ink" font-size="13" font-weight="600">REQUEST — สิ่งที่ curl ส่งออกไป</text>
+<text x="608" y="66" text-anchor="end" class="muted" font-size="12">บรรทัดขึ้นต้นด้วย &gt; ใน curl -v</text>
+
+<rect x="40" y="90" width="4" height="20" rx="2" class="z1"/>
+<text x="56" y="104" class="mono ink">POST /login HTTP/1.1</text>
+
+<rect x="40" y="118" width="4" height="76" rx="2" class="z2"/>
+<text x="56" y="132" class="mono ink">Host: example.com</text>
+<text x="56" y="150" class="mono ink">Content-Type: application/x-www-form-urlencoded</text>
+<text x="56" y="168" class="mono ink">Content-Length: 29</text>
+<text x="56" y="186" class="mono ink">Cookie: sid=abc123</text>
+
+<rect x="52" y="198" width="470" height="16" rx="3" class="sep"/>
+<text x="60" y="210" class="mono muted" font-size="11">↑ บรรทัดว่าง 1 บรรทัด — ตัวคั่น header กับ body (ห้ามลืม)</text>
+
+<rect x="40" y="222" width="4" height="20" rx="2" class="z3"/>
+<text x="56" y="236" class="mono ink">username=myuser&amp;password=mypass</text>
+
+<!-- labels right -->
+<text x="648" y="105" class="t1" font-size="12.5" font-weight="600">request line</text>
+<text x="648" y="121" class="muted" font-size="11">method + path + version</text>
+<text x="648" y="147" class="t2" font-size="12.5" font-weight="600">headers</text>
+<text x="648" y="163" class="muted" font-size="11">ข้อมูลประกอบ</text>
+<text x="648" y="177" class="muted" font-size="11">(ฉันเป็นใคร ส่งอะไรมา)</text>
+<text x="648" y="237" class="t3" font-size="12.5" font-weight="600">body</text>
+<text x="648" y="253" class="muted" font-size="11">เนื้อข้อมูล</text>
+
+<!-- arrows to labels -->
+<path d="M628 100 L644 100" class="arrow"/>
+<path d="M628 143 L644 143" class="arrow"/>
+<path d="M628 232 L644 232" class="arrow"/>
+
+<!-- flow arrow -->
+<path d="M324 268 L324 300" class="arrow"/>
+<text x="336" y="290" class="muted" font-size="12">server ประมวลผลแล้วตอบกลับ</text>
+
+<!-- ============ RESPONSE ============ -->
+<rect x="24" y="310" width="600" height="192" rx="8" class="card"/>
+<rect x="24" y="310" width="600" height="30" rx="8" class="strip"/>
+<rect x="24" y="332" width="600" height="8" class="strip"/>
+<text x="40" y="330" class="ink" font-size="13" font-weight="600">RESPONSE — สิ่งที่ server ตอบกลับ</text>
+<text x="608" y="330" text-anchor="end" class="muted" font-size="12">บรรทัดขึ้นต้นด้วย &lt; ใน curl -v</text>
+
+<rect x="40" y="354" width="4" height="20" rx="2" class="z1"/>
+<text x="56" y="368" class="mono ink">HTTP/1.1 302 Found</text>
+
+<rect x="40" y="382" width="4" height="58" rx="2" class="z2"/>
+<text x="56" y="396" class="mono ink">Location: /dashboard</text>
+<text x="56" y="414" class="mono ink">Set-Cookie: sid=abc123; Path=/</text>
+<text x="56" y="432" class="mono ink">Content-Type: text/html</text>
+
+<rect x="52" y="444" width="470" height="16" rx="3" class="sep"/>
+<text x="60" y="456" class="mono muted" font-size="11">↑ บรรทัดว่างเหมือนกัน</text>
+
+<rect x="40" y="468" width="4" height="20" rx="2" class="z3"/>
+<text x="56" y="482" class="mono ink">&lt;a href="/dashboard"&gt;moved&lt;/a&gt;</text>
+
+<text x="648" y="369" class="t1" font-size="12.5" font-weight="600">status line</text>
+<text x="648" y="385" class="muted" font-size="11">version + code</text>
+<text x="648" y="405" class="t2" font-size="12.5" font-weight="600">headers</text>
+<text x="648" y="483" class="t3" font-size="12.5" font-weight="600">body</text>
+<path d="M628 364 L644 364" class="arrow"/>
+<path d="M628 401 L644 401" class="arrow"/>
+<path d="M628 478 L644 478" class="arrow"/>
+
+<!-- footer note -->
+<rect x="24" y="524" width="772" height="52" rx="8" class="strip" stroke="none"/>
+<text x="44" y="546" class="ink" font-size="12.5" font-weight="600">HTTP ไม่มีความจำ (stateless)</text>
+<text x="44" y="565" class="muted" font-size="12">request ถัดไปเริ่มจากศูนย์เสมอ — server จำไม่ได้ว่าเคยคุยกับคุณ ทุกอย่างที่ทำให้ "จำได้" ต้องส่งไปใหม่ทุกครั้ง (cookie / token)</text>
+</svg>

@@ -1,0 +1,79 @@
+<!--
+  เปิดใช้ mermaid สำหรับบล็อก ```mermaid ในไฟล์ .md
+
+  ทำไมต้องทำเอง:
+    Quarto โหลด mermaid.js ให้อัตโนมัติเฉพาะ code cell แบบ ```{mermaid}
+    ซึ่งใช้ได้แค่ในไฟล์ .qmd เท่านั้น
+    แต่คอร์สนี้เก็บบทเรียนเป็น .md เพื่อให้ GitHub render ได้ด้วย
+    จึงใช้ ```mermaid ธรรมดา แล้วโหลด/เรียก mermaid เอง
+
+    ผลลัพธ์: รูปเดียวกันแสดงได้ทั้ง GitHub, เว็บ Quarto และ PDF
+-->
+<script src="/assets/mermaid/mermaid.min.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  // Quarto ใส่ธีมไว้ที่ <html data-bs-theme="light|dark">
+  function currentTheme() {
+    return document.documentElement.getAttribute("data-bs-theme") === "dark"
+      ? "dark" : "default";
+  }
+
+  // Quarto สร้างบล็อกออกมาเป็น pre.mermaid ที่หุ้ม code ไว้ข้างใน
+  // แปลงให้เป็น div.mermaid-live ที่ mermaid รู้จัก
+  // (เก็บ source ไว้ใน data-src เผื่อต้องวาดใหม่ตอนสลับธีม)
+  function collect() {
+    var out = [];
+    document.querySelectorAll("pre.mermaid").forEach(function (pre) {
+      var src = (pre.querySelector("code") || pre).textContent;
+      var div = document.createElement("div");
+      div.className = "mermaid-live";
+      div.dataset.src = src;
+      pre.replaceWith(div);
+      out.push(div);
+    });
+    return out;
+  }
+
+  function draw(nodes) {
+    if (!nodes.length) return;
+    nodes.forEach(function (n) {
+      n.removeAttribute("data-processed");
+      n.textContent = n.dataset.src;
+    });
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: currentTheme(),
+      securityLevel: "loose",
+      fontFamily: '"Sarabun","Noto Sans Thai",system-ui,sans-serif',
+      sequence: { useMaxWidth: true, wrap: true },
+      flowchart: { useMaxWidth: true, htmlLabels: true }
+    });
+    mermaid.run({ nodes: nodes });
+  }
+
+  function start() {
+    if (typeof mermaid === "undefined") return;   // ไฟล์โหลดไม่สำเร็จ
+    var nodes = collect();
+    draw(nodes);
+
+    // วาดใหม่เมื่อผู้ใช้กดสลับธีมสว่าง/มืด
+    new MutationObserver(function (muts) {
+      for (var i = 0; i < muts.length; i++) {
+        if (muts[i].attributeName === "data-bs-theme") { draw(nodes); return; }
+      }
+    }).observe(document.documentElement, { attributes: true });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+})();
+</script>
+<style>
+  .mermaid-live { margin: 1.8rem 0; text-align: left; overflow-x: auto; }
+  .mermaid-live svg { max-width: 100%; height: auto; }
+</style>

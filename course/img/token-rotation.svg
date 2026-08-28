@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 560" width="100%" style="max-width:830px;height:auto" role="img" aria-label="refresh token rotation และการตรวจจับการใช้ซ้ำ เมื่อ token รั่วจะเพิกถอนทั้ง family">
+<style>
+  text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
+  .ink{fill:#1f2328}.muted{fill:#656d76}
+  .strip{fill:#f6f8fa;stroke:#d0d7de;stroke-width:1.5}
+  .ok{fill:#dafbe1;stroke:#1a7f37;stroke-width:1.5}.oktx{fill:#0f5323}
+  .dead{fill:#f6f8fa;stroke:#8c959f;stroke-width:1.5;stroke-dasharray:4 3}
+  .bad{fill:#ffebe9;stroke:#cf222e;stroke-width:1.5}.badtx{fill:#a40e26}
+  .warn{fill:#fff8c5;stroke:#d4a72c;stroke-width:1.5}
+  .aok{stroke:#1a7f37;stroke-width:2;fill:none;marker-end:url(#g)}
+  .abad{stroke:#cf222e;stroke-width:2;fill:none;marker-end:url(#r)}
+  .fg{fill:#1a7f37}.fr{fill:#cf222e}
+  .x{stroke:#cf222e;stroke-width:2.5}
+  @media (prefers-color-scheme:dark){
+    .ink{fill:#e6edf3}.muted{fill:#9198a1}
+    .strip{fill:#161b22;stroke:#3d444d}
+    .ok{fill:#0f2916;stroke:#2ea043}.oktx{fill:#3fb950}
+    .dead{fill:#161b22;stroke:#6e7681}
+    .bad{fill:#2d0f11;stroke:#f85149}.badtx{fill:#ff7b72}
+    .warn{fill:#3d2c00;stroke:#9e6a03}
+    .aok{stroke:#2ea043}.abad{stroke:#f85149}.fg{fill:#2ea043}.fr{fill:#f85149}
+    .x{stroke:#f85149}
+  }
+</style>
+<defs>
+  <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg"/></marker>
+  <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fr"/></marker>
+</defs>
+
+<!-- ===== normal ===== -->
+<text x="24" y="26" class="oktx" font-size="14" font-weight="700">กรณีปกติ — ทุกครั้งที่ใช้ refresh token จะได้ใบใหม่ ใบเก่าถูกเผาทิ้ง</text>
+
+<rect x="24" y="42" width="120" height="56" rx="8" class="dead"/>
+<text x="84" y="66" text-anchor="middle" class="muted" font-size="12.5" font-weight="600">R1</text>
+<text x="84" y="86" text-anchor="middle" class="muted" font-size="11">ใช้แล้ว · ตายแล้ว</text>
+
+<rect x="216" y="42" width="120" height="56" rx="8" class="dead"/>
+<text x="276" y="66" text-anchor="middle" class="muted" font-size="12.5" font-weight="600">R2</text>
+<text x="276" y="86" text-anchor="middle" class="muted" font-size="11">ใช้แล้ว · ตายแล้ว</text>
+
+<rect x="408" y="42" width="120" height="56" rx="8" class="ok"/>
+<text x="468" y="66" text-anchor="middle" class="oktx" font-size="12.5" font-weight="600">R3</text>
+<text x="468" y="86" text-anchor="middle" class="oktx" font-size="11">ใบที่ใช้ได้ตอนนี้</text>
+
+<path d="M148 70 L212 70" class="aok"/>
+<path d="M340 70 L404 70" class="aok"/>
+<text x="152" y="62" class="muted" font-size="10.5">refresh</text>
+<text x="344" y="62" class="muted" font-size="10.5">refresh</text>
+
+<rect x="560" y="42" width="246" height="56" rx="8" class="strip"/>
+<text x="576" y="63" class="ink" font-size="11.5" font-weight="600">ทั้งหมดนี้คือ family เดียวกัน</text>
+<text x="576" y="82" class="muted" font-size="11">สืบทอดมาจากการ login ครั้งเดียว</text>
+
+<line x1="24" y1="122" x2="806" y2="122" stroke="#d0d7de" stroke-dasharray="4 4"/>
+
+<!-- ===== attack ===== -->
+<text x="24" y="152" class="badtx" font-size="14" font-weight="700">กรณี token รั่ว — ผู้โจมตีคัดลอก R1 ไปก่อนที่ผู้ใช้จะใช้มัน</text>
+
+<!-- user lane -->
+<rect x="24" y="170" width="86" height="30" rx="6" class="strip"/>
+<text x="67" y="190" text-anchor="middle" class="ink" font-size="12" font-weight="600">ผู้ใช้จริง</text>
+
+<rect x="130" y="168" width="106" height="52" rx="8" class="dead"/>
+<text x="183" y="190" text-anchor="middle" class="muted" font-size="12" font-weight="600">R1</text>
+<text x="183" y="208" text-anchor="middle" class="muted" font-size="10.5">ใช้ไปแล้ว</text>
+
+<rect x="286" y="168" width="106" height="52" rx="8" class="dead"/>
+<text x="339" y="190" text-anchor="middle" class="muted" font-size="12" font-weight="600">R2</text>
+<text x="339" y="208" text-anchor="middle" class="muted" font-size="10.5">ใช้ไปแล้ว</text>
+
+<rect x="442" y="168" width="106" height="52" rx="8" class="ok"/>
+<text x="495" y="190" text-anchor="middle" class="oktx" font-size="12" font-weight="600">R3</text>
+<text x="495" y="208" text-anchor="middle" class="oktx" font-size="10.5">กำลังใช้อยู่</text>
+
+<path d="M240 194 L282 194" class="aok"/>
+<path d="M396 194 L438 194" class="aok"/>
+
+<!-- attacker lane -->
+<rect x="24" y="268" width="86" height="30" rx="6" class="bad"/>
+<text x="67" y="288" text-anchor="middle" class="badtx" font-size="12" font-weight="600">ผู้โจมตี</text>
+
+<rect x="130" y="266" width="106" height="52" rx="8" class="bad"/>
+<text x="183" y="288" text-anchor="middle" class="badtx" font-size="12" font-weight="600">R1 (สำเนา)</text>
+<text x="183" y="306" text-anchor="middle" class="badtx" font-size="10.5">ขโมยไปตอนนั้น</text>
+
+<!-- dashed copy line -->
+<path d="M183 224 L183 262" stroke="#cf222e" stroke-width="1.5" stroke-dasharray="4 3" fill="none" marker-end="url(#r)"/>
+<text x="192" y="248" class="badtx" font-size="10.5">คัดลอก</text>
+
+<path d="M240 292 L340 292" class="abad"/>
+<text x="248" y="284" class="badtx" font-size="10.5">ลองใช้ R1 อีกครั้ง</text>
+
+<!-- server detects -->
+<rect x="352" y="258" width="454" height="70" rx="8" class="bad"/>
+<text x="370" y="280" class="badtx" font-size="12.5" font-weight="700">⚠ server ตรวจพบ: R1 ถูกใช้ไปแล้ว แต่มีคนเอามาใช้ซ้ำ</text>
+<text x="370" y="300" class="badtx" font-size="11.5">แปลว่ามีสำเนาของ token อยู่ในมือคนอื่น = token รั่วแน่นอน</text>
+<text x="370" y="318" class="badtx" font-size="11.5">→ เพิกถอน <tspan font-weight="700">ทั้ง family</tspan> ทันที (R1, R2, R3 ตายหมด)</text>
+
+<!-- X marks -->
+<path d="M462 172 L528 216 M528 172 L462 216" class="x"/>
+
+<path d="M495 232 L495 254" class="abad"/>
+
+<!-- outcome -->
+<rect x="24" y="348" width="380" height="80" rx="8" class="warn"/>
+<text x="42" y="370" class="ink" font-size="12.5" font-weight="600">ผลลัพธ์: ทั้งคู่ถูกตัด</text>
+<text x="42" y="391" class="ink" font-size="11.5">ผู้ใช้จริงต้อง login ใหม่ (เสียความสะดวกนิดหน่อย)</text>
+<text x="42" y="409" class="ink" font-size="11.5">ผู้โจมตีก็เข้าไม่ได้เช่นกัน</text>
+<text x="42" y="424" class="muted" font-size="11">และที่สำคัญ — คุณ<tspan font-weight="600">รู้ตัว</tspan>ว่ามีเหตุเกิดขึ้น ควร log + แจ้งเตือน</text>
+
+<rect x="426" y="348" width="380" height="80" rx="8" class="strip"/>
+<text x="444" y="370" class="ink" font-size="12.5" font-weight="600">ทำไมยอมให้ผู้ใช้จริงเดือดร้อนด้วย</text>
+<text x="444" y="391" class="muted" font-size="11.5">เพราะ server แยกไม่ออกว่าใครคือตัวจริง</text>
+<text x="444" y="409" class="muted" font-size="11.5">— ทั้งคู่ถือ token ที่ถูกต้องเหมือนกัน</text>
+<text x="444" y="424" class="muted" font-size="11">ตัดทั้งคู่จึงปลอดภัยกว่าเดาผิด</text>
+
+<!-- pitfall -->
+<rect x="24" y="446" width="782" height="98" rx="8" class="bad"/>
+<text x="44" y="470" class="badtx" font-size="13" font-weight="700">⚠ กับดักอันดับ 1 ของการทำ rotation — แอปทำลาย family ของตัวเอง</text>
+<text x="44" y="492" class="badtx" font-size="12">ถ้ามี 5 request เจอ 401 พร้อมกัน แล้วต่างคนต่างเรียก <tspan class="mono">/auth/refresh</tspan> ด้วย token ใบเดียวกัน</text>
+<text x="44" y="511" class="badtx" font-size="12">ตัวแรกสำเร็จ ที่เหลืออีก 4 ตัวจะถูกมองว่าเป็น "การใช้ซ้ำ" → ระบบเพิกถอนทุกอย่าง → ผู้ใช้ถูกเตะออกเอง</text>
+<text x="44" y="533" class="ink" font-size="12">วิธีแก้: <tspan font-weight="700">single-flight</tspan> — ให้ request แรกเรียก refresh ที่เหลือรอผลแล้วใช้ token เดียวกัน</text>
+</svg>
