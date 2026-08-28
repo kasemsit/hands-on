@@ -230,4 +230,4 @@ gdb ./crackme
    ได้ใกล้ของจริงแค่ไหน
 
 ***
-[⬅ หน่วยความจำและช่องโหว่คลาสสิก](37-memory-and-classic-exploits.md) · [สารบัญ](../README.md) · [Cryptography ภาคปฏิบัติ ➡](38-crypto-in-practice.md)
+[⬅ หน่วยความจำและช่องโหว่คลาสสิก](37-memory-and-classic-exploits.md) · [สารบัญ](../README.md) · [เรียกข้ามภาษา — FFI และ binding ➡](64-ffi-and-bindings.md)

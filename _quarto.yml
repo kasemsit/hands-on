@@ -86,6 +86,8 @@ book:
         - course/36-permissions-and-isolation.md
         - course/37-memory-and-classic-exploits.md
         - course/63-reverse-engineering.md
+        - course/64-ffi-and-bindings.md
+        - course/65-linking-and-loading.md
         - course/38-crypto-in-practice.md
 
     - part: "ส่วนที่ 7 · Malware และการตั้งรับ"

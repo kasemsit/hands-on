@@ -33,3 +33,6 @@ __pycache__/
 # ผลลัพธ์การ compile ของ lab 63
 lab/re/crackme
 lab/re/crackme_patched
+
+# ผลลัพธ์การ compile ของ lab 64
+lab/ffi/libfast.so
