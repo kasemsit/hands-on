@@ -144,6 +144,8 @@ curl -i http://127.0.0.1:8080/
 |----|--------|
 | [บทที่ 46](course/46-gpu-101.md) | GPU 101 สำหรับคนที่มาจาก data science |
 | [บทที่ 47](course/47-gpu-memory-and-kv-cache.md) | VRAM และ KV cache — คำนวณให้เป็น |
+| [บทที่ 78](course/78-llm-architecture-internals.md) | สถาปัตยกรรม LLM ข้างใน — attention, MoE |
+| [บทที่ 79](course/79-vllm-internals.md) | vLLM ข้างใน — PagedAttention, prefix cache |
 | [บทที่ 48](course/48-serving-llm.md) | Serving LLM ให้เป็น API |
 | [บทที่ 66](course/66-training-and-finetuning.md) | เทรนและ fine-tune ให้เป็น |
 | [บทที่ 72](course/72-mlops.md) | MLOps — reproducibility และ registry |
@@ -185,7 +187,7 @@ curl -i http://127.0.0.1:8080/
 ├── Makefile             ← คำสั่งลัด (make help)
 ├── _quarto.yml          ← ตั้งค่าหนังสือ (เว็บ / PDF / EPUB)
 ├── index.qmd            ← หน้าแรกของหนังสือ
-├── course/              ← บทเรียน 77 บท
+├── course/              ← บทเรียน 79 บท
 │   └── img/             ← รูปประกอบ SVG (รองรับธีมสว่าง/มืด)
 └── lab/
     ├── server.py        ← lab server (stdlib ล้วน ไม่ต้องลงอะไร)

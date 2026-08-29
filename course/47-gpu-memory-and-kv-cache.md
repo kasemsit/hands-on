@@ -317,4 +317,4 @@ lab นี้ให้ตัวเลข**ประมาณ**ที่ดีพ
    Llama-3 8B ให้ 30 คนพร้อมกัน ต้องทำอะไรบ้าง" — ใช้ lab หาคำตอบ
 
 ***
-[⬅ GPU 101](46-gpu-101.md) · [สารบัญ](../README.md) · [Serving LLM ให้เป็น API ➡](48-serving-llm.md)
+[⬅ GPU 101](46-gpu-101.md) · [สารบัญ](../README.md) · [สถาปัตยกรรม LLM ข้างใน ➡](78-llm-architecture-internals.md)

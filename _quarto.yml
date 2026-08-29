@@ -107,6 +107,8 @@ book:
       chapters:
         - course/46-gpu-101.md
         - course/47-gpu-memory-and-kv-cache.md
+        - course/78-llm-architecture-internals.md
+        - course/79-vllm-internals.md
         - course/48-serving-llm.md
         - course/66-training-and-finetuning.md
         - course/72-mlops.md
