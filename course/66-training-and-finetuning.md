@@ -229,4 +229,4 @@ random.seed(0); np.random.seed(0)
    — วัดก่อนตอบ
 
 ***
-[⬅ Serving LLM ให้เป็น API](48-serving-llm.md) · [สารบัญ](../README.md) · [แบ่ง GPU ให้หลายคนใช้ ➡](49-gpu-on-containers-and-k8s.md)
+[⬅ Serving LLM ให้เป็น API](48-serving-llm.md) · [สารบัญ](../README.md) · [MLOps — reproducibility และ registry ➡](72-mlops.md)

@@ -874,4 +874,4 @@ Run:ai (เชิงพาณิชย์)  =  KAI Scheduler (ฟรี)
     กับตารางของฟรีใน[ข้อ 49.15](#s49-15) — เหลือกี่ข้อที่ไม่มีของฟรีทดแทน
 
 ***
-[⬅ เทรนและ fine-tune ให้เป็น](66-training-and-finetuning.md) · [สารบัญ](../README.md) · [หลาย GPU และเครือข่ายระหว่างการ์ด ➡](50-multi-gpu-and-networking.md)
+[⬅ MLOps](72-mlops.md) · [สารบัญ](../README.md) · [หลาย GPU และเครือข่ายระหว่างการ์ด ➡](50-multi-gpu-and-networking.md)

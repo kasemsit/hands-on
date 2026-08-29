@@ -55,6 +55,7 @@ book:
         - course/25-input-validation-and-injection.md
         - course/26-proxy-caching-cdn.md
         - course/27-database-and-performance.md
+        - course/71-transactions-and-isolation.md
         - course/28-observability-and-deployment.md
         - course/68-observability-deep.md
         - course/29-realtime-push-and-offline.md
@@ -108,6 +109,7 @@ book:
         - course/47-gpu-memory-and-kv-cache.md
         - course/48-serving-llm.md
         - course/66-training-and-finetuning.md
+        - course/72-mlops.md
         - course/49-gpu-on-containers-and-k8s.md
         - course/50-multi-gpu-and-networking.md
         - course/51-gpu-observability-and-cost.md

@@ -340,4 +340,4 @@ ALTER SYSTEM SET log_min_duration_statement = '200ms';
 7. ทำ load test ด้วย k6 กับ lab server แล้วดู p95
 
 ***
-[⬅ Reverse proxy, X-Forwarded-For, Cach](26-proxy-caching-cdn.md) · [สารบัญ](../README.md) · [Observability และ Deployment ➡](28-observability-and-deployment.md)
+[⬅ Reverse proxy, Caching และ CDN](26-proxy-caching-cdn.md) · [สารบัญ](../README.md) · [Transaction และ Isolation ➡](71-transactions-and-isolation.md)
