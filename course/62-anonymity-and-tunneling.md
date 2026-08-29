@@ -219,4 +219,4 @@ ssh -R 9000:localhost:3000 user@public-host
    VPN พอไหม ต้องทำอะไรเพิ่ม ([62.7](#s62-7))
 
 ***
-[⬅ Digital forensics](61-digital-forensics.md) · [สารบัญ](../README.md) · [Threat modeling ➡](34-threat-modeling.md)
+[⬅ Digital forensics](61-digital-forensics.md) · [สารบัญ](../README.md) · [หลักการออกแบบโค้ด ➡](73-design-principles.md)

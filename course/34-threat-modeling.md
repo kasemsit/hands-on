@@ -238,4 +238,4 @@ threat modeling คือ**เส้นด้ายที่ร้อยทุ�
    คุณจะเริ่มจากตรงไหน**
 
 ***
-[⬅ การระบุตัวตนบนอินเทอร์เน็ต](62-anonymity-and-tunneling.md) · [สารบัญ](../README.md) · [จริยธรรมและขอบเขต ➡](22-ethics-and-limits.md)
+[⬅ สถาปัตยกรรมซอฟต์แวร์](74-software-architecture.md) · [สารบัญ](../README.md) · [จริยธรรมและขอบเขต ➡](22-ethics-and-limits.md)
