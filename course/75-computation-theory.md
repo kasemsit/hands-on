@@ -192,4 +192,4 @@ for x in data:
    ที่ควรเติม
 
 ***
-[⬅ สถาปัตยกรรมซอฟต์แวร์](74-software-architecture.md) · [สารบัญ](../README.md) · [Threat modeling ➡](34-threat-modeling.md)
+[⬅ สถาปัตยกรรมซอฟต์แวร์](74-software-architecture.md) · [สารบัญ](../README.md) · [Functional Programming ภาคปฏิบัติ ➡](76-functional-programming.md)

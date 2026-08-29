@@ -159,6 +159,8 @@ curl -i http://127.0.0.1:8080/
 | [บทที่ 73](course/73-design-principles.md) | หลักการออกแบบโค้ด — SOLID, coupling |
 | [บทที่ 74](course/74-software-architecture.md) | สถาปัตยกรรมซอฟต์แวร์ |
 | [บทที่ 75](course/75-computation-theory.md) | ทฤษฎีการคำนวณภาคปฏิบัติ — Big-O, P/NP |
+| [บทที่ 76](course/76-functional-programming.md) | Functional Programming ภาคปฏิบัติ |
+| [บทที่ 77](course/77-system-design.md) | ออกแบบระบบจากศูนย์ |
 | [บทที่ 60](course/60-grc-and-compliance.md) | ความเสี่ยง มาตรฐาน และการปฏิบัติตามกฎ |
 | [บทที่ 61](course/61-digital-forensics.md) | Digital forensics |
 | [บทที่ 62](course/62-anonymity-and-tunneling.md) | การระบุตัวตนบนอินเทอร์เน็ต — VPN, Tor, tunneling |
@@ -183,7 +185,7 @@ curl -i http://127.0.0.1:8080/
 ├── Makefile             ← คำสั่งลัด (make help)
 ├── _quarto.yml          ← ตั้งค่าหนังสือ (เว็บ / PDF / EPUB)
 ├── index.qmd            ← หน้าแรกของหนังสือ
-├── course/              ← บทเรียน 75 บท
+├── course/              ← บทเรียน 77 บท
 │   └── img/             ← รูปประกอบ SVG (รองรับธีมสว่าง/มืด)
 └── lab/
     ├── server.py        ← lab server (stdlib ล้วน ไม่ต้องลงอะไร)
