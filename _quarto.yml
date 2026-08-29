@@ -122,6 +122,7 @@ book:
         - course/62-anonymity-and-tunneling.md
         - course/73-design-principles.md
         - course/74-software-architecture.md
+        - course/75-computation-theory.md
         - course/34-threat-modeling.md
         - course/22-ethics-and-limits.md
         - course/43-security-roles-and-paths.md

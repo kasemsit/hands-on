@@ -172,4 +172,4 @@ flowchart TD
    inference ออกจากส่วนอื่นไหม เพราะอะไร ([74.1](#s74-1))
 
 ***
-[⬅ หลักการออกแบบโค้ด](73-design-principles.md) · [สารบัญ](../README.md) · [Threat modeling ➡](34-threat-modeling.md)
+[⬅ หลักการออกแบบโค้ด](73-design-principles.md) · [สารบัญ](../README.md) · [ทฤษฎีการคำนวณภาคปฏิบัติ ➡](75-computation-theory.md)
