@@ -119,6 +119,8 @@ book:
         - course/50-multi-gpu-and-networking.md
         - course/51-gpu-observability-and-cost.md
         - course/83-gpu-kernels.md
+        - course/84-quantization-and-numerics.md
+        - course/85-parallelism-and-disaggregation.md
         - course/52-ai-system-security.md
 
     - part: "ส่วนที่ 9 · คิดอย่างเป็นระบบ และก้าวต่อไป"

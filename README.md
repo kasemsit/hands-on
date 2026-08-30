@@ -156,6 +156,8 @@ curl -i http://127.0.0.1:8080/
 | [บทที่ 50](course/50-multi-gpu-and-networking.md) | หลาย GPU และเครือข่ายระหว่างการ์ด |
 | [บทที่ 51](course/51-gpu-observability-and-cost.md) | วัดผล GPU และคิดต้นทุนให้เป็น |
 | [บทที่ 83](course/83-gpu-kernels.md) | GPU Kernel และ FlashAttention |
+| [บทที่ 84](course/84-quantization-and-numerics.md) | Quantization และ Numerics |
+| [บทที่ 85](course/85-parallelism-and-disaggregation.md) | Parallelism ขั้นสูง — EP, disaggregation |
 | [บทที่ 52](course/52-ai-system-security.md) | ความปลอดภัยของระบบ AI |
 
 ### ส่วนที่ 9 · คิดอย่างเป็นระบบ และก้าวต่อไป
@@ -191,7 +193,7 @@ curl -i http://127.0.0.1:8080/
 ├── Makefile             ← คำสั่งลัด (make help)
 ├── _quarto.yml          ← ตั้งค่าหนังสือ (เว็บ / PDF / EPUB)
 ├── index.qmd            ← หน้าแรกของหนังสือ
-├── course/              ← บทเรียน 83 บท
+├── course/              ← บทเรียน 85 บท
 │   └── img/             ← รูปประกอบ SVG (รองรับธีมสว่าง/มืด)
 └── lab/
     ├── server.py        ← lab server (stdlib ล้วน ไม่ต้องลงอะไร)

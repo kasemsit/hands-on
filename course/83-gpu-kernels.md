@@ -168,4 +168,4 @@ kernel ไหนกินเวลา แล้วค่อย optimize ตร�
 7. หา kernel ใน vllm-project/vllm ที่เขียนด้วย Triton — อ่านว่ามันทำอะไร
 
 ***
-[⬅ วัดผล GPU และคิดต้นทุนให้เป็น](51-gpu-observability-and-cost.md) · [สารบัญ](../README.md) · [ความปลอดภัยของระบบ AI ➡](52-ai-system-security.md)
+[⬅ วัดผล GPU และคิดต้นทุนให้เป็น](51-gpu-observability-and-cost.md) · [สารบัญ](../README.md) · [Quantization และ Numerics ➡](84-quantization-and-numerics.md)
