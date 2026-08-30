@@ -334,4 +334,4 @@ location /v1/ {
    แล้วเทียบกับที่วัดได้จริงตอน batch=1
 
 ***
-[⬅ vLLM ข้างใน — PagedAttention และ prefix cache](79-vllm-internals.md) · [สารบัญ](../README.md) · [เทรนและ fine-tune ให้เป็น ➡](66-training-and-finetuning.md)
+[⬅ vLLM ข้างใน — PagedAttention และ prefix cache](79-vllm-internals.md) · [สารบัญ](../README.md) · [Speculative Decoding ➡](80-speculative-decoding.md)

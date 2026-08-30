@@ -229,4 +229,4 @@ random.seed(0); np.random.seed(0)
    — วัดก่อนตอบ
 
 ***
-[⬅ Serving LLM ให้เป็น API](48-serving-llm.md) · [สารบัญ](../README.md) · [MLOps — reproducibility และ registry ➡](72-mlops.md)
+[⬅ ประเมินผลโมเดล LLM](82-llm-evaluation.md) · [สารบัญ](../README.md) · [MLOps — reproducibility และ registry ➡](72-mlops.md)

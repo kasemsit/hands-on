@@ -341,4 +341,4 @@ python train.py --data /local/scratch/$SLURM_JOB_ID/
     — ตอบว่าติด compute หรือติด I/O
 
 ***
-[⬅ หลาย GPU และเครือข่ายระหว่างการ์ด](50-multi-gpu-and-networking.md) · [สารบัญ](../README.md) · [ความปลอดภัยของระบบ AI ➡](52-ai-system-security.md)
+[⬅ หลาย GPU และเครือข่ายระหว่างการ์ด](50-multi-gpu-and-networking.md) · [สารบัญ](../README.md) · [GPU Kernel และ FlashAttention ➡](83-gpu-kernels.md)

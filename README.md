@@ -147,11 +147,15 @@ curl -i http://127.0.0.1:8080/
 | [บทที่ 78](course/78-llm-architecture-internals.md) | สถาปัตยกรรม LLM ข้างใน — attention, MoE |
 | [บทที่ 79](course/79-vllm-internals.md) | vLLM ข้างใน — PagedAttention, prefix cache |
 | [บทที่ 48](course/48-serving-llm.md) | Serving LLM ให้เป็น API |
+| [บทที่ 80](course/80-speculative-decoding.md) | Speculative Decoding |
+| [บทที่ 81](course/81-serving-features.md) | Serving features — chat template, tool calling |
+| [บทที่ 82](course/82-llm-evaluation.md) | ประเมินผลโมเดล LLM |
 | [บทที่ 66](course/66-training-and-finetuning.md) | เทรนและ fine-tune ให้เป็น |
 | [บทที่ 72](course/72-mlops.md) | MLOps — reproducibility และ registry |
 | [บทที่ 49](course/49-gpu-on-containers-and-k8s.md) | แบ่ง GPU ให้หลายคนใช้ |
 | [บทที่ 50](course/50-multi-gpu-and-networking.md) | หลาย GPU และเครือข่ายระหว่างการ์ด |
 | [บทที่ 51](course/51-gpu-observability-and-cost.md) | วัดผล GPU และคิดต้นทุนให้เป็น |
+| [บทที่ 83](course/83-gpu-kernels.md) | GPU Kernel และ FlashAttention |
 | [บทที่ 52](course/52-ai-system-security.md) | ความปลอดภัยของระบบ AI |
 
 ### ส่วนที่ 9 · คิดอย่างเป็นระบบ และก้าวต่อไป
@@ -187,7 +191,7 @@ curl -i http://127.0.0.1:8080/
 ├── Makefile             ← คำสั่งลัด (make help)
 ├── _quarto.yml          ← ตั้งค่าหนังสือ (เว็บ / PDF / EPUB)
 ├── index.qmd            ← หน้าแรกของหนังสือ
-├── course/              ← บทเรียน 79 บท
+├── course/              ← บทเรียน 83 บท
 │   └── img/             ← รูปประกอบ SVG (รองรับธีมสว่าง/มืด)
 └── lab/
     ├── server.py        ← lab server (stdlib ล้วน ไม่ต้องลงอะไร)

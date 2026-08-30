@@ -255,4 +255,4 @@ nvidia-smi -q | grep -i -A3 'ecc errors'
    ด้วย [vram_calc.py](../lab/gpu/vram_calc.py) — เทียบกับ context 1k
 
 ***
-[⬅ วัดผล GPU และคิดต้นทุนให้เป็น](51-gpu-observability-and-cost.md) · [สารบัญ](../README.md) · [ความเสี่ยง มาตรฐาน และการปฏิบัติตามกฎ ➡](60-grc-and-compliance.md)
+[⬅ GPU Kernel และ FlashAttention](83-gpu-kernels.md) · [สารบัญ](../README.md) · [ความเสี่ยง มาตรฐาน และการปฏิบัติตามกฎ ➡](60-grc-and-compliance.md)

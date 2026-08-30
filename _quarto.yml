@@ -110,11 +110,15 @@ book:
         - course/78-llm-architecture-internals.md
         - course/79-vllm-internals.md
         - course/48-serving-llm.md
+        - course/80-speculative-decoding.md
+        - course/81-serving-features.md
+        - course/82-llm-evaluation.md
         - course/66-training-and-finetuning.md
         - course/72-mlops.md
         - course/49-gpu-on-containers-and-k8s.md
         - course/50-multi-gpu-and-networking.md
         - course/51-gpu-observability-and-cost.md
+        - course/83-gpu-kernels.md
         - course/52-ai-system-security.md
 
     - part: "ส่วนที่ 9 · คิดอย่างเป็นระบบ และก้าวต่อไป"
